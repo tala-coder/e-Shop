@@ -26,7 +26,6 @@ for(let kljuc of kljuceviObjekta){
 
 const JSON_zapisi_studenata = JSON.stringify(student);
 console.log(JSON_zapisi_studenata)
-console.log(JSON.stringify(student))
 
 console.log("------------------------  FUNCKIJE  --------------------------------")
 
