@@ -27,12 +27,25 @@ for(let kljuc of kljuceviObjekta){
 const JSON_zapisi_studenata = JSON.stringify(student);
 console.log(JSON_zapisi_studenata)
 
-console.log("------------------------  FUNCKIJE  --------------------------------")
+console.log("------------------------  PROMISSE  --------------------------------")
 
+const obecanje = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let broj = (Math.random() *5).toFixed(0);
+        if (broj <= 3){
+            reject("Dobijen je nedozvoljen broj!")
+        }
+        resolve(broj);
+    }, 1500)
+});
 
+obecanje
+    .then(b => console.log(b))
+    .catch(greska => console.log("doslo je do greske: ", greska));
 
+obecanje.then(broj => console.log("Ovaj broj uvecan za jedan je:", Number(broj) + 1))
 
-console.log("-----------------------------------------------------")
+console.log("-----------------------              ------------------------------")
 
 
 
