@@ -1,0 +1,22 @@
+{
+  "name": "muhammed.demo-app",
+  "version": "1.0.0",
+  "description": "projekat e-shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tala-coder/e-Shop.git"
+  },
+  "author": "Muhammed Talić <muhammedtalic.it@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tala-coder/e-Shop/issues"
+  },
+  "homepage": "https://github.com/tala-coder/e-Shop#readme",
+  "dependencies": {
+    "mysql2": "^2.3.2"
+  }
+}
