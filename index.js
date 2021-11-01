@@ -1,19 +1,20 @@
-const mysql = require('mysql2');
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'aplikacija',
-    password: 'aplikacija',
-    database:'aplikacija'
-});
+const http = require('http');
+const server = http.createServer(requestHandler);
 
-connection.promise().query('SELECT * FROM category WHERE parent__category_id = ?;', [1])
-.then(prikaziKategorije)
-.catch(error => {
-    console.log('Doslo je do greske ', error);
-})
+function requestHandler(request, response){
+    const podaciOdKlijenta = {
+        method: request.method,
+        link: request.url
+    };
 
-function prikaziKategorije([rows, fields] ){ // rows redovi koje citamo, mogli smo staviti i categories npr.|| fields -kolone
-    for (let category of rows) {
-        console.log('Ucitana kategorija je: ', category.name);
-    }
+    const podaciOdKlijentaJson = JSON.stringify(podaciOdKlijenta);
+
+    response.writeHead(200, {
+        'Content-type': 'application/json; charset=utf-8'
+    });
+
+    response.write(podaciOdKlijentaJson);
+    response.end();
 }
+
+server.listen(443);
