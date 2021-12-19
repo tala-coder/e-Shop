@@ -1,11 +1,28 @@
+//Ctrl+Alt+L foramt code
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const authJwt = require('./helpers/jwt')
+const errorHandler = require('./helpers/error-handler');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Povezivanje servera sa bazom
+// import connectDB from "./helpers/configDB";
+const DB = require("./helpers/mongoConnect")
+DB.connectDB();
+
+
+//env
+const dotenv = require('dotenv')
+dotenv.config({path:__dirname+'/.env'});
+const nazivShopa = process.env.nazivShopa;
+
+
+const kategorijaRoutes = require('./routes/kategorija');
+const proizvodRoutes = require('./routes/proizvod');
+const korisnikRoutes = require('./routes/korisnik');
+const narudzbaRoutes = require('./routes/narudzba');
 
 var app = express();
 
@@ -19,8 +36,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
+app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);
+app.use(`/${nazivShopa}/korisnik`,   korisnikRoutes);
+app.use(`/${nazivShopa}/narudzba`,   narudzbaRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
