@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const controllers = require("../controllers/kategorija")
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
-});
+router.get(`/`, controllers.dajKategorije)
+router.get(`/:id`, controllers.dajKategoriju)
+router.post('/', controllers.postaviKategoriju)
+router.delete('/:id', controllers.obrisiKetegoriju)
 
 module.exports = router;
