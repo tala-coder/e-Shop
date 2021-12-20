@@ -3,7 +3,7 @@ const Kategorija = require("../models/kategorija");
 exports.dajKategorije = async (req, res) =>{
     const kategorije = await Kategorija.find();
     if(!kategorije) {
-        res.status(500).json({success: false, bug: `BUG -> exports.dajKategorije`});
+        res.status(500).json({success: false, bug: `exports.dajKategorije`});
     }
     res.send(kategorije);
 }
@@ -11,7 +11,7 @@ exports.dajKategorije = async (req, res) =>{
 exports.dajKategoriju = async(req,res)=>{
     const kategorija = await Kategorija.findById(req.params.id);
     if(!kategorija) {
-        res.status(500).json({message: `Kategorija sa ID-om ${reg.params.id} ne postoji!. BUG -> exports.dajKategoriju.`})
+        res.status(500).json({message: `Kategorija sa ID-om ${reg.params.id} ne postoji!`, bug:`exports.dajKategoriju.`})
     }
     res.status(200).send(kategorija);
 }
@@ -24,7 +24,7 @@ exports.postaviKategoriju = async (req,res)=>{
     })
     kategorija = await kategorija.save();
     if(!kategorija)
-        return res.status(400).json({success: false , message:`Kategorija se ne može kreirati! BUG -> exports.postaviKategoriju.`})
+        return res.status(400).json({success: false , message:`Kategorija se ne može kreirati!`, bug:`exports.postaviKategoriju.`})
     res.send(kategorija);
 }
 
@@ -34,7 +34,7 @@ exports.obrisiKetegoriju = (req, res)=>{
         if(kategorija) {
             return res.status(200).json({success: true, message: 'Kategorija je obrisana!'})
         } else {
-            return res.status(404).json({success: false , message: `Kategorija nije pronađena! BUG -> exports.obrisiKetegoriju.`})
+            return res.status(404).json({success: false , message: `Kategorija nije pronađena!`, bug:` exports.obrisiKetegoriju.`})
         }
     }).catch(err=>{
         return res.status(500).json({success: false, error: err})

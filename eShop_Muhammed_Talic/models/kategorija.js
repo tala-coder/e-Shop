@@ -5,15 +5,9 @@ const kategorijaSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    ikona: {
-        type: String,
-    },
     slika: {
         type: String,
         default: ''
-    },
-    boja: { // Mozda staviti niz boje' ?
-        type: String,
     }
 })
 
