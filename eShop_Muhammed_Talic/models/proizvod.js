@@ -55,6 +55,9 @@ const proizvodSchema = mongoose.Schema({
         ref: 'Kategorija',
         required:true
     },
+    tagovi: [{
+        type: String,
+    }],
     kolicina: {
         type: Number,
         required: true,
@@ -84,7 +87,7 @@ const proizvodSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    reviews: [recenzijaSchema],
+    recenzija: [recenzijaSchema],
 })
 
 
