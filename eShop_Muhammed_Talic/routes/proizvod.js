@@ -3,7 +3,11 @@ const controllers = require("../controllers/proizvod");
 const router = express.Router();
 
 router.get(`/`, controllers.dajProizvode);
+router.get(`/:id`, controllers.dajProizvod);
+router.put('/:id',controllers.urediProizvod)
 router.post(`/`, controllers.postaviProizvod);
+
+
 
 
 
