@@ -1,5 +1,47 @@
 const mongoose = require('mongoose');
 
+const trgovinaSchema = mongoose.Schema(
+    {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "Korisnik",
+        },
+        naziv: {
+            type: String,
+            required: true,
+        },
+        telefon: {
+            type: String,
+            required: true,
+        },
+        mail: {
+            type: String,
+            required: true,
+        },
+        adresa: {
+            type: String,
+            required: true,
+        },
+        adresePoslovnica: [ // [] //
+            {
+                grad: {
+                    type: String,
+                    required: true,
+                },
+                ulica: {
+                    type: String,
+                    required: true,
+                },
+        }
+        ],
+        kategorijeUsluga: [{
+            type: String,
+            required: true,
+        }],
+    },
+);
+
 const korisnikSchema = new mongoose.Schema({
     nickName: {
         type: String,
@@ -43,10 +85,7 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    // category: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Trgovina'
-    // }
+    trgovina: [trgovinaSchema],
 });
 
 exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
