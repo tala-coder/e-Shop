@@ -1,45 +1,63 @@
 //Ctrl+Alt+L foramt code
 var createError = require('http-errors');
-var express = require('express');
+const express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const authJwt = require('./helpers/jwt')
+const app = express();
+const authJwt = require("./helpers/jwt");
 const errorHandler = require('./helpers/error-handler');
 
-// Povezivanje servera sa bazom
-// import connectDB from "./helpers/configDB";
-const DB = require("./helpers/mongoConnect")
-DB.connectDB();
 
 
-//env
+
+
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(cookieParser());
+
+
+
+
+// dotenv
+// require('dotenv/config')
+// //env
 const dotenv = require('dotenv')
 dotenv.config({path:__dirname+'/.env'});
-const nazivShopa = process.env.nazivShopa;
+app.use(logger('dev'));
+// app.use(authJwt()); // belay
+// app.use(errorHandler);
+
+
 
 
 const kategorijaRoutes = require('./routes/kategorija');
-const proizvodRoutes = require('./routes/proizvod');
-const korisnikRoutes = require('./routes/korisnik');
-const narudzbaRoutes = require('./routes/narudzba');
+const proizvodRoutes =   require('./routes/proizvod');
+const korisnikRoutes =   require('./routes/korisnik');
+const narudzbaRoutes =   require('./routes/narudzba');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const nazivShopa = process.env.nazivShopa;
 
 app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
 app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);
 app.use(`/${nazivShopa}/korisnik`,   korisnikRoutes);
 app.use(`/${nazivShopa}/narudzba`,   narudzbaRoutes);
+
+
+
+
+
+
+// Povezivanje servera sa bazom, // import connectDB from "./helpers/configDB";
+const DB = require("./helpers/mongoConnect")
+DB.connectDB();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,3 +76,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+

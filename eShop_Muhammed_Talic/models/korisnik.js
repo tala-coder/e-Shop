@@ -39,8 +39,8 @@ const trgovinaSchema = mongoose.Schema(
             type: String,
             required: true,
         }],
-    },
-);
+    }
+    );
 
 const korisnikSchema = new mongoose.Schema({
     nickName: {
@@ -78,16 +78,16 @@ const korisnikSchema = new mongoose.Schema({
         default: ''
     },
     postanskiBroj :{
-        type: String,
+        type: Number,
         default: ''
     },
     jelAdmin: {
         type: Boolean,
         default: false,
     },
-    trgovina: [trgovinaSchema],
+    trgovina: [trgovinaSchema]
 });
 
-exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
-exports.korisnikSchema = korisnikSchema;
+Korisnik = mongoose.model('Korisnik', korisnikSchema);
+module.exports = Korisnik;
 
