@@ -1,63 +1,58 @@
 //Ctrl+Alt+L foramt code
 var createError = require('http-errors');
-const express = require('express');
+var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const app = express();
-const authJwt = require("./helpers/jwt");
+const authJwt = require('./helpers/jwt')
 const errorHandler = require('./helpers/error-handler');
+var app = express();
 
 
+// Povezivanje servera sa bazom
+// import connectDB from "./helpers/configDB";
+const DB = require("./helpers/mongoConnect")
+DB.connectDB();
 
 
-
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(cookieParser());
-
-
-
-
-// dotenv
-// require('dotenv/config')
-// //env
+//env
 const dotenv = require('dotenv')
 dotenv.config({path:__dirname+'/.env'});
-app.use(logger('dev'));
-// app.use(authJwt()); // belay
-// app.use(errorHandler);
+const nazivShopa = process.env.nazivShopa;
 
+
+app.use(logger('dev'));
+app.use(authJwt());
+app.use(errorHandler);
 
 
 
 const kategorijaRoutes = require('./routes/kategorija');
-const proizvodRoutes =   require('./routes/proizvod');
-const korisnikRoutes =   require('./routes/korisnik');
-const narudzbaRoutes =   require('./routes/narudzba');
+const proizvodRoutes = require('./routes/proizvod');
+const korisnikRoutes = require('./routes/korisnik');
+const narudzbaRoutes = require('./routes/narudzba');
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const nazivShopa = process.env.nazivShopa;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+/*
+
+app.use(`/TalaShop/kategorija`, kategorijaRoutes);
+app.use(`/TalaShop/proizvod`,   proizvodRoutes);
+app.use(`/TalaShop/korisnik`,   korisnikRoutes);
+app.use(`/TalaShop/narudzba`,   narudzbaRoutes);
+*/
 
 app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
 app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);
 app.use(`/${nazivShopa}/korisnik`,   korisnikRoutes);
 app.use(`/${nazivShopa}/narudzba`,   narudzbaRoutes);
-
-
-
-
-
-
-// Povezivanje servera sa bazom, // import connectDB from "./helpers/configDB";
-const DB = require("./helpers/mongoConnect")
-DB.connectDB();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -76,4 +71,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-

@@ -1,10 +1,32 @@
+const expressJwt = require('express-jwt');
 
+function authJwt() {
+    const secret = 'secret';
+    return expressJwt({
+        secret,
+        algorithms: ['HS256'],// Zabrana korisniku da koriste metode PUT;DELETE,POST, a adminu dozvoljava
+        isRevoked: isRevoked
+    }).unless({ // daj mi ove rute bez tokena, ( npr. pristup posjetiocima)
+        path: [
+            // KONFUZNOO!
+            // https://stackoverflow.com/questions/36400665/regex-for-express-router-url-to-match-path-starting-with-public
+            // https://www.regextester.com
+            {url: /\/TalaShop\/proizvod(.*)/ ,     methods: ['GET', 'OPTIONS'] },
+            {url: /\/TalaShop\/kategorija(.*)/ ,   methods: ['GET', 'OPTIONS'] },
+            `/TalaShop/korisnik/login`,
+            `/TalaShop/korisnik/register`
+        ]
+    })
+}
 
+async function isRevoked(req, payload, done) {
+    if(!payload.jelAdmin) {
+        done(null, true)
+    }
+    done();
+}
 
-
-
-
-
+module.exports = authJwt;
 
 
 

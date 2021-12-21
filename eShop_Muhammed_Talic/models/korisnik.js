@@ -46,11 +46,11 @@ const korisnikSchema = new mongoose.Schema({
     nickName: {
         type: String,
         required: true,
+        // unigue: true
     },
     imePrezime: {
         type: String,
         required: true,
-        unique: true
     },
     mail: {
         type: String,
@@ -85,9 +85,10 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    trgovina: [trgovinaSchema]
+    // trgovina: [trgovinaSchema]
 });
 
-Korisnik = mongoose.model('Korisnik', korisnikSchema);
-module.exports = Korisnik;
+
+exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
+exports.korisnikSchema = korisnikSchema;
 
