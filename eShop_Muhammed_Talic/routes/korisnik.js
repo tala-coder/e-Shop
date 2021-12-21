@@ -1,12 +1,28 @@
 const express = require('express');
-// const controllers = require("../controllers/korisnik");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
-
-const {Korisnik} = require('../models/korisnik');
+const controllers = require("../controllers/korisnik");
 const router = express.Router();
 
+router.get(`/`,  controllers.dajKorisnike);
+router.get(`/:id`,  controllers.dajKorisnika);
+router.post(`/register`, controllers.registrujSe);
+router.post(`/login`, controllers.logujSe);
+router.delete('/:id', controllers.obrisiKorisnika);
+
+// router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 router.get(`/`, async (req, res) =>{
     const korisnici = await Korisnik.find().select('-passwordHash');
@@ -60,6 +76,7 @@ router.post(`/`, async (req,res)=>{
 })
 
 
+*/
 
 /*
 router.get(`/`,  controllers.dajKorisnike);

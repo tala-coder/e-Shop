@@ -85,7 +85,7 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    // trgovina: [trgovinaSchema]
+    trgovina: [trgovinaSchema]
 });
 
 
