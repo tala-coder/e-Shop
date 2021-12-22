@@ -67,11 +67,11 @@ const proizvodSchema = mongoose.Schema({
 /*    rating: {
         type: Number,
         default: 0,
-    },*/
+    },
     brojRecenczija: {
         type: Number,
         default: 0,
-    },
+    },*/
     slika: {
         type: String,
         default: ''

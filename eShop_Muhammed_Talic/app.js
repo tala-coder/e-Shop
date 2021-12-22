@@ -28,6 +28,7 @@ app.use(errorHandler);
 
 
 
+const indexRoutes = require('./routes/index');
 const kategorijaRoutes = require('./routes/kategorija');
 const proizvodRoutes = require('./routes/proizvod');
 const korisnikRoutes = require('./routes/korisnik');
@@ -50,6 +51,7 @@ app.use(`/TalaShop/korisnik`,   korisnikRoutes);
 app.use(`/TalaShop/narudzba`,   narudzbaRoutes);
 */
 
+app.use(`/${nazivShopa}`, indexRoutes);
 app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
 app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);
 app.use(`/${nazivShopa}/korisnik`,   korisnikRoutes);
