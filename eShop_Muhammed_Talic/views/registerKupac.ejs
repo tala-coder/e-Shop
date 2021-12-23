@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+            rel="stylesheet"
+    />
+<style>
+    .intro {
+        height: 100%;
+    }
+
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #003399;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to bottom right, #003399, #3366CC);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to bottom right, #003399, #3366CC)
+    }
+</style>
+</head>
+<section class="intro" >
+    <div class="mask d-flex align-items-center h-100 gradient-custom">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9 col-xl-7" >
+                    <div class="card">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2">Registracija kupca</h3>
+
+                            <form action="" >
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="ime" class="form-control" />
+                                            <label class="form-label"  name="ime" value="" for="ime">Ime</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="prezime" class="form-control" />
+                                            <label class="form-label" name="prezime" value="" for="prezime">Prezime</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="zemlja" class="form-control" />
+                                            <label class="form-label" name="zemlja" value="" for="zemlja">Zemlja</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="grad" class="form-control" />
+                                            <label class="form-label" name="grad" value="" for="grad">Grad</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="ulica" class="form-control" />
+                                            <label class="form-label" name="ulica" value="" for="ulica">Ulica</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="postanskiBroj" class="form-control" />
+                                            <label class="form-label" name="postanskiBroj" value="" for="postanskiBroj">Poštanski broj</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline datepicker">
+                                            <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="datumRodenja"
+                                            />
+                                            <label class="form-label" name="datumRodenja" value="" for="datumRodenja">Datum rođenja</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <h6 class="mb-2 pb-1">Spol: </h6>
+
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="inlineRadioOptions"
+                                                    id="spolM"
+                                                    value="option1"
+                                            />
+                                            <label class="form-check-label" name="spolM" value="" for="spolM">Muško</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="inlineRadioOptions"
+                                                    id="spolZ"
+                                                    value="option2"
+                                            />
+                                            <label class="form-check-label" name="spolZ" value="" for="spolZ">Žensko</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="email" id="mail" class="form-control" />
+                                            <label class="form-label" name="mail" value="" for="mail">Email</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="tel" id="phoneNumber" class="form-control" />
+                                            <label class="form-label" name="Prezime" value="" for="Prezime">Telefon</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="password" id="passwordHash" class="form-control" />
+                                            <label class="form-label" name="passwordHash" value="" for="passwordHash">Šifra</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="password" class="form-control" />
+                                            <label class="form-label" >Potvrdi šifru</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="form-check" class="form-label">Interesi:</label> <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes1" value="option1" />
+                                        <label class="form-check-label" for="interes1">Auta</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes2" value="option2" />
+                                        <label class="form-check-label" for="interes2">Parfemi</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes3" value="option1" />
+                                        <label class="form-check-label" for="interes3">Nekretnine</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes4" value="option2" />
+                                        <label class="form-check-label" for="interes4">IT oprema</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes5" value="option1" />
+                                        <label class="form-check-label" for="interes5">Odjeća</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes6" value="option2" />
+                                        <label class="form-check-label" for="interes6">Cvijeće</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes7" value="option1" />
+                                        <label class="form-check-label" for="interes7">Literatura</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="interes8" value="option2" />
+                                        <label class="form-check-label" for="interes8">Nakit i satovi</label>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-12">
+
+<!--                                        <h6 class="mb-3">Subject</h6>-->
+
+<!--                                        <select class="select" multiple>-->
+<!--                                            <option value="1">One</option>-->
+<!--                                            <option value="2">Two</option>-->
+<!--                                            <option value="3">Three</option>-->
+<!--                                            <option value="4">Four</option>-->
+<!--                                            <option value="5">Five</option>-->
+<!--                                            <option value="6">Six</option>-->
+<!--                                            <option value="7">Seven</option>-->
+<!--                                            <option value="8">Eight</option>-->
+<!--                                        </select>-->
+<!--                                        <label class="form-label select-label">Choose option</label>-->
+
+                                        <div class="mt-4">
+                                            <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<body>
+</body>
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"
+></script>
+</html>
+

@@ -4,7 +4,7 @@
     <title> TalaShop </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap Navbar with Login Form in Dropdown</title>
+    <title>ff</title>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/5.7.0/css/font-awesome.min.css">
@@ -46,7 +46,7 @@
       }
       .navbar .navbar-brand b {
         font-weight: bold;
-        color: #135c9f;
+        color: #003399;
       }
       .navbar .form-inline {
         display: inline-block;
@@ -82,7 +82,7 @@
       }
       .navbar .nav .btn-primary, .navbar .nav .btn-primary:active {
         color: #fff;
-        background: #1a60a4;
+        background: #003399;
         padding-top: 8px;
         padding-bottom: 6px;
         border-radius: 4px;
@@ -97,7 +97,7 @@
       .navbar .nav .btn-primary:hover, .navbar .nav .btn-primary:focus {
         color: #fff;
         outline: none;
-        background: #1886c4;
+        background: #3399FF;
       }
       .search-box .btn span {
         transform: scale(0.9);
@@ -157,7 +157,7 @@
         }
       }
       @media (max-width: 768px){
-        .navbar .dropdown-menu.login-form {
+        .navbar .dropdown-menu {
           width: 100%;
           padding: 10px 15px;
           background: transparent;
@@ -218,9 +218,21 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a data-toggle="dropdown" class="dropdown-toggle" href="http://localhost:3000/TalaShop/login">Login</a>
+          <a href="http://localhost:3000/TalaShop/login">Login</a>
         </li>
-        <li><a href="#" class="btn btn-primary mt-1 mb-1">Register</a></li>
+        <li>
+          <button class="btn btn-primary mt-1 mb-1 dropdown-toggle" data-toggle="dropdown">Register</button>
+
+          <div class="dropdown-menu d-grid gap-2 d-md-block p-1" style="width: 250px">
+                <p class="hint-text text-center" >Registruj se kao</p>
+<!--            <div class="d-grid gap-2 d-md-block">-->
+             <a class="btn btn-primary"
+                href="http://localhost:3000/TalaShop/registerTrgovac" style="margin-top: 0; margin-left: 2px" type="button">Trgovac</a>
+              <a class="btn btn-primary"
+                 href="http://localhost:3000/TalaShop/registerKupac" style="margin-top: 0;" type="button">Kupac</a>
+<!--            </div>-->
+          </div>
+        </li>
       </ul>
     </div>
   </nav>

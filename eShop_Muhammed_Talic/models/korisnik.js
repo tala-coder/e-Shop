@@ -43,12 +43,12 @@ const trgovinaSchema = mongoose.Schema(
     );
 
 const korisnikSchema = new mongoose.Schema({
-    nickName: {
+    ime: {
         type: String,
         required: true,
         // unigue: true
     },
-    imePrezime: {
+    Prezime: {
         type: String,
         required: true,
     },
@@ -81,11 +81,14 @@ const korisnikSchema = new mongoose.Schema({
         type: Number,
         default: ''
     },
-    jelAdmin: {
-        type: Boolean,
-        default: false,
-    },
-    trgovina: [trgovinaSchema]
+    // jelAdmin: {
+    //     type: Boolean,
+    //     default: false,
+    // },
+    // trgovina: [trgovinaSchema]
+    // interesi: [{
+    //             type: String
+    //         }]
 });
 
 

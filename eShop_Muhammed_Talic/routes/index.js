@@ -12,4 +12,8 @@ router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Express' });
 });
 
+router.get('/registerKupac', function(req, res, next) {
+  res.render('registerKupac', { title: 'Express' });
+});
+
 module.exports = router;

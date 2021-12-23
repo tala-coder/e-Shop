@@ -40,7 +40,7 @@ exports.postaviNarudzbu = async (req,res)=>{
         return orderItem.proizvod.cijena * orderItem.kolicina
     }))
 
-    const totalPrice = totalPrices.reduce((a,b) => a +b , 0);
+    const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
 
     let narudzba = new Narudzba({
         orderItems: orderItemsIdsResolved,
