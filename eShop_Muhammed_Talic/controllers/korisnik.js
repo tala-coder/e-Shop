@@ -22,8 +22,8 @@ exports.dajKorisnika = async(req,res)=>{
 exports.registrujSe = async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let korisnik = new Korisnik({
-         nickName:  req.body.nickName,
-         imePrezime :  req.body.imePrezime,
+         ime:  req.body.ime,
+         prezime :  req.body.prezime,
          mail : req.body.mail,
          passwordHash : bcrypt.hashSync(req.body.password, salt),
          telefon : req.body.telefon,
@@ -32,8 +32,12 @@ exports.registrujSe = async (req,res)=>{
          grad : req.body.grad,
          ulica : req.body.ulica,
          postanskiBroj : req.body.postanskiBroj,
+         interesi: req.body.interesi,
+         trgovina: req.body.trgovina
+
     })
     korisnik = await korisnik.save();
+    console.log(req.body.trgovina);
     if(!korisnik)
         res.status(400).json({success: false, bug: `exports.registrujSe`});
     res.send(korisnik);
