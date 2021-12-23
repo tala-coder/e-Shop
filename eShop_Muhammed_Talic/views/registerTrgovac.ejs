@@ -42,7 +42,7 @@
                 <div class="col-12 col-lg-9 col-xl-7" >
                     <div class="card">
                         <div class="card-body  ">
-                            <h3 class="mb-4 pb-2">Registracija kupca</h3>
+                            <h3 class="mb-4 pb-2">Registracija trgovca</h3>
 
                             <form action="" >
 
@@ -50,97 +50,34 @@
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" id="ime" class="form-control" />
-                                            <label class="form-label"  name="ime" value="" for="ime">Ime</label>
+                                            <input type="text" id="naziv" class="form-control" />
+                                            <label class="form-label"  name="naziv" value="" for="naziv">Naziv firme</label>
                                         </div>
 
                                     </div>
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
-                                            <input type="text" id="prezime" class="form-control" />
-                                            <label class="form-label" name="prezime" value="" for="prezime">Prezime</label>
+                                            <input type="text" id="adresa" class="form-control" />
+                                            <label class="form-label" name="adresa" value="" for="adresa">Adresa</label>
                                         </div>
 
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
-
-                                        <div class="form-outline">
-                                            <input type="text" id="zemlja" class="form-control" />
-                                            <label class="form-label" name="zemlja" value="" for="zemlja">Zemlja</label>
-                                        </div>
-
-                                    </div>
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
                                             <input type="text" id="grad" class="form-control" />
-                                            <label class="form-label" name="grad" value="" for="grad">Grad</label>
+                                            <label class="form-label" name="grad" value="" for="mail">Grad</label>
                                         </div>
 
                                     </div>
-                                </div>
-
-
-                                <div class="row">
                                     <div class="col-md-6 mb-4">
-
                                         <div class="form-outline">
-                                            <input type="text" id="ulica" class="form-control" />
-                                            <label class="form-label" name="ulica" value="" for="ulica">Ulica</label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-
-                                        <div class="form-outline">
-                                            <input type="text" id="postanskiBroj" class="form-control" />
-                                            <label class="form-label" name="postanskiBroj" value="" for="postanskiBroj">Poštanski broj</label>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-
-                                        <div class="form-outline datepicker">
-                                            <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="datumRodenja"
-                                            />
-                                            <label class="form-label" name="datumRodenja" value="" for="datumRodenja">Datum rođenja</label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-
-                                        <h6 class="mb-2 pb-1">Spol: </h6>
-
-                                        <div class="form-check form-check-inline">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="inlineRadioOptions"
-                                                    id="spolM"
-                                                    value="option1"
-                                            />
-                                            <label class="form-check-label" name="spolM" value="" for="spolM">Muško</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="inlineRadioOptions"
-                                                    id="spolZ"
-                                                    value="option2"
-                                            />
-                                            <label class="form-check-label" name="spolZ" value="" for="spolZ">Žensko</label>
+                                            <input type="text" id="država" class="form-control" />
+                                            <label class="form-label" name="država" value="" for="država">Država</label>
                                         </div>
 
                                     </div>
@@ -184,8 +121,13 @@
                                     </div>
                                 </div>
 
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="poslovnice" rows="2"></textarea>
+                                    <label class="form-label" for="poslovnice">Unesite adrese ostalih poslovnica</label>
+                                </div>
+
                                 <div>
-                                    <label for="form-check" class="form-label">Interesi:</label> <br>
+                                    <label for="form-check" class="form-label">Kategorije:</label> <br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="interes1" value="option1" />
                                         <label class="form-check-label" for="interes1">Auta</label>

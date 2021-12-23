@@ -4,40 +4,43 @@ const trgovinaSchema = mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
+            // required: true,
             ref: "Korisnik",
         },
         naziv: {
             type: String,
-            required: true,
+            // required: true,
         },
-        telefon: {
-            type: String,
-            required: true,
-        },
-        mail: {
-            type: String,
-            required: true,
-        },
-        adresa: {
-            type: String,
-            required: true,
-        },
-        adresePoslovnica: [ // [] //
+        // telefon: {
+        //     type: String,
+        //     // required: true,
+        // },
+        // mail: {
+        //     type: String,
+        //     required: true,
+        // },
+        // adresa: {
+        //     type: String,
+        //     required: true,
+        // },
+        adresePoslovnica: {
+                type: String,
+            },
+       /* adresePoslovnica: [ // [] //
             {
                 grad: {
                     type: String,
-                    required: true,
+                    // required: true,
                 },
                 ulica: {
                     type: String,
-                    required: true,
+                    // required: true,
                 },
         }
-        ],
+        ],*/
         kategorijeUsluga: [{
-            type: String,
-            required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Kategorija",
         }],
     }
     );
@@ -45,17 +48,17 @@ const trgovinaSchema = mongoose.Schema(
 const korisnikSchema = new mongoose.Schema({
     ime: {
         type: String,
-        required: true,
+        // required: true,
         // unigue: true
     },
     Prezime: {
         type: String,
-        required: true,
+        // required: true,
     },
     mail: {
         type: String,
-        required: true,
-        unique: true
+        // required: true,
+        // unique: true
     },
     passwordHash: {
         type: String,
@@ -63,7 +66,7 @@ const korisnikSchema = new mongoose.Schema({
     },
     telefon: {
         type: String,
-        required: true,
+        // required: true,
     },
     zemlja: {
         type: String,
@@ -81,14 +84,16 @@ const korisnikSchema = new mongoose.Schema({
         type: Number,
         default: ''
     },
-    // jelAdmin: {
-    //     type: Boolean,
-    //     default: false,
-    // },
-    // trgovina: [trgovinaSchema]
-    // interesi: [{
-    //             type: String
-    //         }]
+    jelAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    trgovina: [trgovinaSchema],
+    interesi: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Kategorija",
+            }],
+
 });
 
 
