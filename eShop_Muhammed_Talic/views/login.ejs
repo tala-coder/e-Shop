@@ -31,22 +31,22 @@
             <div class="col-xl-5 col-md-8">
               <a class="navbar-brand p-4" style="color: #bcc0cb" href="#">Tala<b>Shop</b></a>
 
-              <form style="opacity: 80%" class="bg-white  rounded-5 shadow-5-strong p-4 ">
+              <form style="opacity: 80%" class="bg-white  rounded-5 shadow-5-strong p-4 " action="/TalaShop/korisnik/login" method="POST" id="login_korisnik" >
                 <!-- Email input -->
                 <div class="form-outline mb-2">
                   <label class="form-label" for="form1Example1" >Email addresa</label>
-                  <input required="required" type="email" id="form1Example1" class="form-control" />
+                  <input required="required" type="email" id="form1Example1" name="mail" value="" class="form-control" />
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-2">
                   <label class="form-label" for="form1Example2">Šifra</label>
-                  <input required="required" type="password" id="form1Example2" class="form-control" />
+                  <input required="required" type="password" id="form1Example2" name="password" value="" class="form-control" />
                 </div>
 
                 <!-- 2 column grid layout for inline styling -->
                 <div class="row mb-4">
-                  <div class="col d-flex justify-content-center">
+                  <div class="col d-flex justify-content-between">
                     <!-- Checkbox -->
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="form1Example3"  />
@@ -56,9 +56,9 @@
                     </div>
                   </div>
 
-                  <div class="col text-center">
+                  <div class="col text-end">
                     <!-- Simple link -->
-                    <a href="#!">Zaboravili ste šifru?</a>
+                    <a href="#">Zaboravili ste šifru?</a>
                   </div>
                 </div>
 
@@ -78,11 +78,11 @@
     </a>
   </div>
   <div class="collapse mt-3" id="collapseExample">
-    <p class="hint-text text-start" >Registruj se kao</p>
+<!--    <p class="hint-text text-start" >Registruj se kao</p>-->
     <a class="btn btn-primary"
-       href="http://localhost:3000/TalaShop/registerTrgovac" data-mdb-ripple-duration="0"  type="button">Trgovac</a>
-    <a class="btn btn-primary"
-       href="http://localhost:3000/TalaShop/registerKupac " data-mdb-ripple-duration="0" type="button">Kupac</a>
+       href="http://localhost:3000/TalaShop/korisnik/register" data-mdb-ripple-duration="0"  type="button">Registruj se</a>
+<!--    <a class="btn btn-primary"-->
+<!--       href="http://localhost:3000/TalaShop/registerKupac " data-mdb-ripple-duration="0" type="button">Kupac</a>-->
   </div>
 
 

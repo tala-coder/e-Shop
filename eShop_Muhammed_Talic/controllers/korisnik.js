@@ -2,7 +2,18 @@ const {Korisnik} = require('../models/korisnik');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
-const Proizvod = require("../models/proizvod");
+const asyncHandler = require('express-async-handler')
+
+exports.registrujSeForma = asyncHandler(async function(req, res, next) {
+    res.render('register', { title: 'Registracija' });
+})
+
+exports.logujSeForma = asyncHandler(async function(req, res, next) {
+    res.render('login', { title: 'Login' });
+})
+
+
+
 
 exports.dajKorisnike = async (req, res) =>{
     const korisnici = await Korisnik.find().select('-passwordHash');
@@ -19,17 +30,21 @@ exports.dajKorisnika = async(req,res)=>{
     res.status(200).send(korisnik);
 }
 
-exports.registrujSe = async (req,res)=>{
+exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
+    let pass = await bcrypt.hashSync(req.body.password, salt);
+
     let korisnik = new Korisnik({
          ime:  req.body.ime,
          prezime :  req.body.prezime,
          mail : req.body.mail,
-         passwordHash : bcrypt.hashSync(req.body.password, salt),
+         // passwordHash : "test",
+         passwordHash : pass,
          telefon : req.body.telefon,
          zemlja : req.body.zemlja,
          jelAdmin: req.body.jelAdmin,
          grad : req.body.grad,
+         spol : req.body.spol,
          ulica : req.body.ulica,
          postanskiBroj : req.body.postanskiBroj,
          interesi: req.body.interesi,
@@ -37,11 +52,11 @@ exports.registrujSe = async (req,res)=>{
 
     })
     korisnik = await korisnik.save();
-    console.log(req.body.trgovina);
+    // console.log(req.body.trgovina);
     if(!korisnik)
         res.status(400).json({success: false, bug: `exports.registrujSe`});
     res.send(korisnik);
-}
+})
 
 exports.logujSe = async (req, res) => {
     const korisnik = await Korisnik.findOne({mail: req.body.mail})
@@ -52,19 +67,23 @@ exports.logujSe = async (req, res) => {
     else if( korisnik.mail !== req.body.mail)
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
-        const token = jwt.sign(
-            {
-                korisnikId: korisnik.id,
-                jelAdmin: korisnik.jelAdmin  //https://jwt.io DEBUGGER
-            },
-            secret,
-            {expiresIn : '2d'}
-        )
-        return res.status(200).send({korisnik: korisnik.nickName, token});
+        const token = jwt.sign({korisnikId: korisnik.id, korisnikIme: korisnik.ime, jelAdmin: korisnik.jelAdmin  //https://jwt.io DEBUGGER
+            },secret,{expiresIn : '1d'})
+         res.cookie("jwt", token, {
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000 // 24h
+            });
+        return res.redirect('/TalaShop');
+        // return res.status(200).send({korisnik: korisnik.ime, token});
     }
     else
         res.status(400).json({message: `Pogresan password!`, bug: `exports.logujSe`});
 }
+/*
+return res.cookie("acces_token", token {
+    httpOnly: true,
+        secure: secret,
+})*/
 
 exports.obrisiKorisnika = async (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id))

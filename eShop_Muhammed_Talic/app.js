@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const authJwt = require('./helpers/jwt')
 const errorHandler = require('./helpers/error-handler');
+const auth = require('./helpers/authMiddleware');
 var app = express();
 
 
@@ -22,8 +23,8 @@ const nazivShopa = process.env.nazivShopa;
 
 
 app.use(logger('dev'));
-//TODO: ukloniti komentar
-// app.use(authJwt());
+// TODO: ukloniti komentar
+app.use(authJwt());
 app.use(errorHandler);
 
 
@@ -51,6 +52,7 @@ app.use(`/TalaShop/korisnik`,   korisnikRoutes);
 app.use(`/TalaShop/narudzba`,   narudzbaRoutes);
 */
 
+app.use('*', auth.checkUser);
 app.use(`/${nazivShopa}`, indexRoutes);
 app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
 app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);

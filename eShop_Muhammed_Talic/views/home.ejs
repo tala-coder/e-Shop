@@ -7,7 +7,7 @@
     <title>ff</title>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/5.7.0/css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/5.7.0/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -176,9 +176,9 @@
     </style>
     <script>
       // Prevent dropdown menu from closing when click inside the form
-      $(document).on("click", ".navbar-right .dropdown-menu", function(e){
-        e.stopPropagation();
-      });
+      // $(document).on("click", ".navbar-right .dropdown-menu", function(e){
+      //   e.stopPropagation();
+      // });
     </script>
   </head>
   <body>
@@ -217,24 +217,25 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="http://localhost:3000/TalaShop/login">Login</a>
-        </li>
-        <li>
-          <button class="btn btn-primary mt-1 mb-1 dropdown-toggle" data-toggle="dropdown">Register</button>
+        <% if (user) { %>
+        <li> <a  class="btn disabled" style="color: black">Dobro došli, <%= user %></a> </li>
+        <li> <a class="btn btn-primary mt-1 mb-1" href="http://localhost:3000/TalaShop/logout">Logout</a> </li>
+        <% } else { %>
+          <li>
+            <a href="http://localhost:3000/TalaShop/korisnik/login">Login</a>
+          </li>
 
-          <div class="dropdown-menu d-grid gap-2 d-md-block p-1" style="width: 250px">
-                <p class="hint-text text-center" >Registruj se kao</p>
-<!--            <div class="d-grid gap-2 d-md-block">-->
-             <a class="btn btn-primary"
-                href="http://localhost:3000/TalaShop/registerTrgovac" style="margin-top: 0; margin-left: 2px" type="button">Trgovac</a>
-              <a class="btn btn-primary"
-                 href="http://localhost:3000/TalaShop/registerKupac" style="margin-top: 0;" type="button">Kupac</a>
-<!--            </div>-->
-          </div>
+        <li>
+          <a class="btn btn-primary mt-1 mb-1"  href="http://localhost:3000/TalaShop/korisnik/register" >Register</a>
         </li>
+        <% } %>
+
       </ul>
     </div>
   </nav>
+
+  <a class="btn btn-primary"
+     href="http://localhost:3000/TalaShop/test" type="button">Trgovac</a>
+
   </body>
 </html>

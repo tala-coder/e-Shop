@@ -2,6 +2,10 @@ const express = require('express');
 const controllers = require("../controllers/korisnik");
 const router = express.Router();
 
+router.get(`/register`,  controllers.registrujSeForma);
+router.get(`/login`, controllers.logujSeForma);
+
+
 router.get(`/`,  controllers.dajKorisnike);
 router.get(`/:id`,  controllers.dajKorisnika);
 router.post(`/register`, controllers.registrujSe);

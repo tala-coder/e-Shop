@@ -7,22 +7,22 @@ const trgovinaSchema = mongoose.Schema(
         //     // required: true,
         //     ref: "Korisnik",
         // },
-        naziv: {
+        nazivFirme: {
             type: String,
             // required: true,
         },
-        // telefon: {
-        //     type: String,
-        //     // required: true,
-        // },
-        // mail: {
-        //     type: String,
-        //     required: true,
-        // },
-        // adresa: {
-        //     type: String,
-        //     required: true,
-        // },
+        telefonFirme: {
+            type: String,
+            // required: true,
+        },
+        mailFirme: {
+            type: String,
+            // required: true,
+        },
+        adresaFirme: {
+            type: String,
+            // required: true,
+        },
         adresePoslovnica: {
                 type: String,
             },
@@ -57,18 +57,24 @@ const korisnikSchema = new mongoose.Schema({
     },
     mail: {
         type: String,
+        lowercase: true,
         // required: true,
         // unique: true
     },
     passwordHash: {
         type: String,
         required: true,
+        minLenght: [6, 'Minimalna dužina šifre je 6 karaktera.'] // todo u htmlu dodat
     },
     telefon: {
         type: String,
         // required: true,
     },
     zemlja: {
+        type: String,
+        default: ''
+    },
+    spol: {
         type: String,
         default: ''
     },
@@ -88,7 +94,10 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    trgovina: trgovinaSchema,
+    trgovina: [{
+        type: trgovinaSchema,
+        default: null
+    }],
     interesi: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Kategorija",
@@ -96,7 +105,10 @@ const korisnikSchema = new mongoose.Schema({
 
 });
 
-
-exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
+// Kolekcija za test
+exports.Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
 exports.korisnikSchema = korisnikSchema;
+
+// exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
+// exports.korisnikSchema = korisnikSchema;
 
