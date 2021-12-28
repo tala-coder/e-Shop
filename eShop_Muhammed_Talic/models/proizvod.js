@@ -83,12 +83,14 @@ const proizvodSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    datumKreiranja: {
+    /*datumKreiranja: {
         type: Date,
         default: Date.now,
-    },
+    },*/
     recenzija: [recenzijaSchema],
-})
+},
+    { timestamps: true }
+)
 
 
 Proizvod = mongoose.model('Proizvod', proizvodSchema);

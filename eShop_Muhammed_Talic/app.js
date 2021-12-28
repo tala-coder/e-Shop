@@ -24,7 +24,7 @@ const nazivShopa = process.env.nazivShopa;
 
 app.use(logger('dev'));
 // TODO: ukloniti komentar
-app.use(authJwt());
+// app.use(authJwt());
 app.use(errorHandler);
 
 

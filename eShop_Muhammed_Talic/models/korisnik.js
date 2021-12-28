@@ -42,7 +42,8 @@ const trgovinaSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Kategorija",
         }],
-    }
+    },
+    { timestamps: true }
     );
 
 const korisnikSchema = new mongoose.Schema({
@@ -103,7 +104,9 @@ const korisnikSchema = new mongoose.Schema({
                 ref: "Kategorija",
             }],
 
-});
+},
+    { timestamps: true }
+);
 
 // Kolekcija za test
 exports.Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);

@@ -41,11 +41,13 @@ const narudzbaSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Korisnik',
     },
-    narudzbaTime: {
+    /*narudzbaTime: {
         type: Date,
         default: Date.now,
-    },
-})
+    },*/
+},
+    { timestamps: true }
+)
 
 exports.Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 /*

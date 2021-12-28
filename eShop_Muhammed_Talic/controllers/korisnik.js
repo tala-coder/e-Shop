@@ -67,8 +67,10 @@ exports.logujSe = async (req, res) => {
     else if( korisnik.mail !== req.body.mail)
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
-        const token = jwt.sign({korisnikId: korisnik.id, korisnikIme: korisnik.ime, jelAdmin: korisnik.jelAdmin  //https://jwt.io DEBUGGER
-            },secret,{expiresIn : '1d'})
+        const token = jwt.sign(
+            {korisnikId: korisnik.id, korisnikIme: korisnik.ime, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
+            secret,
+            {expiresIn : '1d'})
          res.cookie("jwt", token, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000 // 24h
