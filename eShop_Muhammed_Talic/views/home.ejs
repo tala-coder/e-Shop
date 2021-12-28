@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
       body {
         font-family: 'Varela Round', sans-serif;
@@ -30,6 +31,7 @@
         padding-right: 16px;
         border-bottom: 1px solid #dfe3e8;
         border-radius: 0;
+        font-size:18px;
       }
       .nav img {
         border-radius: 50%;
@@ -125,20 +127,13 @@
       .navbar .navbar-form {
         border: none;
       }
-      .navbar .navbar-form-wrapper {
-        padding: 0 15px;
-      }
+
       .navbar .login-form label {
         color: #888;
         font-weight: normal;
       }
-      .navbar .dropdown-menu.login-form {
-        width: 280px;
-        padding: 20px;
-        left: auto;
-        right: 0;
-        font-size: 14px;
-      }
+
+
       .navbar .nav .dropdown-menu.login-form a {
         padding: 0 !important;
         color: #1367b6;
@@ -147,9 +142,7 @@
       .navbar .nav .dropdown-menu.login-form a:hover{
         text-decoration: underline;
       }
-      .navbar .dropdown-menu.login-form .checkbox-inline {
-        margin-top: 10px;
-      }
+
       @media (min-width: 1200px){
         .form-inline .input-group {
           width: 300px;
@@ -175,14 +168,29 @@
       }
     </style>
     <script>
-      // Prevent dropdown menu from closing when click inside the form
-      // $(document).on("click", ".navbar-right .dropdown-menu", function(e){
-      //   e.stopPropagation();
-      // });
+      $(document).ready(function() {
+
+        $(".owl-carousel").owlCarousel({
+
+          autoPlay: 3000,
+          items : 4,
+          itemsDesktop : [1199,3],
+          itemsDesktopSmall : [979,3],
+          center: true,
+          nav:true,
+          loop:true,
+          responsive: {
+            600: {
+              items: 4
+            }
+          }
+        });
+
+      });
     </script>
   </head>
   <body>
-  <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-light" style="margin-bottom: 10px ">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Tala<b>Shop</b></a>
       <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -234,8 +242,20 @@
     </div>
   </nav>
 
-  <a class="btn btn-primary"
-     href="http://localhost:3000/TalaShop/test" type="button">Trgovac</a>
+
+  <%- include('include/_carouselHomePage.ejs') %>
+
+<!--  <div class="row">-->
+<!--    <div class="col-md-2">.col-md-3</div>-->
+<!--    <div class="col-md">.col-md-6</div>-->
+<!--  </div>-->
+
+    <%- include('include/_sidebarHomePage.ejs') %>
+
+
+
+<!--  <a class="btn btn-primary"-->
+<!--     href="http://localhost:3000/TalaShop/test" type="button">Trgovac</a>-->
 
   </body>
 </html>

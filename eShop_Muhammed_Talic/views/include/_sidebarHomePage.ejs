@@ -1,0 +1,133 @@
+
+
+<style>
+    .sidebar {
+        display: none;
+        /*font-family: Arial, serif;*/
+        color: rgb(0, 0, 0);
+        /*font-weight:normal;*/
+        /*font-size: 15px;*/
+
+    }
+    .sidebar label{
+        font-weight:normal;
+
+    }
+    @media (min-width: 768px) {
+        .sidebar {
+
+            position: center;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: block;
+            padding: 20px;
+
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            background-color: #f5f5f5;
+            border-right: 1px solid #eee;
+        }
+    }
+    .main {
+        padding: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .main {
+            padding-right: 40px;
+            padding-left: 40px;
+        }
+    }
+
+
+    .placeholders {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .placeholders h4 {
+        margin-bottom: 0;
+    }
+    .placeholder {
+        margin-bottom: 20px;
+    }
+    .placeholder img {
+        display: inline-block;
+        border-radius: 50%;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar " style="margin-left: 20px">
+            <ul class="nav nav-sidebar">
+                <h3 style="margin-top: 5px">Kategorije</h3>
+
+                <% for (let i=0; i<kategorije.length; i++)       {%>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value=<%=kategorije[i].naziv%> id= <%= kategorije[i]._id %> name="kategorije"/>
+                        <label class="form-check-label" for=<%= kategorije[i]._id %>>
+                            <%= kategorije[i].naziv %>
+                        </label>
+                    </div>
+                <%}%>
+            </ul>
+
+
+
+            <ul class="nav nav-sidebar " >
+                <h3 style="margin-top: 10px">Cijena</h3>
+                <ul class="nav nav-sidebar " >
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">OD:</span>
+
+                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text">DO:</span>
+
+                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+
+                    </div>
+                </ul>
+
+
+            </ul>
+                <input class="btn btn-primary btn" style="margin-top: 5px" type="submit" value="Submit" />
+        </div>
+
+        <div class=" col-md-offset-2 main">TODO artikli
+            <!--TODO artikli            <h1 class="page-header" style="margin: 0">Artikli</h1> -->
+
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

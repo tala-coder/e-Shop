@@ -25,6 +25,10 @@ exports.dajKorisnike = async (req, res) =>{
 
 exports.dajKorisnika = async(req,res)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
+    // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+    const { ime, ...others } = korisnik._doc;
+    // console.log(others)
+
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
     res.status(200).send(korisnik);

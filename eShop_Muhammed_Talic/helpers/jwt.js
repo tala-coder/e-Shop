@@ -10,7 +10,7 @@ function authJwt() {
         path: [
             // KONFUZNOO!
             // https://stackoverflow.com/questions/36400665/regex-for-express-router-url-to-match-path-starting-with-public
-            // https://www.regextester.com
+            // https://www.regextester.com // public routes that don't require authentication
             {url: /\/TalaShop\/proizvod(.*)/ ,     methods: ['GET', 'OPTIONS'] },
             {url: /\/TalaShop\/kategorija(.*)/ ,   methods: ['GET', 'OPTIONS'] }, // TODO kategorije dodaje samo headAdmin
             `/TalaShop/korisnik/login`,
@@ -21,7 +21,7 @@ function authJwt() {
         ]
     })
 }
-
+// revoke token if user no longer exists
 async function isRevoked(req, payload, done) {
     if(!payload.jelAdmin) {
         done(null, true)

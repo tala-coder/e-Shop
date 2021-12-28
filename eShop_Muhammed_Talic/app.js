@@ -23,8 +23,9 @@ const nazivShopa = process.env.nazivShopa;
 
 
 app.use(logger('dev'));
-// TODO: ukloniti komentar
+// TODO: ukloniti komentar // use JWT auth to secure the api
 // app.use(authJwt());
+// global error handler
 app.use(errorHandler);
 
 

@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const auth = require("../helpers/authMiddleware");
+const controllers = require("../controllers/home")
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log(res.locals)
-  res.render('home', { title: 'Express' });
+router.get('/', controllers.dajKategorije, function(req, res, next) {
+  // console.log(res.locals)
+
 });
 
 router.get('/logout', function(req, res) {

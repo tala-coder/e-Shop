@@ -28,7 +28,7 @@ exports.checkUser = (req, res, next) => {
                 res.locals.user = null;
                 next();
         } else {
-            console.log('find decoded', decodedToken);
+            // console.log('find decoded', decodedToken);
             res.locals.user = decodedToken.korisnikIme;
             next();
         }
