@@ -48,7 +48,8 @@
         display: inline-block;
         border-radius: 50%;
     }
-
+    .moj-dropDown{display:block;width:100%;padding:.375rem 2.25rem .375rem .75rem;-moz-padding-start:calc(0.75rem - 3px);font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right .75rem center;background-size:16px 12px;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;-webkit-appearance:none;-moz-appearance:none;appearance:none}@media (prefers-reduced-motion:reduce){.moj-dropDown{transition:none}}.moj-dropDown:focus{border-color:#86b7fe;outline:0;box-shadow:0 0 0 .25rem rgba(13,110,253,.25)}.moj-dropDown[multiple],.moj-dropDown[size]:not([size="1"]){padding-right:.75rem;background-image:none}.moj-dropDown:disabled{background-color:#e9ecef}.moj-dropDown:-moz-focusring{color:transparent;text-shadow:0 0 0 #212529}
+    .moj-dropDown-lg{padding-top:.5rem;padding-bottom:.5rem;padding-left:1rem;font-size:1.25rem}
 
 
 </style>
@@ -70,18 +71,28 @@
                 </div>
                 <%}%>
             </ul><ul class="nav nav-sidebar " >
+                <div>
+                    <h3 style="margin-top: 10px">Grad</h3>
+                    <select class="moj-dropDown-lg" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
                 <h3 style="margin-top: 10px">Cijena</h3>
                 <ul class="nav nav-sidebar " >
                     <div class="input-group mb-3">
                         <span class="input-group-text">OD:</span>
-                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                        <input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">DO:</span>
-                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
+                        <input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
                     </div>
                 </ul>
             </ul>
+
             <input class="btn btn-primary btn" style="margin-top: 5px" type="submit" value="Submit" />
         </div>
 <!--        CARD PROIZVOD-->
@@ -95,14 +106,12 @@
                 </section>
             </div>
 <!--        Pagination -->
-            <nav class="text-center" aria-label="...">
+            <!--<nav class="text-center" aria-label="...">
                 <ul class="pagination " style="justify-content: center">
                     <li class="page-item">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                     </li>
 
-                    <li><a href="?p=0" data-original-title="" title="">1a</a></li>
-                    <li><a href="?p=1" data-original-title="" title="">2a</a></li>
 
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item active" aria-current="page">
@@ -113,7 +122,7 @@
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            </nav>
+            </nav>-->
             </main>
         </div>
     </div>

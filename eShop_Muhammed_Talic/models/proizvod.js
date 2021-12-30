@@ -83,6 +83,14 @@ const proizvodSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    akcija: {
+        type: Number,
+        default: null,
+    },
+    brojOtvaranja: {
+        type: Number,
+        default: 0,
+    },
     /*datumKreiranja: {
         type: Date,
         default: Date.now,
