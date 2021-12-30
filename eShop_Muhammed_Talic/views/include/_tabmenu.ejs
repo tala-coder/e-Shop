@@ -1,0 +1,32 @@
+<style>
+    .navi{padding-left:0;margin-bottom:0;list-style:none}.navi>li{position:relative;display:block}.navi>li>a{position:relative;display:block;padding:10px 15px}.navi>li>a:focus,.navi>li>a:hover{text-decoration:none;background-color:#eee}.navi>li.disabled>a{color:#777}.navi>li.disabled>a:focus,.navi>li.disabled>a:hover{color:#777;text-decoration:none;cursor:not-allowed;background-color:transparent}.navi .open>a,.navi .open>a:focus,.navi .open>a:hover{background-color:#eee;border-color:#337ab7}.navi .navi-divider{height:1px;margin:9px 0;overflow:hidden;background-color:#e5e5e5}.navi>li>a>img{max-width:none}.navi-tabs{border-bottom:1px solid #ddd}.navi-tabs>li{float:left;margin-bottom:-1px}.navi-tabs>li>a{margin-right:2px;line-height:1.42857143;border:1px solid transparent;border-radius:4px 4px 0 0}.navi-tabs>li>a:hover{border-color:#eee #eee #ddd}.navi-tabs>li.active>a,.navi-tabs>li.active>a:focus,.navi-tabs>li.active>a:hover{color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-bottom-color:transparent}.navi-tabs.navi-justified{width:100%;border-bottom:0}.navi-tabs.navi-justified>li{float:none}.navi-tabs.navi-justified>li>a{margin-bottom:5px;text-align:center}.navi-tabs.navi-justified>.dropdown .dropdown-menu{top:auto;left:auto}@media (min-width:768px){.navi-tabs.navi-justified>li{display:table-cell;width:1%}.navi-tabs.navi-justified>li>a{margin-bottom:0}}.navi-tabs.navi-justified>li>a{margin-right:0;border-radius:4px}.navi-tabs.navi-justified>.active>a,.navi-tabs.navi-justified>.active>a:focus,.navi-tabs.navi-justified>.active>a:hover{border:1px solid #ddd}@media (min-width:768px){.navi-tabs.navi-justified>li>a{border-bottom:1px solid #ddd;border-radius:4px 4px 0 0}.navi-tabs.navi-justified>.active>a,.navi-tabs.navi-justified>.active>a:focus,.navi-tabs.navi-justified>.active>a:hover{border-bottom-color:#fff}}.navi-pills>li{float:left}.navi-pills>li>a{border-radius:4px}.navi-pills>li+li{margin-left:2px}.navi-pills>li.active>a,.navi-pills>li.active>a:focus,.navi-pills>li.active>a:hover{color:#fff;background-color:#337ab7}.navi-stacked>li{float:none}.navi-stacked>li+li{margin-top:2px;margin-left:0}.navi-justified{width:100%}.navi-justified>li{float:none}.navi-justified>li>a{margin-bottom:5px;text-align:center}.navi-justified>.dropdown .dropdown-menu{top:auto;left:auto}@media (min-width:768px){.navi-justified>li{display:table-cell;width:1%}.navi-justified>li>a{margin-bottom:0}}.navi-tabs-justified{border-bottom:0}.navi-tabs-justified>li>a{margin-right:0;border-radius:4px}.navi-tabs-justified>.active>a,.navi-tabs-justified>.active>a:focus,.navi-tabs-justified>.active>a:hover{border:1px solid #ddd}@media (min-width:768px){.navi-tabs-justified>li>a{border-bottom:1px solid #ddd;border-radius:4px 4px 0 0}.navi-tabs-justified>.active>a,.navi-tabs-justified>.active>a:focus,.navi-tabs-justified>.active>a:hover{border-bottom-color:#fff}}.tab-content>.tab-pane{display:none}.tab-content>.active{display:block}.navi-tabs .dropdown-menu{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}.navibar{position:relative;min-height:50px;margin-bottom:20px;border:1px solid transparent}@media (min-width:768px){.navibar{border-radius:4px}}@media (min-width:768px){.navibar-header{float:left}}.navibar-collapse{padding-right:15px;padding-left:15px;overflow-x:visible;border-top:1px solid transparent;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);-webkit-overflow-scrolling:touch}.navibar-collapse.in{overflow-y:auto}@media (min-width:768px){.navibar-collapse{width:auto;border-top:0;-webkit-box-shadow:none;box-shadow:none}.navibar-collapse.collapse{display:block!important;height:auto!important;padding-bottom:0;overflow:visible!important}.navibar-collapse.in{overflow-y:visible}.navibar-fixed-bottom .navibar-collapse,.navibar-fixed-top .navibar-collapse,.navibar-static-top
+     </style>
+
+
+
+<div class="container-fluid" style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+    <ul class="navi navi-tabs navi-justified">
+        <li class="active"><a data-toggle="tab" style="border-left-width: 0px;" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+        <li><a data-toggle="tab" href="#menu2" style="border-right-width: 0px;">Menu 3</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active"> <br>
+             <%- include('-card')%>
+        </div>
+        <div id="menu1" class="tab-pane "> <br>
+             <%- include('-card')%>
+        </div>
+        <div id="menu2" class="tab-pane fade"> <br>
+             <%- include('-card')%>
+        </div>
+        <div id="menu3" class="tab-pane fade"> <br>
+             <%- include('-card')%>
+        </div>
+    </div>
+</div>

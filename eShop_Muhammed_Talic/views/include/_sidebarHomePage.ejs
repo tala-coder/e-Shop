@@ -40,94 +40,81 @@
         }
     }
 
-
-    .placeholders {
-        margin-bottom: 30px;
-        text-align: center;
-    }
     .placeholders h4 {
         margin-bottom: 0;
     }
-    .placeholder {
-        margin-bottom: 20px;
-    }
+
     .placeholder img {
         display: inline-block;
         border-radius: 50%;
     }
+
+
+
 </style>
 
 
 <div class="container-fluid">
     <div class="row">
+<!--        SIDEBAR-->
         <div class="col-sm-3 col-md-2 sidebar " style="margin-left: 20px">
             <ul class="nav nav-sidebar">
                 <h3 style="margin-top: 5px">Kategorije</h3>
 
                 <% for (let i=0; i<kategorije.length; i++)       {%>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value=<%=kategorije[i].naziv%> id= <%= kategorije[i]._id %> name="kategorije"/>
-                        <label class="form-check-label" for=<%= kategorije[i]._id %>>
-                            <%= kategorije[i].naziv %>
-                        </label>
-                    </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value=<%=kategorije[i].naziv%> id= <%= kategorije[i]._id %> name="kategorije"/>
+                    <label class="form-check-label" for=<%= kategorije[i]._id %>>
+                        <%= kategorije[i].naziv %>
+                    </label>
+                </div>
                 <%}%>
-            </ul>
-
-
-
-            <ul class="nav nav-sidebar " >
+            </ul><ul class="nav nav-sidebar " >
                 <h3 style="margin-top: 10px">Cijena</h3>
                 <ul class="nav nav-sidebar " >
                     <div class="input-group mb-3">
                         <span class="input-group-text">OD:</span>
-
                         <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
                     </div>
-
                     <div class="input-group">
                         <span class="input-group-text">DO:</span>
-
                         <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" />
-
                     </div>
                 </ul>
-
-
             </ul>
-                <input class="btn btn-primary btn" style="margin-top: 5px" type="submit" value="Submit" />
+            <input class="btn btn-primary btn" style="margin-top: 5px" type="submit" value="Submit" />
         </div>
+<!--        CARD PROIZVOD-->
+        <div class=" col-md-offset-2 main"    style="padding-top: 0px;padding-right: 0px;padding-left: 0px";
+        >
+<!--            TABMENU-->
+            <div class="container-fluid">
+                <section class="text-center">
+                    <%- include('_tabmenu')%>
 
-        <div class=" col-md-offset-2 main">TODO artikli
-            <!--TODO artikli            <h1 class="page-header" style="margin: 0">Artikli</h1> -->
-
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-
+                </section>
             </div>
+<!--        Pagination -->
+            <nav class="text-center" aria-label="...">
+                <ul class="pagination " style="justify-content: center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+
+                    <li><a href="?p=0" data-original-title="" title="">1a</a></li>
+                    <li><a href="?p=1" data-original-title="" title="">2a</a></li>
+
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            </main>
         </div>
     </div>
 </div>
