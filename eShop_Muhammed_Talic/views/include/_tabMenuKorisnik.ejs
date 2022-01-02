@@ -22,7 +22,7 @@
                 aria-controls="home"
                 aria-selected="true"
         >
-            Artikli
+            <b>Artikli</b>
         </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -36,7 +36,7 @@
                 aria-controls="profile"
                 aria-selected="false"
         >
-            Prodato
+            <b>Prodato</b>
         </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -50,7 +50,7 @@
                 aria-controls="contact"
                 aria-selected="false"
         >
-            Recenzije
+         <b>Dojmovi</b>
         </button>
     </li>
 </ul>
@@ -77,6 +77,6 @@
                 </section>
     </div>
     <div class="tab-pane fade" id="contact0" role="tabpanel" aria-labelledby="contact-tab0">
-        Tab 3 content
+        <%- include('_recenzije')%>
     </div>
 </div>
