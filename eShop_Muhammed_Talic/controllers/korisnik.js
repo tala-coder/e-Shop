@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
 
-exports.registrujSeForma = asyncHandler(async function(req, res, next) {
+exports.registrujSeForma = asyncHandler(async function(req, res) {
     res.render('register', { title: 'Registracija' });
 })
 
-exports.logujSeForma = asyncHandler(async function(req, res, next) {
+exports.logujSeForma = asyncHandler(async function(req, res) {
     res.render('login', { title: 'Login' });
 })
 
@@ -31,7 +31,7 @@ exports.dajKorisnika = async(req,res)=>{
 
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
-    res.status(200).send(korisnik);
+    res.render('korisnik', { title: 'User view' });
 }
 
 exports.registrujSe = asyncHandler(async (req,res)=>{

@@ -95,10 +95,10 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    trgovina: [{
+    trgovina: {
         type: trgovinaSchema,
         default: null
-    }],
+    },
     interesi: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Kategorija",

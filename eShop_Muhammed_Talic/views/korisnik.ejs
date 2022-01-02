@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+            rel="stylesheet"
+    />
+    <style>
+
+    </style>
+</head>
+
+<div class="row pb-3 pt-3 ps-3 pe-0" style="background-color: #eee;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <img
+                            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                            height="15"
+                            alt="MDB Logo"
+                            loading="lazy"
+                    />
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Projects</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <!-- Icon -->
+                <a class="text-reset me-3" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+
+                <!-- Notifications -->
+                <a
+                        class="text-reset me-3 dropdown-toggle hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false"
+                >
+                    <i class="fas fa-bell"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuLink"
+                >
+                    <li>
+                        <a class="dropdown-item" href="#">Some news</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Another news</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                </ul>
+
+                <!-- Avatar -->
+                <a
+                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false"
+                >
+                    <img
+                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                            class="rounded-circle"
+                            height="25"
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                    />
+                </a>
+                <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuLink"
+                >
+                    <li>
+                        <a class="dropdown-item" href="#">My profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <div class="container pt-2">
+
+        <div class="row">
+            <div class="col-lg-3 pe-0">
+                <div class="card mb-2">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">purak718</h5>
+
+                         <p class="text-muted mb-1"> Malina d.o.o.</p>
+                        <p class="text-muted mb-1">Željezno Polje, Žepče, Bosna i Hercegovina</p>
+                        <p class="text-muted mb-4">(032) 556-578</p>
+
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary ms-1">Poruka</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 ">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <p class="mb-0">https://PurakMaline.com</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <p class="mb-0">PurakMaline</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <p class="mb-0">@PurakMaline</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                <p class="mb-0">@PurakMaline</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                <p class="mb-0">PurakMaline</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <%-include('./include/_tabMenuKorisnik')%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+</body>
+
+ <script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js">
+ </script>
+</html>
