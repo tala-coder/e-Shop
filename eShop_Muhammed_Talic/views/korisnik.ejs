@@ -2,6 +2,7 @@
 <html>
 <head>
     <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
     <link
@@ -20,7 +21,9 @@
 
 <div class="row pb-3 pt-3 m-0 p-0" style="background-color: #eee;">
     <!-- Navbar -->
+    <div class="container">
         <%-include('./include/_navBarnew')%>
+    </div>
     <!-- Navbar -->
     <div class="container pt-2">
 
@@ -44,19 +47,26 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
 
-                            <li class="list-group-item d-flex justify-content-center align-items-center">
-                                <span class="badge badge-pill badge-primary ">157</span>
-                                <span class="ps-3"> Prodatih artikala </span>
+                            <li class="list-group-item d-flex  align-items-center  ">
+                                <span class="badge badge-pill justify-content-left badge-primary me-3">157</span>
+                                <span class=" "> Prodatih artikala </span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-center align-items-center p-3">
-                                <span class="badge badge-pill badge-primary ">157</span>
-                                <span class="ps-3"> Broj pregleda </span>
+                            <li class="list-group-item d-flex  align-items-center  ">
+                                <span class="badge badge-pill justify-content-left badge-primary me-3">157</span>
+                                <span class=" "> Broj pregleda </span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-center align-items-center p-3">
-                                <span class="badge badge-pill badge-primary ">157</span>
-                                <span class="ps-3"> Prodatih artikala </span>
+                            <li class="list-group-item d-flex  align-items-center  ">
+                                <span class="badge badge-pill justify-content-left badge-success me-3">15 </span>
+                                <span class=" "> Pozitivnih dojmova </span>
                             </li>
-
+                            <li class="list-group-item d-flex  align-items-center ">
+                                <span class="badge badge-pill justify-content-left badge-light  me-3"> 0  </span>
+                                <span class=" "> Neutralnih dojmova </span>
+                            </li>
+                            <li class="list-group-item d-flex  align-items-center  ">
+                                <span class="badge badge-pill justify-content-left badge-danger me-3">1</span>
+                                <span class=" "> Negativnih dojmova </span>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 <!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -65,104 +66,66 @@
             <!-- Left links -->
         </div>
         <!-- Collapsible wrapper -->
-
         <!-- Right elements -->
         <div class="d-flex align-items-center" >
-            <div class="d-flex align-items-center" >
-                <button type="button" class="btn btn-link px-3 me-2" >
-                    Login
-                </button>
-                <button  type="button" class="btn btn-primary me-3"  >
-                    Sign up for free
-                </button>
-            </div>
 
-            <!-- Icon -->
-            <a class="text-reset me-3" href="#">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
+            <% if (user) { %>
+                 <a> Dobro došli, <%= user %></a>
 
-            <!-- Notifications -->
-            <a
-                    class="text-reset me-3 dropdown-toggle hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false"
-            >
-                <i class="fas fa-comments fa-lg"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-            </a>
-            <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuLink"
-            >
-                <li>
-                    <a class="dropdown-item" href="#">Some news</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Another news</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-            </ul>
+                <!-- Korpa -->
+                <a class="text-reset me-3 ms-3" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
 
-            <!-- Notifications -->
-            <a
-                    class="text-reset me-3 dropdown-toggle hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false"
-            >
-                <i class="fas fa-bell"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-            </a>
-            <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuLink"
-            >
-                <li>
-                    <a class="dropdown-item" href="#">Some news</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Another news</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-            </ul>
+                <!-- Poruke -->
+                <a
+                        class="text-reset me-3  hidden-arrow"
+                        href="#"
+                >
+                    <i class="fas fa-comments fa-lg"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <!-- Notifikacije -->
+                <a
+                        class="text-reset me-2 dropdown-toggle hidden-arrow"
+                        href="#"
+                >
+                    <i class="fas fa-bell"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">2</span>
+                </a>
 
-            <a style="color: #35353a"
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-mdb-toggle="dropdown"
-                    aria-expanded="false"
-            >
-                <i class="fas fa-user" ></i>
-            </a>
-            <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuLink"
-            >
-                <li>
-                    <a class="dropdown-item" href="#">My profile</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Settings</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Logout</a>
-                </li>
-            </ul>
+                <a style="color: #35353a"
+                   class="nav-link dropdown-toggle "
+                   href="#"
+                   id="navbarDropdown"
+                   role="button"
+                   data-mdb-toggle="dropdown"
+                   aria-expanded="false"
+                >
+                    <i class="fas fa-user" ></i>
+                </a>
+                <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuLink"
+                >
+                    <li>
+                        <a class="dropdown-item" href="#">Moj profil</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Postavke</a>
+                    </li>
+                    <li> <a class="dropdown-item" href="http://localhost:3000/TalaShop/logout">Odjavite se</a> </li>
+                </ul>
+            <% } else { %>
+                <div class="d-flex align-items-center" >
+                        <a class="btn btn-link text-dark mt-1 mb-1 me-2" href="http://localhost:3000/TalaShop/korisnik/login">prijava</a>
+                        <a class="btn btn-primary mt-1 mb-1"  href="http://localhost:3000/TalaShop/korisnik/register" >REGISTRUJTE SE</a>
+                </div>
+            <% } %>
         </div>
         <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
 </nav>
+
 <!-- Navbar -->
