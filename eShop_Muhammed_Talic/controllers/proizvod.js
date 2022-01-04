@@ -9,7 +9,8 @@ exports.dajProizvode = async (req, res) => { // dajProizvode po selektovanim kat
     const proizvodi = await Proizvod.find(filter).populate('kategorija'); // await Proizvod.find().select('naziv opis');.. SELECT PRETRAGA
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
-    res.send(proizvodi);
+    // res.send(proizvodi);
+    res.render('proizvod', { title: 'test proizvod' })
 }
 
 exports.dajProizvod = async (req, res) =>{
