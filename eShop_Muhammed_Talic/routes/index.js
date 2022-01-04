@@ -4,10 +4,11 @@ const auth = require("../helpers/authMiddleware");
 const controllers = require("../controllers/home")
 
 
-router.get('/', controllers.dajKategorije, function(req, res, next) {
+router.get('/', controllers.dajPodatkeZaPocetnu, function(req, res, next) {
   // console.log(res.locals)
 
 });
+
 
 router.get('/logout', function(req, res) {
   res.cookie('jwt', '', {maxAge: 1});
@@ -15,9 +16,10 @@ router.get('/logout', function(req, res) {
 });
 
 
-router.get('/test',
-    auth.requireAuth, (req, res) =>
-  res.render('index', { title: 'test jwt cookie' }));
+
+// router.get('/test',
+//     auth.requireAuth, (req, res) =>
+//   res.render('index', { title: 'test jwt cookie' }));
 
 /*
 router.get('/register', function(req, res, next) {

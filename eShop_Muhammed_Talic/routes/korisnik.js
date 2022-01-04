@@ -10,6 +10,7 @@ router.get(`/`,  controllers.dajKorisnike);
 router.get(`/:id`,  controllers.dajKorisnika);
 router.post(`/register`, controllers.registrujSe);
 router.post(`/login`, controllers.logujSe);
+router.put('/:id',controllers.urediKorisnika);
 router.delete('/:id', controllers.obrisiKorisnika);
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator

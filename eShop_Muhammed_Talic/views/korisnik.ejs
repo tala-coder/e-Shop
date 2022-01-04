@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <title><%= korisnik.trgovina.nazivFirme %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
@@ -31,11 +31,11 @@
                 <div class="card mb-2">
                     <div class="card-body text-center">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3">purak718</h5>
+                        <h5 class="my-3"><%= korisnik.nickName %> <h5>
 
-                         <p class="text-muted mb-1"> Malina d.o.o.</p>
-                        <p class="text-muted mb-1">Željezno Polje, Žepče, Bosna i Hercegovina</p>
-                        <p class="text-muted mb-4">(032) 556-578</p>
+                         <p class="text-muted mb-1"> <%=  korisnik.trgovina.nazivFirme %></p>
+                        <p class="text-muted mb-1"> <%=  korisnik.trgovina.adresaFirme %>, <%= korisnik.trgovina.gradFirme %>, <%=  korisnik.zemlja %> </p>
+                        <p class="text-muted mb-4"> <%=  korisnik.telefon %> </p>
 
                         <div class="d-flex justify-content-center mb-2">
                             <button type="button" class="btn btn-primary ms-1">Poruka</button>

@@ -23,6 +23,10 @@ const trgovinaSchema = mongoose.Schema(
             type: String,
             // required: true,
         },
+        gradFirme: {
+            type: String,
+            // required: true,
+        },
         adresePoslovnica: {
                 type: String,
             },
@@ -47,6 +51,11 @@ const trgovinaSchema = mongoose.Schema(
     );
 
 const korisnikSchema = new mongoose.Schema({
+
+    nickName: {
+        type: String,
+        // required: true,
+    },
     ime: {
         type: String,
         // required: true,

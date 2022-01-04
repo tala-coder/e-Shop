@@ -10,6 +10,7 @@ exports.dajProizvode = async (req, res) => { // dajProizvode po selektovanim kat
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     // res.send(proizvodi);
+    // res.send(proizvodi);
     res.render('proizvod', { title: 'test proizvod' })
 }
 

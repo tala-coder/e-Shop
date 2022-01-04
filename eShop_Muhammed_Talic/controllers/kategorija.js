@@ -1,11 +1,14 @@
 const Kategorija = require("../models/kategorija");
 
-exports.dajKategorije = async (req, res) =>{
+exports.dajKategorije = async (req, res, next) =>{
     const kategorije = await Kategorija.find();
     if(!kategorije) {
         res.status(500).json({success: false, bug: `exports.dajKategorije`});
     }
-    res.send(kategorije);
+    req.kategorije = kategorije;
+    next();
+    //next()
+    // res.send(kategorije);
 }
 
 exports.dajKategoriju = async(req,res)=>{

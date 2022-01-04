@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
+const Proizvod = require("../models/proizvod");
 
 exports.registrujSeForma = asyncHandler(async function(req, res) {
     res.render('register', { title: 'Registracija' });
@@ -23,15 +24,46 @@ exports.dajKorisnike = async (req, res) =>{
     res.send(korisnici);
 }
 
+exports.urediKorisnika =  async (req, res)=> {
+    if(!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).json({message: `ID korisnika ne postoji`})
+    }
+    const salt = await bcrypt.genSaltSync(10);
+    let pass = await bcrypt.hashSync(req.body.password, salt);
+    const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
+        {
+            nickName: req.body.nickName,
+            ime:  req.body.ime,
+            prezime :  req.body.prezime,
+            mail : req.body.mail,
+            passwordHash : pass,
+            telefon : req.body.telefon,
+            zemlja : req.body.zemlja,
+            jelAdmin: req.body.jelAdmin,
+            grad : req.body.grad,
+            spol : req.body.spol,
+            ulica : req.body.ulica,
+            postanskiBroj : req.body.postanskiBroj,
+            interesi: req.body.interesi,
+            trgovina: req.body.trgovina
+        },
+        { new: true}
+    )
+    if(!korisnik)
+        return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
+    res.send(korisnik);
+}
+
 exports.dajKorisnika = async(req,res)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-    const { ime, ...others } = korisnik._doc;
+    // const { ime, ...others } = korisnik._doc;
     // console.log(others)
+    console.log(korisnik)
 
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
-    res.render('korisnik', { title: 'User view' });
+    res.render('korisnik', { korisnik: korisnik });
 }
 
 exports.registrujSe = asyncHandler(async (req,res)=>{
@@ -39,6 +71,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
     let korisnik = new Korisnik({
+         nickName: req.body.nickName,
          ime:  req.body.ime,
          prezime :  req.body.prezime,
          mail : req.body.mail,
