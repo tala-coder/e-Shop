@@ -8,15 +8,18 @@ moment.locale('bs');
 exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
     let filter = {};
     if(req.query.kategorije)
-        filter = {kategorija: req.query.categories.split(",")};
+        filter = {kategorija: req.query.kategorije.split(",")};
 
-     const proizvodi = await Proizvod.find(filter)
-        // .populate({ path: 'korisnik', select: 'nickName', model: Korisnik })
-    .populate( 'kategorija' , 'naziv')
+    const proizvodi = await Proizvod.find(filter)
+        .populate( 'kategorija' , 'naziv')
+    // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
+
+    const gradovi = await Proizvod.find().distinct('grad');
 
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     req.proizvod = proizvodi;
+    req.gradovi = gradovi;
     req.moment = moment;
     // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
@@ -25,7 +28,7 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode 
 exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
 
     const proizvodi = await Proizvod.find({korisnik: req.params.id})
-    // .populate( 'kategorija' , 'naziv')
+    .populate( 'kategorija' , 'naziv')
 
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
@@ -51,6 +54,7 @@ exports.dodajProizvod =  async (req, res) =>{
         opis: req.body.opis,
         detaljnjiOpis: req.body.detaljnjiOpis,
         brand: req.body.brand,
+        grad: req.body.grad,
         cijena: req.body.cijena,
         kategorija: req.body.kategorija,
         tagovi: req.body.tagovi,
@@ -82,6 +86,7 @@ exports.urediProizvod =  async (req, res)=> {
             detaljnjiOpis: req.body.detaljnjiOpis,
             brand: req.body.brand,
             cijena: req.body.cijena,
+            grad: req.body.grad,
             kategorija: req.body.kategorija,
             tagovi: req.body.tagovi,
             kolicina: req.body.kolicina,

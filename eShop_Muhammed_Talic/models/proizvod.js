@@ -48,6 +48,10 @@ const proizvodSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    grad: {
+        type: String,
+        default: ''
+    },
     cijena : {
         type: String,
         default: '0'

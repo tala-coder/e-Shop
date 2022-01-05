@@ -125,3 +125,5 @@ exports.korisnikSchema = korisnikSchema;
 // exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
 // exports.korisnikSchema = korisnikSchema;
 
+
+

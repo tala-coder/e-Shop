@@ -7,7 +7,7 @@ const proizvod = require("../controllers/proizvod")
 router.get('/', kategorija.dajKategorije, proizvod.dajProizvode,
     function(req, res) {
         // console.log(res.locals)
-        res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment})
+        res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
 });
 
 
