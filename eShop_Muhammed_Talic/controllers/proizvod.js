@@ -10,11 +10,22 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode 
     if(req.query.kategorije)
         filter = {kategorija: req.query.categories.split(",")};
 
-    const proizvodi = await Proizvod.find(filter)
-        .populate({ path: 'korisnik', select: 'nickName', model: Korisnik })
+     const proizvodi = await Proizvod.find(filter)
+        // .populate({ path: 'korisnik', select: 'nickName', model: Korisnik })
     .populate( 'kategorija' , 'naziv')
-        // .populate( {path: 'korisnik' });
 
+    if(!proizvodi)
+        res.status(500).json({success: false, bug: `exports.dajProizvode`});
+    req.proizvod = proizvodi;
+    req.moment = moment;
+    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    next();
+})
+
+exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
+
+    const proizvodi = await Proizvod.find({korisnik: req.params.id})
+    // .populate( 'kategorija' , 'naziv')
 
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
@@ -27,7 +38,6 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode 
 exports.dajProizvod = async (req, res) =>{
     const proizvod = await Proizvod.findById(req.params.id).populate('kategorija');
     // const proizvod = await Proizvod.findById(req.params.id);
-    // console.log(proizvod)
     if(!proizvod) {
         res.status(500).json({success: false, bug: `exports.dajProizvod`})
     }

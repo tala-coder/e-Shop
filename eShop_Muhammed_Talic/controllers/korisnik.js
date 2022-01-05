@@ -54,17 +54,17 @@ exports.urediKorisnika =  async (req, res)=> {
     res.send(korisnik);
 }
 
-exports.dajKorisnika = async(req,res)=>{
+exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
     // const { ime, ...others } = korisnik._doc;
     // console.log(others)
-    console.log(korisnik)
 
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
-    res.render('korisnik', { korisnik: korisnik });
-}
+    req.korisnik = korisnik;
+    next();
+})
 
 exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
