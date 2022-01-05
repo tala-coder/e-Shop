@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
-const Proizvod = require("../models/proizvod");
 
 exports.registrujSeForma = asyncHandler(async function(req, res) {
     res.render('register', { title: 'Registracija' });
@@ -22,6 +21,7 @@ exports.dajKorisnike = async (req, res) =>{
         res.status(500).json({success: false})
     }
     res.send(korisnici);
+    next();
 }
 
 exports.urediKorisnika =  async (req, res)=> {
@@ -75,7 +75,6 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
          ime:  req.body.ime,
          prezime :  req.body.prezime,
          mail : req.body.mail,
-         // passwordHash : "test",
          passwordHash : pass,
          telefon : req.body.telefon,
          zemlja : req.body.zemlja,

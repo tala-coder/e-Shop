@@ -15,21 +15,24 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         rel="stylesheet"
 />
+
+<% proizvod.forEach(function(proizvod) { %>
+
 <div class="col-lg-3 col-md-3  pb-4" >
     <div class="card">
         <img
-                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bmw-m3-coupe-e30-subasta-1582304489.jpg?crop=1.00xw:0.752xh;0,0.160xh&resize=1200:*"
+                src="<%=proizvod.slika%>"
                 class="card-img-top"
                 alt="Slika proizvoda" height="175px"
                 style="object-fit: contain"/>
 
 
         <div class="card-body pt-0 pb-1"  >
-            <h3 class="card-title m-0"  > BMW M3</h3>
+            <h3 class="card-title m-0 mt-3"  > <%=proizvod.naziv%></h3>
             <p class="card-text m-0" >
-                Automobili
+                <%=proizvod.kategorija.naziv%>
             </p>
-            <p style="margin-bottom: 3px">5.000<b> KM</b></p>
+            <p style="margin-bottom: 3px"><%=proizvod.cijena%><b> KM</b></p>
             <a href="#!"  class="btn btn-primary" style="padding-left: 0.625em; padding-right: 0.625em"  >
                 Dodaj u korpu</a>
             <a href="#!" style="padding-left: 0.825em; padding-right: 0.825em" class="btn btn-danger mt-1 " ><i class="far fa-bookmark" ></i></a>
@@ -38,19 +41,22 @@
             <a href="#!" class="btn btn-outline-primary " >
                 Vidi detaljno</a>
         </div>
-        <div class=" card-footer text-muted">
+        <div class=" card-footer text-muted row justify-content-between pt-0 ps-2 pb-0 pe-2 m-0">
 
-            <div style="display: inline-block; float: left"  >
+            <div  class="col-4 text-start mt-3" >
                 <i class="far fa-eye"></i>
                 <span class="light color__dark--3">702</span>
             </div>
-            <div style="display: inline-block; float: right" >
-                <p style="width:80px; text-align: end; margin: 0 ;"  >2 days ago</p>
+            <div  class="col-8 text-end  mt-3 " >
+                <p    > <%= moment(proizvod.createdAt).endOf('second').fromNow() %></p>
             </div>
         </div>
     </div>
 </div>
 
+<% }); %>
+
+<!--
 
 <div class="col-lg-3 col-md-3  pb-4">
     <div class="card">
@@ -79,7 +85,7 @@
 
             <div style="display: inline-block; float: left"  >
                 <i class="far fa-eye"></i>
-                <span class="light color__dark--3">702</span>
+                <span class="light color__dark&#45;&#45;3">702</span>
             </div>
             <div style="display: inline-block; float: right" >
                 <p style="width:80px; text-align: end; margin: 0%;"  >2 days ago</p>
@@ -87,3 +93,4 @@
         </div>
     </div>
 </div>
+-->

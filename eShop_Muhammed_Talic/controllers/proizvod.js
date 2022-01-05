@@ -1,18 +1,28 @@
 const Proizvod = require('../models/proizvod');
 const mongoose = require("mongoose");
+const asyncHandler = require('express-async-handler')
+var moment = require('moment');
+moment.locale('bs');
 
-exports.dajProizvode = async (req, res) => { // dajProizvode po selektovanim kategorijama
+
+exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
     let filter = {};
     if(req.query.kategorije)
         filter = {kategorija: req.query.categories.split(",")};
 
-    const proizvodi = await Proizvod.find(filter).populate('kategorija'); // await Proizvod.find().select('naziv opis');.. SELECT PRETRAGA
+    const proizvodi = await Proizvod.find(filter)
+        .populate({ path: 'korisnik', select: 'nickName', model: Korisnik })
+    .populate( 'kategorija' , 'naziv')
+        // .populate( {path: 'korisnik' });
+
+
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
-    // res.send(proizvodi);
-    // res.send(proizvodi);
-    res.render('proizvod', { title: 'test proizvod' })
-}
+    req.proizvod = proizvodi;
+    req.moment = moment;
+    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    next();
+})
 
 exports.dajProizvod = async (req, res) =>{
     const proizvod = await Proizvod.findById(req.params.id).populate('kategorija');
@@ -21,7 +31,8 @@ exports.dajProizvod = async (req, res) =>{
     if(!proizvod) {
         res.status(500).json({success: false, bug: `exports.dajProizvod`})
     }
-    res.send(proizvod);
+    next();
+    // res.send(proizvod);
 }
 
 exports.dodajProizvod =  async (req, res) =>{
@@ -37,7 +48,12 @@ exports.dodajProizvod =  async (req, res) =>{
         brojRecenczija: req.body.brojRecenczija,
         recenzija: req.body.recenzija,
         slika: req.body.slika,
-        slike: req.body.slike
+        istaknut: req.body.istaknut,
+        akcija: req.body.akcija,
+        besplatnaDostava: req.body.besplatnaDostava,
+        brojOtvaranja: req.body.brojOtvaranja,
+        slike: req.body.slike,
+        korisnik: req.body.korisnik
     })
     proizvod = await proizvod.save();
     if(!proizvod)
@@ -62,7 +78,12 @@ exports.urediProizvod =  async (req, res)=> {
             brojRecenczija: req.body.brojRecenczija,
             recenzija: req.body.recenzija,
             slika: req.body.slika,
-            slike: req.body.slike
+            istaknut: req.body.istaknut,
+            akcija: req.body.akcija,
+            besplatnaDostava: req.body.besplatnaDostava,
+            brojOtvaranja: req.body.brojOtvaranja,
+            slike: req.body.slike,
+            korisnik: req.body.korisnik
         },
         { new: true}
     )

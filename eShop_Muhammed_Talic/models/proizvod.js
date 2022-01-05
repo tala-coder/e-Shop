@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
+moment.locale('bs');
 
 const recenzijaSchema = mongoose.Schema(
     {
@@ -47,13 +49,8 @@ const proizvodSchema = mongoose.Schema({
         default: ''
     },
     cijena : {
-        type: Number,
-        default:0
-    },
-    kategorija: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Kategorija',
-        required:true
+        type: String,
+        default: '0'
     },
     tagovi: [{
         type: String,
@@ -95,15 +92,34 @@ const proizvodSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    /*datumKreiranja: {
-        type: Date,
-        default: Date.now,
-    },*/
+    kategorija: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Kategorija',
+        required: true
+    },
+    korisnik: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Korisnik",
+        required: true
+    },
     recenzija: [recenzijaSchema],
 },
     { timestamps: true }
 )
 
+// proizvodSchema.virtual('va').get(function() {
+//     return moment(this.createdAt).endOf('second').fromNow()
+// });
 
+proizvodSchema.virtual('varijabla').get(function() {
+    return "varijabla";
+})
+
+/*
+za PRODUKCIJU
 Proizvod = mongoose.model('Proizvod', proizvodSchema);
+module.exports = Proizvod;*/
+
+// za TESTIRANJE
+Proizvod = mongoose.model('test_Proizvod', proizvodSchema);
 module.exports = Proizvod;

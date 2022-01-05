@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const auth = require("../helpers/authMiddleware");
-const controllers = require("../controllers/home")
+const kategorija = require("../controllers/kategorija")
+const proizvod = require("../controllers/proizvod")
 
-
-router.get('/', controllers.dajPodatkeZaPocetnu, function(req, res, next) {
-  // console.log(res.locals)
-
+router.get('/', kategorija.dajKategorije, proizvod.dajProizvode,
+    function(req, res) {
+        // console.log(res.locals)
+        res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment})
 });
 
 

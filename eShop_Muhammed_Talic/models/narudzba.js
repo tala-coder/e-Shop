@@ -49,7 +49,9 @@ const narudzbaSchema = mongoose.Schema({
     { timestamps: true }
 )
 
-exports.Narudzba = mongoose.model('Narudzba', narudzbaSchema);
+
+Narudzba = mongoose.model('Narudzba', narudzbaSchema);
+module.exports = Narudzba;
 /*
 {
     "orderItems" : [
