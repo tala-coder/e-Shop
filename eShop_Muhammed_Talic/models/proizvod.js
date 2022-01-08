@@ -56,6 +56,10 @@ const proizvodSchema = mongoose.Schema({
         type: String,
         default: '0'
     },
+    boja : {
+        type: String,
+        default: 'Bijela'
+    },
     tagovi: [{
         type: String,
     }],
@@ -96,16 +100,16 @@ const proizvodSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    korisnik: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Korisnik"
+    },
     kategorija: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Kategorija',
         required: true
     },
-    korisnik: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Korisnik",
-        required: true
-    },
+
     recenzija: [recenzijaSchema],
 },
     { timestamps: true }

@@ -1,4 +1,4 @@
-const {Korisnik} = require('../models/korisnik');
+const Korisnik = require('../models/korisnik');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");

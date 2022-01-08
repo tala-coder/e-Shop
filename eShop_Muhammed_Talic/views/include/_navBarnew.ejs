@@ -19,15 +19,15 @@
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
-                <a class="navbar-brand mt-2 mt-lg-0" href="#">Tala<b style="color: #003399" >Shop</b></a>
+                <a class="navbar-brand mt-2 mt-lg-0" href="/TalaShop">Tala<b style="color: #003399" >Shop</b></a>
             </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Početna</a>
+                    <a class="nav-link" href="/TalaShop">Početna</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">O nama</a>
+                    <a class="nav-link" href="/TalaShop">O nama</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -109,17 +109,28 @@
                         aria-labelledby="navbarDropdownMenuLink"
                 >
                     <li>
-                        <a class="dropdown-item" href="#">Moj profil</a>
+                        <a class="dropdown-item" href="/TalaShop/korisnik/<%=userId%>">Moj profil</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Postavke</a>
+                        <a class="dropdown-item" href="/TalaShop/proizvod/">Objavi artikl</a>
                     </li>
-                    <li> <a class="dropdown-item" href="http://localhost:3000/TalaShop/logout">Odjavite se</a> </li>
+                    <li>
+
+                        <form id="form1"  method="put">
+<!--//TODO: staviti link proizvoda-->
+                            <a class="dropdown-item" href="/TalaShop/proizvod/productID " onclick="document.getElementById('form1').submit();"> Postavke </a>
+
+                            <input type="hidden" name="mess" value=Postavke/>
+                        </form>
+
+<!--                        <a class="dropdown-item" href="/TalaShop/korisnik/<%=userId%>">Postavke</a>-->
+                    </li>
+                    <li> <a class="dropdown-item" href="/TalaShop/logout">Odjavite se</a> </li>
                 </ul>
             <% } else { %>
                 <div class="d-flex align-items-center" >
-                        <a class="btn btn-link text-dark mt-1 mb-1 me-2" href="http://localhost:3000/TalaShop/korisnik/login">prijava</a>
-                        <a class="btn btn-primary mt-1 mb-1"  href="http://localhost:3000/TalaShop/korisnik/register" >REGISTRUJTE SE</a>
+                        <a class="btn btn-link text-dark mt-1 mb-1 me-2" href="/TalaShop/korisnik/login">prijava</a>
+                        <a class="btn btn-primary mt-1 mb-1"  href="/TalaShop/korisnik/register" >REGISTRUJTE SE</a>
                 </div>
             <% } %>
         </div>

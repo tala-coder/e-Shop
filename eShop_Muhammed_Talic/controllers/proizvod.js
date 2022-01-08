@@ -2,6 +2,7 @@ const Proizvod = require('../models/proizvod');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
 var moment = require('moment');
+const Korisnik = require("../models/korisnik");
 moment.locale('bs');
 
 
@@ -29,23 +30,23 @@ exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajP
 
     const proizvodi = await Proizvod.find({korisnik: req.params.id})
     .populate( 'kategorija' , 'naziv')
-
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
+
     req.proizvod = proizvodi;
-    req.moment = moment;
-    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    req.moment = moment;  // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
 })
 
-exports.dajProizvod = async (req, res) =>{
-    const proizvod = await Proizvod.findById(req.params.id).populate('kategorija');
-    // const proizvod = await Proizvod.findById(req.params.id);
-    if(!proizvod) {
+exports.dajProizvod = async (req, res, next) =>{
+    const proizvod = await Proizvod.findById(req.params.id)
+         .populate({ path: 'korisnik', select: 'nickName zemlja', model: Korisnik });
+    if(!proizvod)
         res.status(500).json({success: false, bug: `exports.dajProizvod`})
-    }
+
+    req.proizvod = proizvod;
+    req.moment = moment;
     next();
-    // res.send(proizvod);
 }
 
 exports.dodajProizvod =  async (req, res) =>{
@@ -54,6 +55,7 @@ exports.dodajProizvod =  async (req, res) =>{
         opis: req.body.opis,
         detaljnjiOpis: req.body.detaljnjiOpis,
         brand: req.body.brand,
+        boja: req.body.boja,
         grad: req.body.grad,
         cijena: req.body.cijena,
         kategorija: req.body.kategorija,
@@ -85,6 +87,7 @@ exports.urediProizvod =  async (req, res)=> {
             opis: req.body.opis,
             detaljnjiOpis: req.body.detaljnjiOpis,
             brand: req.body.brand,
+            boja: req.body.boja,
             cijena: req.body.cijena,
             grad: req.body.grad,
             kategorija: req.body.kategorija,

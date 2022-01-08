@@ -118,8 +118,11 @@ const korisnikSchema = new mongoose.Schema({
 );
 
 // Kolekcija za test
-exports.Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
-exports.korisnikSchema = korisnikSchema;
+// exports.Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
+// exports.korisnikSchema = korisnikSchema;
+// Kolekcija za test
+Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
+module.exports = Korisnik;
 
 // za PRODUKCIJU
 // exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
