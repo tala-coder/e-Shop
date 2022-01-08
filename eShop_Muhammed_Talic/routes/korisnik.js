@@ -3,6 +3,13 @@ const korisnik = require("../controllers/korisnik");
 const proizvod = require("../controllers/proizvod");
 const router = express.Router();
 
+
+router.get('/putMethodaProfileID', function(req, res) {
+        res.render('urediProfil', { title: "test",  } )
+});
+
+
+
 router.get(`/register`,  korisnik.registrujSeForma);
 router.get(`/login`, korisnik.logujSeForma);
 
@@ -21,6 +28,8 @@ router.put('/:id',korisnik.urediKorisnika);
 router.delete('/:id', korisnik.obrisiKorisnika);
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
+
+
 
 
 
