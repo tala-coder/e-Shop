@@ -4,22 +4,19 @@ const proizvod = require("../controllers/proizvod");
 const router = express.Router();
 
 
-router.get('/getMethodaProfileID', function(req, res) {
-        res.render('urediProfil', { title: "test",  } )
+router.get('/urediProfil/:id', korisnik.dajKorisnika,function(req, res) {
+        res.render('urediProfil', { korisnik: req.korisnik } )
 });
 
-
-router.get(`/register`,  korisnik.registrujSeForma);
-router.get(`/login`, korisnik.logujSeForma);
-
-
-router.get(`/`,  korisnik.dajKorisnike);
 router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika,
     function (req, res){
         res.render('korisnik', { korisnik: req.korisnik, proizvod: req.proizvod,  moment: req.moment });
 });
 
+router.get(`/register`,  korisnik.registrujSeForma);
+router.get(`/login`, korisnik.logujSeForma);
 
+router.get(`/`,  korisnik.dajKorisnike);
 router.post(`/register`, korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
 router.put('/:id',korisnik.urediKorisnika);
