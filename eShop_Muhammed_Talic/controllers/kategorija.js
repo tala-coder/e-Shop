@@ -7,9 +7,9 @@ exports.dajKategorije = asyncHandler(async (req, res, next) =>{
     if(!kategorije) {
         res.status(500).json({success: false, bug: `exports.dajKategorije`});
     }
+    console.log(kategorije[0])
     req.kategorije = kategorije;
     next();
-    // res.send(kategorije);
 })
 
 exports.dajKategoriju = async(req,res)=>{

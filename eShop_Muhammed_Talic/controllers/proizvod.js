@@ -71,6 +71,7 @@ exports.dodajProizvod =  async (req, res) =>{
         slike: req.body.slike,
         korisnik: req.body.korisnik
     })
+    console.log(req.body)
     proizvod = await proizvod.save();
     if(!proizvod)
         return res.status(500).json({success: false, message: `Nije moguće postaviti proizvod!`, bug: `exports.postaviProizvod`});

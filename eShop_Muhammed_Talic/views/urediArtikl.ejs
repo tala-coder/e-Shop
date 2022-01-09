@@ -23,7 +23,8 @@
 
 
 <div class="container rounded bg-white mt-5 mb-5">
-    <form id="formUrediKorisnika"  action="/TalaShop/proizvod" method="POST">
+<!--    <form id="formUrediKorisnika"  action="/TalaShop/proizvod"   >-->
+    <form id="formUrediKorisnika"  >
         <div class="row row justify-content-center">
                       <div class="col-md-6 pe-5 pt-5" >
                         <input class="form-control form-control-lg" id="formFileLg" type="file" />
@@ -37,15 +38,15 @@
                         <h4 class="text-right">Dodajte artikl</h4>
                     </div>
                     <div class="row mt-2 ">
-                        <div class="col-md-12"><label class="form-label">Naziv artikla</label><input name="naziv" type="text" class="form-control" placeholder="Naziv" value=""></div>
+                        <div class="col-md-12"><label class="form-label">Naziv artikla</label><input name="naziv" type="text" class="form-control" placeholder="Naziv" value=<%= proizvod.naziv %>></div>
 
                         <div class="col-md-12"><label for="exampleFormControlTextarea1" class="form-label">Opis</label>
-                            <textarea name="opis" value="" class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder=" Opis "></textarea></div>
+                            <textarea name="opis" value=<%= proizvod.opis %>  class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder=" Opis "></textarea></div>
                         <div class="col-md-12"><label for="exampleFormControlTextarea1" class="form-label">Detaljnji opis</label>
-                            <textarea name="detaljnjiOpis" value="" class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Detaljnji opis"></textarea></div>
+                            <textarea name="detaljnjiOpis" value= <%=proizvod.detaljniOpis %>  class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Detaljnji opis"></textarea></div>
 
-                         <div class="col-md-12"><label class="form-label">Brand</label><input name="brand" type="text" class="form-control" placeholder="Brand" value=""></div>
-                        <div class="col-md-6"><label class="form-label">Cijena artikla</label><input name="cijena" type="text" class="form-control" value="" placeholder="Cijena"></div>
+                         <div class="col-md-12"><label class="form-label">Brand</label><input name="brand" type="text" class="form-control" placeholder="Brand" value=<%= proizvod.brand %>></div>
+                        <div class="col-md-6"><label class="form-label">Cijena artikla</label><input name="cijena" type="text" class="form-control" value=<%= proizvod.cijena %>  placeholder="Cijena"></div>
 
                         <div class="col-md-6"> <label class="form-label">Kategorija</label>
                             <select class="form-select  form-control-sm" aria-label="Default select example" name="kategorija">
@@ -55,8 +56,8 @@
                             </select>
                         </div>
 
-                         <div class="col-md-6"><label class="form-label">Grad</label><input name="grad" type="text" class="form-control" placeholder="Grad" value=""></div>
-                        <div class="col-md-6"><label class="form-label">Boja</label><input name="boja" type="text" class="form-control" placeholder="Boja" value=""></div>
+                         <div class="col-md-6"> <label class="form-label">Grad</label><input name="grad" type="text" class="form-control" placeholder="Grad" value=<%= proizvod.grad %>></div>
+                         <div class="col-md-6"> <label class="form-label">Boja</label><input name="boja" type="text" class="form-control" placeholder="Boja" value=<%= proizvod.boja %>></div>
 
                         <div class="col-md-6">
                              <label for="form-check" class="form-label">Izdvojen</label> <br>
@@ -94,7 +95,7 @@
                                 <label class="form-check-label" for="besplatna dostava0">Ne</label>
                             </div>
                         </div>
-                        <div class="col-md-6"><label class="form-label">Količina</label><input name="kolicina" type="number" class="form-control" placeholder="Količina" value=""></div>
+                        <div class="col-md-6"><label class="form-label">Količina</label><input name="kolicina" type="number" class="form-control" placeholder="Količina" value=<%= proizvod.kolicina %>></div>
 
                     </div>
                 </div>
@@ -108,4 +109,8 @@
 </div>
 
 </body>
+<script>
+    
+
+</script>
 </html>

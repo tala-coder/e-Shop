@@ -1,11 +1,12 @@
 const express = require('express');
 const proizvod = require("../controllers/proizvod");
+const kategorija = require("../controllers/kategorija");
 const router = express.Router();
 
 
 //test
-router.get('/getMethodaProductID', function(req, res) {
-    res.render('dodajArtikl', { title: "test",  } )
+router.get('/dodajArtikl', kategorija.dajKategorije, function(req, res) {
+    res.render('dodajArtikl', {kategorija: req.kategorije} )
 });
 
 

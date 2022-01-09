@@ -94,8 +94,8 @@ const proizvodSchema = mongoose.Schema({
         default: false,
     },
     akcija: {
-        type: Number,
-        default: null,
+        type: Boolean,
+        default: false,
     },
     brojOtvaranja: {
         type: Number,
