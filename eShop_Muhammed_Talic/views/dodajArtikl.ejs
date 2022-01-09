@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #093485, #5881d2);
+        }
+
+        .form-label {
+            font-size: 11px
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <form id="formUrediKorisnika"  method="post">
+        <div class="row row justify-content-center">
+                      <div class="col-md-6 pe-5 pt-5" >
+                        <input class="form-control form-control-lg" id="formFileLg" type="file" />
+                        <div class="small text-muted mt-2 text-center "> Dodajte slike vašeg proizvoda. </div>
+              </div>
+
+
+            <div class="col-md-8 border-right ">
+                <div class="p-3 py-5  ">
+                    <div class=" mb-3">
+                        <h4 class="text-right">Dodajte artikl</h4>
+                    </div>
+                    <div class="row mt-2 ">
+                        <div class="col-md-12"><label class="form-label">Naziv artikla</label><input name="naziv" type="text" class="form-control" placeholder="Naziv" value=""></div>
+                        <div class="col-md-12"><label class="form-label">opis</label><input name="opis" type="text" class="form-control" placeholder="opis" value=""></div>
+                        <div class="col-md-12"><label class="form-label">Detaljnji opis</label><input name="detaljnjiOpis" type="text" class="form-control" placeholder="Detaljnji opis" value=""></div>
+                        <div class="col-md-12"><label class="form-label">Brand</label><input name="brand" type="text" class="form-control" placeholder="Brand" value=""></div>
+                        <div class="col-md-6"><label class="form-label">Cijena artikla</label><input name="cijena" type="text" class="form-control" value="" placeholder="Cijena"></div>
+                        <div class="col-md-6"><label class="form-label">Kategorija</label><input name="kategorija" type="text" class="form-control" placeholder="Kategorija" value=""></div>
+                        <div class="col-md-6"><label class="form-label">Grad</label><input name="grad" type="text" class="form-control" placeholder="Grad" value=""></div>
+                        <div class="col-md-6"><label class="form-label">Boja</label><input name="boja" type="text" class="form-control" placeholder="Boja" value=""></div>
+
+                        <div class="col-md-6">
+                             <label for="form-check" class="form-label">Izdvojen</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="izdvojen1" value="option1" />
+                                <label class="form-check-label" for="izdvojen1">Da</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="izdvojen0" value="option2" />
+                                <label class="form-check-label" for="izdvojen0">Ne</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <label for="form-check" class="form-label">Akcija</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="akcija1" value="option1" />
+                                <label class="form-check-label" for="akcija1">Da</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="akcija0" value="option2" />
+                                <label class="form-check-label" for="akcija0">Ne</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <label for="form-check" class="form-label">Besplatna dostava</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="besplatna dostava1" value="option1" />
+                                <label class="form-check-label" for="besplatna dostava1">Da</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="besplatna dostava0" value="option2" />
+                                <label class="form-check-label" for="besplatna dostava0">Ne</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"><label class="form-label">Količina</label><input name="kolicina" type="number" class="form-control" placeholder="Količina" value=""></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2 text-center">
+                <button class="btn btn-primary profile-button" type="submit" value="Submit">Spasi promjene</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

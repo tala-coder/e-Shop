@@ -4,10 +4,9 @@ const proizvod = require("../controllers/proizvod");
 const router = express.Router();
 
 
-router.get('/putMethodaProfileID', function(req, res) {
+router.get('/getMethodaProfileID', function(req, res) {
         res.render('urediProfil', { title: "test",  } )
 });
-
 
 
 router.get(`/register`,  korisnik.registrujSeForma);

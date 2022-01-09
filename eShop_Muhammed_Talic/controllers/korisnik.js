@@ -113,7 +113,7 @@ exports.logujSe = async (req, res) => {
             });
 
         if (korisnik.jelAdmin && !korisnik.trgovina )
-            return res.redirect('/TalaShop/korisnik/putMethodaProfileID');
+            return res.redirect('/TalaShop/korisnik/getMethodaProfileID');
         return res.redirect('/TalaShop');
         // return res.status(200).send({korisnik: korisnik.ime, token});
     }

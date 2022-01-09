@@ -77,13 +77,14 @@ const proizvodSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },*/
+    slike: [{
+        type: String
+    }],
     slika: {
         type: String,
         default: ''
     },
-    slike: [{
-        type: String
-    }],
+
     istaknut: {
         type: Boolean,
         default: false,

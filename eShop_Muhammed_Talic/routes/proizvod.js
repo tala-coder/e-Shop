@@ -2,6 +2,14 @@ const express = require('express');
 const proizvod = require("../controllers/proizvod");
 const router = express.Router();
 
+
+//test
+router.get('/getMethodaProductID', function(req, res) {
+    res.render('dodajArtikl', { title: "test",  } )
+});
+
+
+
 router.get(`/`, proizvod.dajProizvode,  function(req, res) {
     // console.log(res.locals)
     res.render('index')
