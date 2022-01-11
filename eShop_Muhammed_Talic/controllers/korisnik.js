@@ -59,7 +59,6 @@ exports.urediKorisnika =  async (req, res)=> {
     },
         { new: true}
     )
-    // console.log(req);
     console.log(req.body);
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})

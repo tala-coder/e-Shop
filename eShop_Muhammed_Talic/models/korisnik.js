@@ -42,9 +42,12 @@ const trgovinaSchema = mongoose.Schema(
                 },
         }
         ],*/
+        // kategorijeUsluga: [{
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: "Kategorija",
+        // }],
         kategorijeUsluga: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Kategorija",
+            type: String,
         }],
     },
     { timestamps: true }
