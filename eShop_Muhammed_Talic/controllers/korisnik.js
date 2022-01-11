@@ -28,15 +28,15 @@ exports.urediKorisnika =  async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).json({message: `ID korisnika ne postoji`})
     }
-    const salt = await bcrypt.genSaltSync(10);
-    let pass = await bcrypt.hashSync(req.body.password, salt);
+    // const salt = await bcrypt.genSaltSync(10);
+    // let pass = await bcrypt.hashSync(req.body.password, salt);
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
         {
             nickName: req.body.nickName,
             ime:  req.body.ime,
             prezime :  req.body.prezime,
             mail : req.body.mail,
-            passwordHash : pass,
+            // passwordHash : pass,
             telefon : req.body.telefon,
             zemlja : req.body.zemlja,
             jelAdmin: req.body.jelAdmin,
@@ -45,10 +45,22 @@ exports.urediKorisnika =  async (req, res)=> {
             ulica : req.body.ulica,
             postanskiBroj : req.body.postanskiBroj,
             interesi: req.body.interesi,
-            trgovina: req.body.trgovina
-        },
+
+            trgovina : {
+                nazivFirme  : req.body.nazivFirme,
+                telefonFirme  : req.body.telefonFirme,
+                mailFirme: req.body.mailFirme,
+                adresaFirme: req.body.adresaFirme,
+                gradFirme: req.body.gradFirme,
+                adresePoslovnica: req.body.adresePoslovnica,
+                kategorijeUsluga: req.body.kategorijeUsluga
+
+            }
+    },
         { new: true}
     )
+    // console.log(req);
+    console.log(req.body);
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
     res.send(korisnik);
@@ -58,8 +70,9 @@ exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
     // const { ime, ...others } = korisnik._doc;
-    // console.log(others)
+    // console.log(others
 
+    // console.log(korisnik)
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
     req.korisnik = korisnik;
@@ -88,7 +101,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
 
     })
     korisnik = await korisnik.save();
-    // console.log(req.body.trgovina);
+    console.log(req.body.trgovina);
     if(!korisnik)
         res.status(400).json({success: false, bug: `exports.registrujSe`});
     res.send(korisnik);

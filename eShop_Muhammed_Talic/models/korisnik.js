@@ -108,6 +108,37 @@ const korisnikSchema = new mongoose.Schema({
         type: trgovinaSchema,
         default: null
     },
+    // trgovina:{
+    //     nazivFirme: {
+    //         type: String,
+    //         // required: true,
+    //     },
+    //     telefonFirme: {
+    //         type: String,
+    //         // required: true,
+    //     },
+    //     mailFirme: {
+    //         type: String,
+    //         // required: true,
+    //     },
+    //     adresaFirme: {
+    //         type: String,
+    //         // required: true,
+    //     },
+    //     gradFirme: {
+    //         type: String,
+    //         // required: true,
+    //     },
+    //     adresePoslovnica: {
+    //         type: String,
+    //     },
+    //     kategorijeUsluga: [{
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "Kategorija",
+    //     }],
+    // default: null,
+    // },
+
     interesi: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Kategorija",

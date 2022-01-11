@@ -1,25 +1,26 @@
 const express = require('express');
 const korisnik = require("../controllers/korisnik");
 const proizvod = require("../controllers/proizvod");
+const kategorija = require("../controllers/kategorija");
 const router = express.Router();
-
-
-router.get('/urediProfil/:id', korisnik.dajKorisnika,function(req, res) {
-        res.render('urediProfil', { korisnik: req.korisnik } )
-});
-
-router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika,
-    function (req, res){
-        res.render('korisnik', { korisnik: req.korisnik, proizvod: req.proizvod,  moment: req.moment });
-});
 
 router.get(`/register`,  korisnik.registrujSeForma);
 router.get(`/login`, korisnik.logujSeForma);
 
+router.get('/urediProfil/:id', korisnik.dajKorisnika, kategorija.dajKategorije, function(req, res) {
+        res.render('urediProfil', { korisnik: req.korisnik, kategorija: req.kategorije  } )
+});
+
+router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, // moguci bug, konfuzija
+    function (req, res){
+        res.render('korisnik', { korisnik: req.korisnik, proizvod: req.proizvod,  moment: req.moment });
+});
+
+
+router.put('/:id',korisnik.urediKorisnika);
 router.get(`/`,  korisnik.dajKorisnike);
 router.post(`/register`, korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
-router.put('/:id',korisnik.urediKorisnika);
 router.delete('/:id', korisnik.obrisiKorisnika);
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
