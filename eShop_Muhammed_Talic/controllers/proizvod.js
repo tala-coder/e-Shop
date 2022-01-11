@@ -2,7 +2,6 @@ const Proizvod = require('../models/proizvod');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
 var moment = require('moment');
-const Korisnik = require("../models/korisnik");
 moment.locale('bs');
 
 
@@ -40,7 +39,8 @@ exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajP
 
 exports.dajProizvod = async (req, res, next) =>{
     const proizvod = await Proizvod.findById(req.params.id)
-         .populate({ path: 'korisnik', select: 'nickName zemlja', model: Korisnik });
+         .populate({ path: 'korisnik', select: 'nickName zemlja', model: Korisnik })
+         .populate({ path: 'kategorija', select: 'naziv', model: Kategorija });
     if(!proizvod)
         res.status(500).json({success: false, bug: `exports.dajProizvod`})
 
@@ -105,6 +105,7 @@ exports.urediProizvod =  async (req, res)=> {
         },
         { new: true}
     )
+    console.log(req.body)
     if(!proizvod)
         return res.status(500).json({succes: false, message: `Nije moguće urediti proizvod!`, bug: `exports.urediProizvod`})
     res.send(proizvod);

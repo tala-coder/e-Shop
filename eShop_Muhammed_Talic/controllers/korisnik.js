@@ -54,7 +54,6 @@ exports.urediKorisnika =  async (req, res)=> {
                 gradFirme: req.body.gradFirme,
                 adresePoslovnica: req.body.adresePoslovnica,
                 kategorijeUsluga: req.body.kategorijeUsluga
-
             }
     },
         { new: true}

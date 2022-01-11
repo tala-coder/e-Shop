@@ -130,18 +130,16 @@
             }
         })
         data.kategorijeUsluga = kategorijeUsluga ;
-        console.log(data.kategorijeUsluga);
+        console.log(data);
 
         var request = {
-             url  : `/TalaShop/korisnik/<%=korisnik._id%>`,
-             method   : "PUT",
-             contentType : "application/json",
-             processData : false,
-            data : JSON.stringify(data)
+            "url" : `/TalaShop/korisnik/<%=korisnik._id%>`,
+            "method" : "PUT",
+            "data" : data
         }
 
         $.ajax(request).done(function(response){
-            // alert("Uspješno ste uredili svoj profil!");
+            alert("Uspješno ste uredili svoj profil!");
             <!--location.replace(`/TalaShop/korisnik/urediProfil/<%=korisnik._id%>`);-->
         })
 

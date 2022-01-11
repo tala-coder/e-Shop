@@ -51,9 +51,11 @@
                         <div class="col-md-6"><label class="form-label">Cijena artikla</label><input name="cijena" type="text" class="form-control" value="<%= proizvod.cijena %>"  ></div>
 
                         <div class="col-md-6"> <label class="form-label">Kategorija</label>
-                            <select class="form-select  form-control-sm" aria-label="Default select example" name="kategorija">
+                            <select class="form-select  form-control-sm" aria-label="Default select example" name="kategorija"  >
+                                <option selected> <%= proizvod.kategorija.naziv %> </option>
                                 <% for(var i = 0; i <  kategorija.length; i++) { %>
-                                <option value= <%= kategorija[i]._id %>  > <%= kategorija[i].naziv %> </option>
+                                <option value= "<%= kategorija[i]._id %>"  >
+                                        <%= kategorija[i].naziv %> </option>
                                 <% } %>
                             </select>
                         </div>
@@ -64,36 +66,42 @@
                         <div class="col-md-6">
                              <label for="form-check" class="form-label">Izdvojen</label> <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="izdvojen1" name="istaknut" value="true" />
+                                <input class="form-check-input" type="radio" id="izdvojen1" name="istaknut"
+                                       value="true" <%= proizvod.istaknut === true ? 'checked' : '' %>/>
                                 <label class="form-check-label" for="izdvojen1">Da</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="izdvojen0" name="istaknut" value="false" />
+                                <input class="form-check-input" type="radio" id="izdvojen0" name="istaknut"
+                                       value="false" <%= proizvod.istaknut === false ? 'checked' : '' %>/>
                                 <label class="form-check-label" for="izdvojen0">Ne</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                              <label for="form-check" class="form-label">Akcija</label> <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="akcija1" name="akcija" value="true" />
+                                <input class="form-check-input" type="radio" id="akcija1" name="akcija"
+                                       value="true"  <%= proizvod.akcija === true ? 'checked' : '' %>/>
                                 <label class="form-check-label" for="akcija1">Da</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="akcija0" name="akcija" value="false" />
+                                <input class="form-check-input" type="radio" id="akcija0" name="akcija"
+                                       value="false" <%= proizvod.akcija === false ? 'checked' : '' %>/>
                                 <label class="form-check-label" for="akcija0">Ne</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                              <label for="form-check" class="form-label">Besplatna dostava</label> <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="besplatna dostava1" name="besplatnaDostava" value="true" />
+                                <input class="form-check-input" type="radio" id="besplatna dostava1" name="besplatnaDostava"
+                                       value="true"  <%= proizvod.besplatnaDostava === true ? 'checked' : '' %> />
                                 <label class="form-check-label" for="besplatna dostava1">Da</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="besplatna dostava0" name="besplatnaDostava" value="false" />
+                                <input class="form-check-input" type="radio" id="besplatna dostava0" name="besplatnaDostava"
+                                       value="false" <%= proizvod.besplatnaDostava === false ? 'checked' : '' %> />
                                 <label class="form-check-label" for="besplatna dostava0">Ne</label>
                             </div>
                         </div>
@@ -142,7 +150,6 @@
 
         $.ajax(request).done(function(response){
             alert("Uspješno ste uredili artikl!");
-            $().redirect('/TalaShop/korisnik/<%=proizvod.korisnik._id%>');
         })
 
     })
