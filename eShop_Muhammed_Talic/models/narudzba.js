@@ -41,10 +41,6 @@ const narudzbaSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Korisnik',
     },
-    /*narudzbaTime: {
-        type: Date,
-        default: Date.now,
-    },*/
 },
     { timestamps: true }
 )
