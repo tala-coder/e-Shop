@@ -104,38 +104,31 @@
 
 </body>
 <script>
-    /*function urediArtikl(id) {
-        $.ajax({
-            url: `/TalaShop/proizvod/id`,
-             type: 'PUT',
-            success: function (result) {
-                location.replace(`/TalaShop/proizvod/${id}`);
-            }
-        });
-    }*/
 
     $("#formUrediKorisnika").submit(function(event){
         event.preventDefault();
 
         var unindexed_array = $(this).serializeArray();
         var data = {}
-        let kategorijeUsluga =[ ];
+        let niz  = [];
 
         $.map(unindexed_array, function(n){
             if(n['name'] === 'kategorijeUsluga'){
-                 kategorijeUsluga.push( n['value'] );
+                niz.push( n['value'] );
             }
             else {
                 data[n['name']] = n['value']
             }
         })
-        data.kategorijeUsluga = kategorijeUsluga ;
+        data.kategorijeUsluga = niz ;
         console.log(data);
 
         var request = {
-            "url" : `/TalaShop/korisnik/<%=korisnik._id%>`,
-            "method" : "PUT",
-            "data" : data
+            url  : `/TalaShop/korisnik/<%=korisnik._id%>`,
+            method   : "PUT",
+            contentType : "application/json",
+            processData : false,
+            data : JSON.stringify(data)
         }
 
         $.ajax(request).done(function(response){

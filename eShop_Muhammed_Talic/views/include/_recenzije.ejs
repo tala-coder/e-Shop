@@ -1,9 +1,11 @@
+<style>
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">
                 <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-                <p class="text-secondary text-center">15 Minutes Ago</p>
+                <p class=" text-center text-muted">15 Minutes Ago</p>
             </div>
             <div class="col-md-10">
                 <p>
@@ -17,30 +19,111 @@
                 <div class="clearfix"></div>
                 <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic  It was popularised in the 1960s with the release, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                 <p>
-                    <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                    <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Odgovori </a>
                     <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
                 </p>
             </div>
         </div>
- <!--       <div class="card card-inner">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-                        <p class="text-secondary text-center">15 Minutes Ago</p>
-                    </div>
-                    <div class="col-md-10">
-                        <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
-                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    </div>
-                </div>
-            </div>
-        </div>-->
         <div class="card card-inner">
             <div class="card-body">
                 <div class="row">
-                   dodaj komentar
             </div>
         </div>
     </div>
 </div>
+
+    <div class="container  text-dark">
+        <div class="row d-flex justify-content-center">
+<!--            // col-lg-8 col-xl-6-->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="d-flex flex-start w-100">
+                            <img
+                                    class="rounded-circle shadow-1-strong me-3"
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                                    alt="avatar"
+                                    width="65"
+                                    height="65"
+                            />
+                            <div class="w-100">
+                                <h5>Dodaj komentar</h5>
+<!--                                <ul class="  mb-3 list-group list-group-horizontal" data-mdb-toggle="rating">-->
+                                        <!-- <i class="far fa-star fa-sm text-danger" title="Bad"></i>
+                                          <i class="far fa-star fa-sm text-danger" title="Poor"></i>
+                                         <i class="far fa-star fa-sm text-danger" title="OK"></i>
+                                         <i class="far fa-star fa-sm text-danger" title="Good"></i>
+                                         <i class="far fa-star fa-sm text-danger" title="Excellent"></i>-->
+<!--                                    <label class="control-label" for="rating">-->
+<!--                                        <span class="field-label-header">How would you rate your ability to use the computer and access internet?*</span><br>-->
+<!--                                        <span class="field-label-info"></span>-->
+<!--                                        <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">-->
+<!--                                    </label>-->
+<!--                                    <h2 class="bold rating-header" style="">-->
+<!--                                        <span class="selected-rating">0</span><small> / 5</small>-->
+<!--                                    </h2>-->
+                                    <div class="form-group mb-3" id="rating-ability-wrapper">
+                                        <button type="button" class="btnrating btn btn-default btn-sm  " data-attr="1" id="rating-star-1" title="Loše">
+                                             <i class="fa fa-star" aria-hidden="true" ></i>
+                                        </button>
+                                        <button type="button" class="btnrating btn btn-default btn-sm" data-attr="2" id="rating-star-2" title="Slabo">
+                                            <i class="fa fa-star" aria-hidden="true" ></i>
+                                        </button>
+                                        <button type="button" class="btnrating btn btn-default btn-sm" data-attr="3" id="rating-star-3" title="OK">
+                                            <i class="fa fa-star" aria-hidden="true" ></i>
+                                        </button>
+                                        <button type="button" class="btnrating btn btn-default btn-sm" data-attr="4" id="rating-star-4" title="Dobar">
+                                            <i class="fa fa-star" aria-hidden="true" ></i>
+                                        </button>
+                                        <button type="button" class="btnrating btn btn-default btn-sm" data-attr="5" id="rating-star-5" title="Sjajno">
+                                            <i class="fa fa-star"  ></i>
+                                        </button>
+                                    </div>
+<!--                                 </ul>-->
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                                    <label class="form-label" for="textAreaExample"
+                                    >Kakav je vaš dojam? </label
+                                    >
+                                </div>
+                                <div class="d-flex justify-content-end mt-3">
+                                     <button type="button" class="btn btn-primary"> Postavi pitanje</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+jQuery(document).ready(function($){
+
+$(".btnrating").on('click',(function(e) {
+
+    var previous_value = $("#selected_rating").val();
+
+    var selected_value = $(this).attr("data-attr");
+    $("#selected_rating").val(selected_value);
+
+    $(".selected-rating").empty();
+    $(".selected-rating").html(selected_value);
+
+    for (i = 1; i <= selected_value; ++i) {
+    $("#rating-star-"+i).toggleClass('btn-warning');
+    $("#rating-star-"+i).toggleClass('btn-default');
+    }
+
+    for (ix = 1; ix <= previous_value; ++ix) {
+    $("#rating-star-"+ix).toggleClass('btn-warning');
+    $("#rating-star-"+ix).toggleClass('btn-default');
+    }
+
+}));
+});
+</script>
+

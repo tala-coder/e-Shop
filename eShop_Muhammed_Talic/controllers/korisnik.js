@@ -30,6 +30,7 @@ exports.urediKorisnika =  async (req, res)=> {
     }
     // const salt = await bcrypt.genSaltSync(10);
     // let pass = await bcrypt.hashSync(req.body.password, salt);
+
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
         {
             nickName: req.body.nickName,
