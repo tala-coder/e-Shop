@@ -1,12 +1,91 @@
 var express = require('express');
 var router = express.Router();
 const auth = require("../helpers/authMiddleware");
-const kategorija = require("../controllers/kategorija")
-const proizvod = require("../controllers/proizvod")
+const kategorija = require("../controllers/kategorija");
+const proizvod = require("../controllers/proizvod");
+const multer  = require('multer');
+const Proizvod = require("../models/proizvod");
+
+const FILE_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const isValid = FILE_TYPE_MAP[file.mimetype];
+        let uploadError = new Error('Slika mora biti u png/jpeg/jpg formatu!');
+
+        if(isValid)
+            uploadError = null;
+
+        cb(uploadError, 'public/slike')
+    },
+    filename: function (req, file, cb) {
+        const fileName = file.originalname.replace(' ', '-') // jpg obrisat dodat na kraj
+        const extension = FILE_TYPE_MAP[file.mimetype];
+
+        cb(null, `${fileName}-${Date.now()}.${extension}`)
+        // cb(null, fileName + '-' +  Date.now() + .extension)
+    }
+})
+const upload = multer({ storage: storage })
+// post dodaj jednu sliku
+router.post('/profile', upload.single('avatar'), async  (req, res ) => {
+    // const fileName = req.file.filename;
+     if(!req.file) return res.status(400).send('Niste dodali sliku!')
+
+    const putanja = `${req.protocol}://${req.get('host')}/public/slike/${req.file.filename}`
+        let proizvod = new Proizvod({
+            slika: putanja,
+            slike: req.body.slike
+        })
+        proizvod = await proizvod.save();
+        if(!proizvod)
+            return res.status(500).json({success: false, message: `Nije moguće postaviti proizvod!`, bug: `exports.postaviProizvod`});
+        res.send(proizvod);
+});
+
+// update dodaj vise slika
+router.post('/profile2', upload.array('avatar', 10), async (req, res)=> {
+        // if(!mongoose.isValidObjectId(req.params.id)) {
+        //     return res.status(400).send('Invalid Product Id')
+        // }
+        let slike = [];
+        const putanja = `${req.protocol}://${req.get('host')}/public/slike/`
+
+        if(req.files) {
+            req.files.map(file =>{
+                slike.push(`${putanja}${file.filename}`);
+            })
+        }
+
+        const proizvod = await Proizvod.findByIdAndUpdate(
+            '61df88ec49d43cf3d1bdecd1',
+            {
+                slike: slike
+            },
+            { new: true}
+        )
+
+        if(!proizvod)
+            return res.status(500).send('Slike nisu dodane!')
+
+        res.send(proizvod);    }
+)
+
+router.get('/test',
+    function(req, res) {
+
+        res.render('multer' )
+    });
+
+
+
 
 router.get('/', kategorija.dajKategorije, proizvod.dajProizvode,
     function(req, res) {
-        // console.log(res.locals)
         res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
 });
 
@@ -16,10 +95,6 @@ router.get('/logout', function(req, res) {
 });
 
 
-router.get('/test',
-    function(req, res) {
-        res.render('narudzba', )
-    });
 
 
 // router.get('/test',
