@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bs">
 <head>
     <title>test</title>
@@ -14,15 +15,14 @@
             rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<style>
-    #div01 {
-        top: 2vh;
-    }
-
-    #div02 {
-        top:    25vh ;
-    }
-</style>
+    <style>
+        #div01 {
+            top: 2vh;
+        }
+        #div02 {
+            top:    25vh ;
+        }
+    </style>
 
 </head>
 <body >
@@ -37,7 +37,7 @@
         <div class="row" >
 
             <div class=" col-lg-9 border-left">
-                <div class="card">
+                <div class="card table-responsive">
                     <table class="table   table-hover   text-center" >
                         <thead class="  bg-dark bg-gradient text-white">
                         <tr>
@@ -55,7 +55,7 @@
 
                             <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
                             <td>
-    <!--                            todo: dodat ID iz baze umjesto 2// ili int i staviti da bih mogao dobiti konacnu cijenu-->
+                                <!--                            todo: dodat ID iz baze umjesto 2// ili int i staviti da bih mogao dobiti konacnu cijenu-->
                                 <select id="sel2" onchange="sumiraj('sel2', 'kes2', 'ukupno2')"  class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
                                     <option value=""> 1 </option>
                                     <option value=""> 2 </option>
@@ -63,13 +63,13 @@
                                 </select>
                             </td>
                             <td >
-                            <div class=" d-flex justify-content-center      pt-3">
-                                <p id="kes2">10.90 </p> <span><b>      KM</b> </span>
-                            </div> </td>
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes2">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
                             <td >
-                            <div class=" d-flex justify-content-center      pt-3">
-                                <p id="ukupno2" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                            </div> </td>
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno2" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
                             <td class="text-end">
                                 <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
@@ -92,13 +92,13 @@
                                 </select>
                             </td>
                             <td >
-                            <div class=" d-flex justify-content-center      pt-3">
-                                <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                            </div> </td>
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
                             <td >
-                            <div class=" d-flex justify-content-center      pt-3">
-                                <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                            </div> </td>
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
                             <td class="text-end">
                                 <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
@@ -108,229 +108,229 @@
                         </tr>
 
                         <!-- Ovdje -->
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
 
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
-
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
-
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
 
 
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
 
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
-
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
-
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
 
 
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
 
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
 
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
-
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
-
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
-
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
 
 
-                                                <tr>
-                                                    <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
 
-                                                    <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
-                                                    <td>
-                                                        <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
-                                                            <option value="" > 1 </option>
-                                                            <option value=""> 2 </option>
-                                                            <option value=""> 3 </option>
-                                                        </select>
-                                                    </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
-                                                    </div> </td>
-                                                    <td >
-                                                    <div class=" d-flex justify-content-center      pt-3">
-                                                        <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
-                                                    </div> </td>
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
 
-                                                    <td class="text-end">
-                                                        <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
 
-<!--                        &ndash;&gt;-->
+
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
+
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
+
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th class="text-center" > <img class="pic" style="width: 60px; height: 60px" src="https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png" alt=""> </th>
+
+                            <td class="col-md-3 col-lg-4">Fugiat Voluptates quasi nemo</td>
+                            <td>
+                                <select id="sel1" onchange="sumiraj('sel1', 'kes1', 'ukupno1')" class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">
+                                    <option value="" > 1 </option>
+                                    <option value=""> 2 </option>
+                                    <option value=""> 3 </option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="kes1">10.90 </p> <span><b>      KM</b> </span>
+                                </div> </td>
+                            <td >
+                                <div class=" d-flex justify-content-center      pt-3">
+                                    <p id="ukupno1" value=""> 10.90 </p> <span><b>  KM</b> </span>
+                                </div> </td>
+
+                            <td class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm px-3 text-ceter">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!--                        &ndash;&gt;-->
 
                         </tbody>
                     </table>
@@ -340,7 +340,9 @@
             <div class="col-lg-3 ">
                 <div class="card mb-2  mt-2  sticky-top " id="div01">
                     <div class="card-body text-center  ">
-                        <h5 class="  mb-4"> Imate kupon? </h5>
+                        <dt class="  mb-3">
+                            Imate kupon?
+                        </dt>
 
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Kupon kod" aria-label="Kupon kod"
@@ -354,14 +356,18 @@
                 <div class="card mb-4 sticky-top " id="div02">
                     <div class="card-body  ">
                         <dl class="row  p-3">
-                            <dt class="col-sm-8">Ukupna cijena:</dt>
-                            <dd class="col-sm-4"> 150 <span>  KM  </span></dd>
+                            <dd class="col-sm-8">Ukupna cijena:</dd>
+                            <dt class="col-sm-4"> 150 <span>  KM  </span></dt>
 
-                            <dt class="col-sm-8">Popust:</dt>
-                            <dd class="col-sm-4"> -10% </dd>
 
-                            <dt class="col-sm-8">Ukupno: </dt>
-                            <dd class="col-sm-4"> 138 <span> KM </span> </dd>
+                            <dd class="col-sm-8"> Dostava: </dd>
+                            <dt class="col-sm-4"> 7 <span> KM </span> </dt>
+
+                            <dd class="col-sm-8">Popust:</dd>
+                            <dt class="col-sm-4"> -10% </dt>
+
+                            <dd class="col-sm-8">Ukupno: </dd>
+                            <dt class="col-sm-4"> 138 <span> KM </span> </dt>
 
                             <hr class="col-sm-12   ">
 
@@ -390,24 +396,16 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
 <script>
     var platit = 10.90 + 10.90; //ukupno za platit
-
-function sumiraj(id, cijena, ukupno){ // ukupno od proizvoda
-
-    let k2 = platit - parseFloat($(`#${ukupno}`).text());
-
-    console.log($(`#${ukupno}`).text());
+    function sumiraj(id, cijena, ukupno){ // ukupno od proizvoda
+        let k2 = platit - parseFloat($(`#${ukupno}`).text());
+        console.log($(`#${ukupno}`).text());
         var select = $(`#${id} option:selected`).text();
         var kes = $(`#${cijena}`).text();
         let suma = parseFloat(select) * parseFloat(kes)
         $(`#${ukupno}`).text(suma);
-
         platit = k2 + suma;
-    console.log(select, kes, suma );
-    console.log(platit + "  platit" );
-
-
-
- }
-
+        console.log(select, kes, suma );
+        console.log(platit + "  platit" );
+    }
 </script>
 </html>
