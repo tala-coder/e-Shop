@@ -9,26 +9,32 @@ const trgovinaSchema = mongoose.Schema(
         // },
         nazivFirme: {
             type: String,
+            default: ""
             // required: true,
         },
         telefonFirme: {
             type: String,
+            default: ""
             // required: true,
         },
         mailFirme: {
             type: String,
+            default: ""
             // required: true,
         },
         adresaFirme: {
             type: String,
+            default: ""
             // required: true,
         },
         gradFirme: {
             type: String,
+            default: ""
             // required: true,
         },
         adresePoslovnica: {
                 type: String,
+            default: ""
             },
        /* adresePoslovnica: [ // [] //
             {
@@ -48,6 +54,7 @@ const trgovinaSchema = mongoose.Schema(
         // }],
         kategorijeUsluga: [{
             type: String,
+            default: ""
         }],
     },
     { timestamps: true }

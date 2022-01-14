@@ -4,12 +4,14 @@ const korisnik = require("../controllers/korisnik");
 const proizvod = require("../controllers/proizvod");
 const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
-router.post('/:id', korisnik.uploadSingle, korisnik.urediKorisnika);
 
-router.get(`/register`,  korisnik.registrujSeForma);
+router.get(`/register`, kategorija.dajKategorije,   function(req, res) {
+        res.render('register', { kategorija: req.kategorije , title: 'Registracija'});
+})
+
 router.get(`/login`,  korisnik.logujSeForma);
 
-router.get('/urediProfil/:id', auth.requireAuth,  korisnik.dajKorisnika, kategorija.dajKategorije, function(req, res) {
+router.get('/urediProfil/:id',   korisnik.dajKorisnika, kategorija.dajKategorije, function(req, res) {
         res.render('urediProfil', { korisnik: req.korisnik, kategorija: req.kategorije  } )
 });
 
@@ -20,9 +22,11 @@ router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, // mo
 
 
 router.get(`/`,  korisnik.dajKorisnike);
-router.post(`/register`, korisnik.registrujSe);
+router.post(`/register`,  korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
 router.delete('/:id', korisnik.obrisiKorisnika);
+router.post('/urediProfil/:id', korisnik.uploadSingle, korisnik.urediKorisnika);
+// router.put('/:id', korisnik.uploadSingle,  korisnik.urediKorisnika); //
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
 

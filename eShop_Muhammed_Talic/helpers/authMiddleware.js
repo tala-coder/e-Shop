@@ -30,6 +30,7 @@ exports.checkUser = (req, res, next) => {
         } else {
             // console.log('find decoded', decodedToken);
             res.locals.user = decodedToken.korisnikIme;
+            res.locals.admin = decodedToken.jelAdmin;
             res.locals.userId = decodedToken.korisnikId;
             next();
         }

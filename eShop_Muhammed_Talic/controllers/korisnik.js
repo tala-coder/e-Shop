@@ -9,9 +9,6 @@ const upload = multer({ storage: storage })
 exports.uploadSingle = upload.single('avatar');
 exports.uploadArray = upload.array('avatar');
 
-exports.registrujSeForma = asyncHandler(async function(req, res) {
-    res.render('register', { title: 'Registracija' });
-})
 
 exports.logujSeForma = asyncHandler(async function(req, res) {
     res.render('login', { title: 'Login' });
@@ -35,7 +32,7 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
 //     // let pass = await bcrypt.hashSync(req.body.password, salt);
 
     if(!req.file)
-        return res.status(400).send('Niste dodali sliku!')
+        return res.status(400).send('Niste dodali sliku!');
 
     const putanja = `${req.protocol}://${req.get('host')}/public/images/${req.file.filename}`
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
@@ -67,7 +64,7 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
         },
         { new: true}
     )
-
+    console.log(req.body)
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
     res.send(korisnik);
@@ -90,7 +87,8 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
-    let picture = req.body.spol == 'M' ? 'Super Admin' : req.body.spol == 'Z' ? 'Sub Admin' : role
+    let picture = req.body.spol == 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
+
     let korisnik = new Korisnik({
          nickName: req.body.nickName,
          ime:  req.body.ime,
@@ -106,7 +104,15 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
          ulica : req.body.ulica,
          postanskiBroj : req.body.postanskiBroj,
          interesi: req.body.interesi,
-         trgovina: req.body.trgovina
+        trgovina : {
+            nazivFirme  : req.body.nazivFirme,
+            telefonFirme  : req.body.telefonFirme,
+            mailFirme: req.body.mailFirme,
+            adresaFirme: req.body.adresaFirme,
+            gradFirme: req.body.gradFirme,
+            adresePoslovnica: req.body.adresePoslovnica,
+            kategorijeUsluga: req.body.kategorijeUsluga
+        }
 
     })
     korisnik = await korisnik.save();

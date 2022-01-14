@@ -94,6 +94,7 @@
                     <span class="badge rounded-pill badge-notification bg-danger">2</span>
                 </a>
 
+                <% if (admin) { %>
                 <a style="color: #35353a"
                    class="nav-link dropdown-toggle "
                    href="#"
@@ -104,6 +105,7 @@
                 >
                     <i class="fas fa-user" ></i>
                 </a>
+
                 <ul
                         class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuLink"
@@ -119,7 +121,12 @@
                     </li>
                     <li> <a class="dropdown-item" href="/TalaShop/logout">Odjavite se</a> </li>
                 </ul>
-            <% } else { %>
+                <% }
+                else { %>
+                     <a class="btn btn-primary mt-1 ms-2 mb-1" href="/TalaShop/logout">Odjavite se</a>
+
+                <% } %>
+                <% } else { %>
                 <div class="d-flex align-items-center" >
                         <a class="btn btn-link text-dark mt-1 mb-1 me-2" href="/TalaShop/korisnik/login">prijava</a>
                         <a class="btn btn-primary mt-1 mb-1"  href="/TalaShop/korisnik/register" >REGISTRUJTE SE</a>

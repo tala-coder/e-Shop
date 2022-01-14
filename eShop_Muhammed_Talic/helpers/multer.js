@@ -3,7 +3,9 @@ const multer = require("multer");
 const FILE_TYPE_MAP = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
-    'image/jpg': 'jpg'
+    'image/jpg': 'jpg',
+    'image/vnd.microsoft.icon': 'ico',
+    'image/gif': 'gif'
 }
 
 exports.storage = multer.diskStorage({

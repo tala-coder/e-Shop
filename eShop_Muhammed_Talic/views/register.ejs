@@ -32,8 +32,7 @@
      }
 </style>
 </head>
-<section class="intro" style="height: 90vh">
-    <div class="mask d-flex align-items-center  gradient-custom" >
+     <div class="mask d-flex align-items-center  gradient-custom" >
         <div class="container"  >
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-9 col-xl-7" >
@@ -184,89 +183,45 @@
                                     <h6 class="mb-2 pb-1">Registruj se kao: </h6>
 
                                     <div class="form-check form-check-inline">
-                                        <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                id="kupac"
-                                                value= false name="jelAdmin"
-                                        />
-                                        <label class="form-check-label"  for="kupac">Kupac</label>
+                                        <input class="form-check-input" type="radio" id="kupac" value= false name="jelAdmin" />
+                                        <a class="text" data-mdb-toggle="collapse" href="#kupac1" role="button" aria-expanded="false" aria-controls="kupac1" >
+                                            <label class="form-check-label text-dark"  for="kupac">Kupac</label>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </a>
                                     </div>
 
                                     <div class="form-check form-check-inline">
-                                        <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                id="trgovac"
-                                                value= true name="jelAdmin"
-                                        />
-                                        <label class="form-check-label" for="trgovac">Trgovac</label>
+                                        <input class="form-check-input" type="radio" id="trgovac" value= true name="jelAdmin" />
+                                        <a class="text " data-mdb-toggle="collapse" href="#trgovac1" role="button" aria-expanded="false" aria-controls="trgovac1" >
+                                        <label class="form-check-label text-dark"  for="trgovac">Trgovac</label>
+                                                <i class="fas fa-chevron-down"></i>
+                                        </a>
                                     </div>
-
                                 </div>
 
-                                <!--<div>
-                                    <label for="form-check" class="form-label">Interesi:</label> <br>
+                                <div class="collapse " id="kupac1">
+                                    <label class="pb-1">Interesi:</label> <br>
+                                    <% for(var i=0; i<kategorija.length; i++) {%>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes1" value="option1" />
-                                        <label class="form-check-label" for="interes1">Auta</label>
+                                        <input class="form-check-input" type="checkbox" name="interesi" id="<%=kategorija[i]._id %>+k"     value="<%=kategorija[i]._id %>" >
+                                        <label class="form-check-label" for="<%=kategorija[i]._id %>+k"><%= kategorija[i].naziv %></label>
                                     </div>
+                                    <% } %>
+                                </div>
 
+                                <div class="collapse " id="trgovac1">
+                                    <label class="pb-1">Kategorije usluga:</label> <br>
+                                    <% for(var i=0; i<kategorija.length; i++) {%>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes2" value="option2" />
-                                        <label class="form-check-label" for="interes2">Parfemi</label>
+                                        <input class="form-check-input" type="checkbox" name="kategorijeUsluga" id="<%=kategorija[i]._id %>+t"     value="<%=kategorija[i]._id %>" >
+                                        <label class="form-check-label" for="<%=kategorija[i]._id %>+t"><%= kategorija[i].naziv %></label>
                                     </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes3" value="option1" />
-                                        <label class="form-check-label" for="interes3">Nekretnine</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes4" value="option2" />
-                                        <label class="form-check-label" for="interes4">IT oprema</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes5" value="option1" />
-                                        <label class="form-check-label" for="interes5">Odjeća</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes6" value="option2" />
-                                        <label class="form-check-label" for="interes6">Cvijeće</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes7" value="option1" />
-                                        <label class="form-check-label" for="interes7">Literatura</label>
-                                    </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="interes8" value="option2" />
-                                        <label class="form-check-label" for="interes8">Nakit i satovi</label>
-                                    </div>
-                                </div>-->
-
-
+                                    <% } %>
+                                </div>
 
 
                                 <div class="row">
                                     <div class="col-12">
-
-<!--                                        <h6 class="mb-3">Subject</h6>-->
-
-<!--                                        <select class="select" multiple>-->
-<!--                                            <option value="1">One</option>-->
-<!--                                            <option value="2">Two</option>-->
-<!--                                            <option value="3">Three</option>-->
-<!--                                            <option value="4">Four</option>-->
-<!--                                            <option value="5">Five</option>-->
-<!--                                            <option value="6">Six</option>-->
-<!--                                            <option value="7">Seven</option>-->
-<!--                                            <option value="8">Eight</option>-->
-<!--                                        </select>-->
-<!--                                        <label class="form-label select-label">Choose option</label>-->
-
                                         <div class="mt-1">
                                             <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
                                         </div>
@@ -277,11 +232,11 @@
                             </form>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
     </div>
-</section>
+</div>
 <body>
 </body>
 <!-- MDB -->

@@ -82,7 +82,7 @@ const proizvodSchema = mongoose.Schema({
     }],
     slika: {
         type: String,
-        default: ''
+        default: 'https://i5.walmartimages.com/asr/538e6ee9-b8ce-4c50-bb78-e0ef9ca3e5d7.d92a2e915d667614f121ea11f0d1ec7e.jpeg'
     },
 
     istaknut: {
