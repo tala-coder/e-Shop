@@ -44,15 +44,15 @@
                         <h4 class="text-right">Uredi svoj profil</h4>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Ime</label>    <input name="ime" type="text" class="form-control" placeholder="ime" value="<%=korisnik.ime%>" ></div>
-                        <div class="col-md-6"><label class="labels">Prezime</label><input name="prezime" type="text" class="form-control" value="<%=korisnik.prezime%>" placeholder="prezime"></div>
+                        <div class="col-md-6"><label class="labels">Ime</label>    <input name="ime" type="text" class="form-control" placeholder="ime" value="<%= korisnik.ime  ? korisnik.ime : '' %>" ></div>
+                        <div class="col-md-6"><label class="labels">Prezime</label><input name="prezime" type="text" class="form-control" value="<%= korisnik.prezime  ? korisnik.prezime : '' %>" placeholder="prezime"></div>
 
-                        <div class="col-md-12"><label class="labels">Naziv profila</label><input name="nickName" type="text" class="form-control" placeholder="" value="<%=korisnik.nickName%>"></div>
-                        <div class="col-md-12"><label class="labels">Mail</label><input name="mail" type="text" class="form-control" placeholder=" " value="<%=korisnik.mail%>"></div>
-                        <div class="col-md-12"><label class="labels">Telefon</label><input name="telefon" type="text" class="form-control" placeholder=" " value="<%=korisnik.telefon%>"></div>
-                        <div class="col-md-12"><label class="labels">Zemlja</label><input name="zemlja" type="text" class="form-control" placeholder=" " value="<%=korisnik.zemlja%>"></div>
-                        <div class="col-md-6"><label class="labels">Grad</label><input name="grad" type="text" class="form-control" placeholder=" " value="<%=korisnik.grad%>"></div>
-                        <div class="col-md-6"><label class="labels">Ulica</label><input name="ulica" type="text" class="form-control" placeholder=" " value="<%=korisnik.ulica%>"></div>
+                        <div class="col-md-12"><label class="labels">Naziv profila</label><input name="nickName" type="text" class="form-control" placeholder="" value="<%= korisnik.nickName  ? korisnik.nickName : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Mail</label><input name="mail" type="text" class="form-control" placeholder=" " value="<%= korisnik.mail  ? korisnik.mail : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Telefon</label><input name="telefon" type="text" class="form-control" placeholder=" " value="<%= korisnik.telefon  ? korisnik.telefon : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Zemlja</label><input name="zemlja" type="text" class="form-control" placeholder=" " value="<%= korisnik.zemlja  ? korisnik.zemlja : '' %>"></div>
+                        <div class="col-md-6"><label class="labels">Grad</label><input name="grad" type="text" class="form-control" placeholder=" " value="<%= korisnik.grad  ? korisnik.grad : '' %>"></div>
+                        <div class="col-md-6"><label class="labels">Ulica</label><input name="ulica" type="text" class="form-control" placeholder=" " value="<%= korisnik.ulica  ? korisnik.ulica : '' %>"></div>
 
                         <div class="col-md-12"><label class="labels">Poštanski broj</label><input name="postanskiBroj" type="text" class="form-control" placeholder=" " value="<%=korisnik.postanskiBroj%>"></div>
 
@@ -65,12 +65,12 @@
                         <h4 class="text-right">Uredi svoju trgovinu</h4>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels">Naziv firme</label><input name="nazivFirme" type="text" class="form-control" placeholder=" " value="<%=korisnik.trgovina.nazivFirme%>"></div>
-                        <div class="col-md-12"><label class="labels">Telefon firme </label><input name="telefonFirme" type="text" class="form-control" placeholder=" " value="<%=korisnik.trgovina.telefonFirme%>"></div>
-                        <div class="col-md-12"><label class="labels">Mail firme</label><input name="mailFirme" type="text" class="form-control" placeholder=""  value="<%=korisnik.trgovina.mailFirme%>"></div>
-                        <div class="col-md-12"><label class="labels">Adresa firme</label><input name="adresaFirme" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.adresaFirme%>"></div>
-                        <div class="col-md-12"><label class="labels">Grad firme</label><input name="gradFirme" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.gradFirme%>"></div>
-                        <div class="col-md-12"><label class="labels">Adrese poslovnica</label><input name="adresePoslovnica" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.adresePoslovnica%>"></div>
+                        <div class="col-md-12"><label class="labels">Naziv firme</label><input name="nazivFirme" type="text" class="form-control" placeholder=" " value="<% korisnik.trgovina.nazivFirme ?  korisnik.trgovina.nazivFirme : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Telefon firme </label><input name="telefonFirme" type="text" class="form-control" placeholder=" " value="<%=korisnik.trgovina.telefonFirme ? korisnik.trgovina.telefonFirme : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Mail firme</label><input name="mailFirme" type="text" class="form-control" placeholder=""  value="<%=korisnik.trgovina.mailFirme ? korisnik.trgovina.mailFirme : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Adresa firme</label><input name="adresaFirme" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.adresaFirme ? korisnik.trgovina.adresaFirme : '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Grad firme</label><input name="gradFirme" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.gradFirme ? korisnik.trgovina.gradFirme: '' %>"></div>
+                        <div class="col-md-12"><label class="labels">Adrese poslovnica</label><input name="adresePoslovnica" type="text" class="form-control" placeholder ="" value="<%=korisnik.trgovina.adresePoslovnica ? korisnik.trgovina.adresePoslovnica : '' %>"></div>
                     </div>
                 </div>
             </div>
