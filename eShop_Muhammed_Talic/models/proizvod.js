@@ -34,11 +34,11 @@ const recenzijaSchema = mongoose.Schema(
 const proizvodSchema = mongoose.Schema({
     naziv: {
         type: String,
-        required: true,
+        // required: true,
     },
     opis: {
         type: String,
-        required: true
+        // required: true
     },
     detaljnjiOpis: {
         type: String,
@@ -65,7 +65,7 @@ const proizvodSchema = mongoose.Schema({
     }],
     kolicina: {
         type: Number,
-        required: true,
+        // required: true,
         min: 0,
         max: 255
     },
@@ -108,7 +108,7 @@ const proizvodSchema = mongoose.Schema({
     kategorija: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Kategorija',
-        required: true
+        // required: true
     },
 
     recenzija: [recenzijaSchema],

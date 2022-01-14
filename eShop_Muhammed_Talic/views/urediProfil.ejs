@@ -23,18 +23,19 @@
 
 
 <div class="container rounded bg-white mt-5 mb-5">
-    <form id="formUrediKorisnika"  method="post">
+    <form id="formUrediKorisnika" action="/TalaShop/korisnik/<%=korisnik._id%>"  method="post" enctype="multipart/form-data"  >
         <div class="row">
             <div class="row justify-content-center">
                 <div class="col-md-6 border-center">
-                    <div class="d-flex flex-column align-items-center text-center py-3"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <div class="d-flex flex-column align-items-center text-center py-3"><img class="rounded-circle mt-5" width="150px"  src= "<%=korisnik.slika%>" alt="slika">
                         <span class="font-weight-bold"> <%= korisnik.ime%> </span><span class="text-black-50"> <%= korisnik.mail%> </span><span> </span></div>
                 </div>
                 <div class="row justify-content-center ">
                     <div class="col-md-6 pe-5 " >
-                        <input class="form-control form-control-lg" id="formFileLg" type="file" />
-                        <div class="small text-muted mt-2 text-center "> Dodajte svoju profilnu sliku. </div>
-                </div>
+                             <input class="form-control form-control-lg"   type="file" name="avatar" value="" />
+
+                            <div class="small text-muted mt-2 text-center "> Dodajte svoju profilnu sliku. </div>
+                 </div>
                 </div>
             </div>
             <div class="col-md-6 border-right">
@@ -104,7 +105,7 @@
 
 </body>
 <script>
-
+/*
     $("#formUrediKorisnika").submit(function(event){
         event.preventDefault();
 
@@ -124,18 +125,18 @@
         console.log(data);
 
         var request = {
-            url  : `/TalaShop/korisnik/<%=korisnik._id%>`,
-            method   : "PUT",
-            contentType : "application/json",
-            processData : false,
+            "url"  : `/TalaShop/korisnik/<%=korisnik._id%>`,
+            "method"   : "PUT",
+            "contentType" : "application/json",
+            "processData" : false,
             data : JSON.stringify(data)
         }
 
         $.ajax(request).done(function(response){
             alert("Uspješno ste uredili svoj profil!");
-            <!--location.replace(`/TalaShop/korisnik/urediProfil/<%=korisnik._id%>`);-->
+            <!--location.replace(`/TalaShop/korisnik/ korisnik ID`);-->
         })
 
-    })
+    })*/
 </script>
 </html>

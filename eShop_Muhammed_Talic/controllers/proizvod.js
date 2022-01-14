@@ -1,7 +1,7 @@
 const Proizvod = require('../models/proizvod');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
-var moment = require('moment');
+const moment = require('moment');
 moment.locale('bs');
 
 

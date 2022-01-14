@@ -1,13 +1,15 @@
 const express = require('express');
+const router = express.Router();
 const korisnik = require("../controllers/korisnik");
 const proizvod = require("../controllers/proizvod");
+const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
-const router = express.Router();
+router.post('/:id', korisnik.uploadSingle, korisnik.urediKorisnika);
 
 router.get(`/register`,  korisnik.registrujSeForma);
-router.get(`/login`, korisnik.logujSeForma);
+router.get(`/login`,  korisnik.logujSeForma);
 
-router.get('/urediProfil/:id', korisnik.dajKorisnika, kategorija.dajKategorije, function(req, res) {
+router.get('/urediProfil/:id', auth.requireAuth,  korisnik.dajKorisnika, kategorija.dajKategorije, function(req, res) {
         res.render('urediProfil', { korisnik: req.korisnik, kategorija: req.kategorije  } )
 });
 
@@ -17,13 +19,16 @@ router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, // mo
 });
 
 
-router.put('/:id',korisnik.urediKorisnika);
 router.get(`/`,  korisnik.dajKorisnike);
 router.post(`/register`, korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
 router.delete('/:id', korisnik.obrisiKorisnika);
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
+
+
+
+
 
 
 

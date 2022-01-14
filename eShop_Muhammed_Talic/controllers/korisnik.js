@@ -3,6 +3,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
+const multer  = require('multer');
+const { storage } = require('../helpers/multer');
+const upload = multer({ storage: storage })
+exports.uploadSingle = upload.single('avatar');
+exports.uploadArray = upload.array('avatar');
 
 exports.registrujSeForma = asyncHandler(async function(req, res) {
     res.render('register', { title: 'Registracija' });
@@ -12,10 +17,7 @@ exports.logujSeForma = asyncHandler(async function(req, res) {
     res.render('login', { title: 'Login' });
 })
 
-
-
-
-exports.dajKorisnike = async (req, res) =>{
+exports.dajKorisnike = async (req, res, next) =>{
     const korisnici = await Korisnik.find().select('-passwordHash');
     if(!korisnici) {
         res.status(500).json({success: false})
@@ -24,13 +26,18 @@ exports.dajKorisnike = async (req, res) =>{
     next();
 }
 
-exports.urediKorisnika =  async (req, res)=> {
-    if(!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).json({message: `ID korisnika ne postoji`})
-    }
-    // const salt = await bcrypt.genSaltSync(10);
-    // let pass = await bcrypt.hashSync(req.body.password, salt);
 
+exports.urediKorisnika =  asyncHandler( async (req, res)=> {
+    if(!mongoose.isValidObjectId(req.params.id))
+        return res.status(400).json({message: `ID korisnika ne postoji`})
+
+//     // const salt = await bcrypt.genSaltSync(10);
+//     // let pass = await bcrypt.hashSync(req.body.password, salt);
+
+    if(!req.file)
+        return res.status(400).send('Niste dodali sliku!')
+
+    const putanja = `${req.protocol}://${req.get('host')}/public/images/${req.file.filename}`
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
         {
             nickName: req.body.nickName,
@@ -46,6 +53,7 @@ exports.urediKorisnika =  async (req, res)=> {
             ulica : req.body.ulica,
             postanskiBroj : req.body.postanskiBroj,
             interesi: req.body.interesi,
+            slika: putanja,
 
             trgovina : {
                 nazivFirme  : req.body.nazivFirme,
@@ -56,14 +64,14 @@ exports.urediKorisnika =  async (req, res)=> {
                 adresePoslovnica: req.body.adresePoslovnica,
                 kategorijeUsluga: req.body.kategorijeUsluga
             }
-    },
+        },
         { new: true}
     )
-    console.log(req.body);
+
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
     res.send(korisnik);
-}
+})
 
 exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
@@ -82,6 +90,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
+    let picture = req.body.spol == 'M' ? 'Super Admin' : req.body.spol == 'Z' ? 'Sub Admin' : role
     let korisnik = new Korisnik({
          nickName: req.body.nickName,
          ime:  req.body.ime,
@@ -93,6 +102,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
          jelAdmin: req.body.jelAdmin,
          grad : req.body.grad,
          spol : req.body.spol,
+        slika: picture,
          ulica : req.body.ulica,
          postanskiBroj : req.body.postanskiBroj,
          interesi: req.body.interesi,
@@ -100,7 +110,6 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
 
     })
     korisnik = await korisnik.save();
-    console.log(req.body.trgovina);
     if(!korisnik)
         res.status(400).json({success: false, bug: `exports.registrujSe`});
     res.send(korisnik);
