@@ -4,6 +4,10 @@ const asyncHandler = require('express-async-handler')
 const moment = require('moment');
 moment.locale('bs');
 
+const multer  = require('multer');
+const { storage } = require('../helpers/multer');
+const upload = multer({ storage: storage })
+exports.uploadArray = upload.array('avatar', 10);
 
 exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
     let filter = {};
@@ -49,7 +53,17 @@ exports.dajProizvod = async (req, res, next) =>{
     next();
 }
 
-exports.dodajProizvod =  async (req, res) =>{
+exports.dodajProizvod =  asyncHandler(async (req, res) =>{
+
+    let slike = [];
+    const putanja = `${req.protocol}://${req.get('host')}/public/images/`
+
+    if(req.files) {
+        req.files.map(file =>{
+            slike.push(`${putanja}${file.filename}`);
+        })
+    }
+
     let proizvod = new Proizvod({
         naziv: req.body.naziv,
         opis: req.body.opis,
@@ -68,14 +82,15 @@ exports.dodajProizvod =  async (req, res) =>{
         akcija: req.body.akcija,
         besplatnaDostava: req.body.besplatnaDostava,
         brojOtvaranja: req.body.brojOtvaranja,
-        slike: req.body.slike,
+        slike: slike,
         korisnik: req.body.korisnik
     })
+    console.log(req.body)
     proizvod = await proizvod.save();
     if(!proizvod)
         return res.status(500).json({success: false, message: `Nije moguće postaviti proizvod!`, bug: `exports.postaviProizvod`});
     res.send(proizvod);
-}
+})
 
 exports.urediProizvod =  async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id)) {
@@ -134,5 +149,3 @@ exports.dajIzdvojeneProizvode = async (req, res) =>{
         res.status(500).json({success: false});
     res.send(proizvodi);
 }
-
-// exports. =

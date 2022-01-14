@@ -1,6 +1,7 @@
 const express = require('express');
 const proizvod = require("../controllers/proizvod");
 const kategorija = require("../controllers/kategorija");
+const korisnik = require("../controllers/korisnik");
 const router = express.Router();
 
 
@@ -14,7 +15,7 @@ router.get('/urediArtikl/:id', kategorija.dajKategorije, proizvod.dajProizvod, f
 });
 
 
-router.post(`/`, proizvod.dodajProizvod);       //redirect na profil page
+router.post(`/`, proizvod.uploadArray,  proizvod.dodajProizvod);       //redirect na profil page
 router.put('/:id',proizvod.urediProizvod);      //redirect na profil page
 router.delete('/:id',proizvod.obrisiProizvod);  //redirect na profil page
 router.get(`/brojProizvoda`, proizvod.brojProizvoda);
