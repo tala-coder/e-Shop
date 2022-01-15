@@ -97,6 +97,7 @@ exports.dodajProizvod =  asyncHandler(async (req, res) =>{
     let proizvod = new Proizvod({
         naziv: req.body.naziv,
         opis: req.body.opis,
+        stanje: req.body.stanje,
         detaljnjiOpis: req.body.detaljnjiOpis,
         brand: req.body.brand,
         boja: req.body.boja,

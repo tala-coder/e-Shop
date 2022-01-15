@@ -90,6 +90,10 @@ const proizvodSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    stanje: {
+        type: String,
+        default: 'Novo',
+    },
     brojOtvaranja: {
         type: Number,
         default: 0,

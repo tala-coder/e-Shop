@@ -49,7 +49,21 @@
                             <textarea name="detaljnjiOpis" value="<%= proizvod.detaljnjiOpis %>"  class="form-control" id="exampleFormControlTextarea1" rows="3" ><%= proizvod.detaljnjiOpis %></textarea></div>
 
 
-                         <div class="col-md-12"><label class="form-label">Brand</label><input name="brand" type="text" class="form-control"  value="<%= proizvod.brand %>"> </div>
+                         <div class="col-md-6"><label class="form-label">Brand</label><input name="brand" type="text" class="form-control"  value="<%= proizvod.brand %>"> </div>
+                        <div class="col-md-6">  <label for="form-check" class="form-label">Stanje</label> <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="stanje1"  name="stanje"  value="Novo"
+                                         <%= proizvod.stanje === "Novo" ? 'checked' : '' %>/>
+                                <label class="form-check-label" for="stanje1">Novo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="stanje1"  name="stanje"  value="Korišteno"
+                                        <%= proizvod.stanje === "Korišteno" ? 'checked' : '' %>/>
+                                <label class="form-check-label" for="stanje1">Korišteno</label>
+                            </div>
+                        </div>
+
+
                         <div class="col-md-6"><label class="form-label">Cijena artikla</label><input name="cijena" type="text" class="form-control" value="<%= proizvod.cijena %>"  >  </div>
 
                         <div class="col-md-6"> <label class="form-label">Kategorija</label>
