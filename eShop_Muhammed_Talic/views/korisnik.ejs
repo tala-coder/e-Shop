@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-    <title><%= korisnik.trgovina.nazivFirme %></title>
+
+    <title><%= korisnik.trgovina  == null ? '' : korisnik.trgovina.nazivFirme %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
@@ -33,8 +34,8 @@
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3"> <%= korisnik.nickName %> </h5>
 
-                         <p class="text-muted mb-1"> <%=  korisnik.trgovina.nazivFirme %></p>
-                        <p class="text-muted mb-1"> <%=  korisnik.trgovina.adresaFirme %>, <%= korisnik.trgovina.gradFirme %>, <%=  korisnik.zemlja %> </p>
+                         <p class="text-muted mb-1">   <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.nazivFirme %></p>
+                        <p class="text-muted mb-1">    <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.adresaFirme + ',' %>  <%=  korisnik.zemlja %></p>
                         <p class="text-muted mb-4"> <%=  korisnik.telefon %> </p>
 
                         <div class="d-flex justify-content-center mb-2">
