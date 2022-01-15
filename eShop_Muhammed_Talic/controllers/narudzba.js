@@ -3,15 +3,22 @@ const  Narudzba   = require('../models/narudzba');
 
 
 exports.dajNarudzbe = async (req, res, next) =>{ // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
-    const narudzbe = await Narudzba.find().populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
-    // .populate({
-    //       path: 'orderItems', populate: {
-    //         path : 'proizvod', populate: 'kategorija', model: Proizvod}
-    //     })
+    const narudzbe = await Narudzba.find({ korisnik: res.locals.userId })
+        .populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
+        .populate({
+            path: 'orderItems', model: OrderItem, populate: {
+                path : 'proizvod', model: Proizvod }
+        });
+        // .populate({
+        //   path: 'orderItems', populate: {
+        //     path : 'proizvod', populate: 'kategorija', model: Proizvod}
+        // })
+
     console.log(narudzbe)
     if(!narudzbe)
         res.status(500).json({success: false});
-    res.send(narudzbe);
+    req.narudzbe = narudzbe;
+    res.send(narudzbe)
     // next();
 }
 
@@ -27,7 +34,7 @@ exports.dajNarudzbu = async (req, res) =>{
     res.send(narudzbe);
 }
 
-const  OrderItem   = require('../models/OrderItem');
+const  OrderItem   = require('../models/OrderItem'); // Cudan bug ? constructor
 exports.postaviNarudzbu = async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
@@ -56,6 +63,7 @@ exports.postaviNarudzbu = async (req,res)=>{
         status: req.body.status,
         totalPrice: totalPrice,
         korisnik: req.body.korisnik,
+        trgovac: req.body.trgovac,
     })
     narudzba = await narudzba.save();
 

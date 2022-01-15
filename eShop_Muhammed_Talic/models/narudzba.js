@@ -42,36 +42,17 @@ const narudzbaSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Korisnik',
     },
+    trgovac: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Korisnik',
+    },
 },
     { timestamps: true }
 )
 
-// exports.Narudzba = mongoose.model('Narudzba', narudzbaSchema);
-
-Narudzba = mongoose.model('Narudzba', narudzbaSchema);
+Narudzba = mongoose.model('TEST_Narudzba', narudzbaSchema);
 module.exports = Narudzba;
-
-
-// Narudzba = mongoose.model('TEST_Narudzba', narudzbaSchema);
+//
+// Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 // module.exports = Narudzba;
-/*
-{
-    "orderItems" : [
-    {
-        "kolicina": 3,
-        "proizvod" : "5fcfc406ae79b0a6a90d2585"
-    },
-    {
-        "kolicina": 2,
-        "proizvod" : "5fd293c7d3abe7295b1403c4"
-    }
-],
-    "adresa1" : "Flowers Street , 45",
-    "adresa2" : "1-B",
-    "grad": "Prague",
-    "postanskiBroj": "00000",
-    "zemlja": "Czech Republic",
-    "telefon": "+420702241333",
-    "korisnik": "5fd51bc7e39ba856244a3b44"
-}
-*/
+
