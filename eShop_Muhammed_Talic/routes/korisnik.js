@@ -25,8 +25,8 @@ router.get(`/`,  korisnik.dajKorisnike);
 router.post(`/register`,  korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
 router.delete('/:id', korisnik.obrisiKorisnika);
-router.post('/urediProfil/:id', korisnik.uploadSingle, korisnik.urediKorisnika);
-// router.put('/:id', korisnik.uploadSingle,  korisnik.urediKorisnika); //
+router.post('/urediProfil/:id', korisnik.uploadSingle, korisnik.urediKorisnika);    // Pokusat sa NPM od profesora
+// router.put('/:id', korisnik.uploadSingle,  korisnik.urediKorisnika);
 
 // router.get(`/get/count`, controllers.brojKorisnika ); // adminstrator
 

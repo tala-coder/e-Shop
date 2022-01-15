@@ -7,7 +7,6 @@ const multer  = require('multer');
 const { storage } = require('../helpers/multer');
 const upload = multer({ storage: storage })
 exports.uploadSingle = upload.single('avatar');
-exports.uploadArray = upload.array('avatar');
 
 
 exports.logujSeForma = asyncHandler(async function(req, res) {
@@ -64,7 +63,6 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
         },
         { new: true}
     )
-    console.log(req.body)
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
     res.send(korisnik);

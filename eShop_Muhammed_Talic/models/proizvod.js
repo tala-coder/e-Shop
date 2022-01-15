@@ -69,14 +69,7 @@ const proizvodSchema = mongoose.Schema({
         min: 0,
         max: 255
     },
-/*    rating: {
-        type: Number,
-        default: 0,
-    },
-    brojRecenczija: {
-        type: Number,
-        default: 0,
-    },*/
+
     slike: [{
         type: String
     }],
@@ -108,7 +101,7 @@ const proizvodSchema = mongoose.Schema({
     kategorija: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Kategorija',
-        // required: true
+        default: '61e216bd6d2b21a6ef5e4e28', // Ostalo
     },
 
     recenzija: [recenzijaSchema],
@@ -120,9 +113,6 @@ const proizvodSchema = mongoose.Schema({
 //     return moment(this.createdAt).endOf('second').fromNow()
 // });
 
-proizvodSchema.virtual('varijabla').get(function() {
-    return "varijabla";
-})
 
 /*
 za PRODUKCIJU
