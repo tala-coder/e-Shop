@@ -1,12 +1,16 @@
-contrllers = require('../controllers/narudzba')
-const express = require('express');
+const  narudzba   = require('../controllers/narudzba');
+ const express = require('express');
 const router = express.Router();
 
-router.get(`/`, contrllers.dajNarudzbe)
-router.get(`/:id`, contrllers.dajNarudzbu)
+router.get(`/`, narudzba.dajNarudzbe) ;
+// ,  function(req, res) {
+//     res.render('narudzba',  { narudzba: req.narudzbe , title: 'Narudžbe'});
+// })
 
-router.post('/', contrllers.postaviNarudzbu)
-router.delete('/:id', contrllers.obrisiNarudzbu)
-router.put('/:id', contrllers.PromijeniStatusNarudzbe)
+router.get(`/:id`, narudzba.dajNarudzbu)
+
+router.post('/', narudzba.postaviNarudzbu)
+router.delete('/:id', narudzba.obrisiNarudzbu)
+router.put('/:id', narudzba.PromijeniStatusNarudzbe)
 
 module.exports = router;

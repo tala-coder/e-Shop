@@ -4,7 +4,7 @@ const narudzbaSchema = mongoose.Schema({
     orderItems: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'OrderItem',
-        required:true
+        // required:true
     }],
     adresa1: {
         type: String,
@@ -32,10 +32,11 @@ const narudzbaSchema = mongoose.Schema({
     status: {
         type: String,
         required: true,
-        default: 'Pending',
+        default: 'Na čekanju',
     },
     ukupnaCijena: {
         type: Number,
+        default: 0,
     },
     korisnik: {
         type: mongoose.Schema.Types.ObjectId,
@@ -45,9 +46,14 @@ const narudzbaSchema = mongoose.Schema({
     { timestamps: true }
 )
 
+// exports.Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 
 Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 module.exports = Narudzba;
+
+
+// Narudzba = mongoose.model('TEST_Narudzba', narudzbaSchema);
+// module.exports = Narudzba;
 /*
 {
     "orderItems" : [

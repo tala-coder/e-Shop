@@ -1,15 +1,18 @@
-const { Narudzba } = require('../models/narudzba');
-const { OrderItem } = require('../models/OrderItem');
+const  Narudzba   = require('../models/narudzba');
+// const  OrderItem   = require('../models/OrderItem');
 
-exports.dajNarudzbe = async (req, res) =>{
-    const narudzbe = await Narudzba.find().populate('korisnik', 'imePrezime').sort('narudzbaTime'); // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
-    /*.populate({
-          path: 'orderItems', populate: {
-            path : 'proizvod', populate: 'kategorija'}
-        })*/
+
+exports.dajNarudzbe = async (req, res, next) =>{ // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
+    const narudzbe = await Narudzba.find().populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
+    // .populate({
+    //       path: 'orderItems', populate: {
+    //         path : 'proizvod', populate: 'kategorija', model: Proizvod}
+    //     })
+    console.log(narudzbe)
     if(!narudzbe)
         res.status(500).json({success: false});
     res.send(narudzbe);
+    // next();
 }
 
 exports.dajNarudzbu = async (req, res) =>{
@@ -24,6 +27,7 @@ exports.dajNarudzbu = async (req, res) =>{
     res.send(narudzbe);
 }
 
+const  OrderItem   = require('../models/OrderItem');
 exports.postaviNarudzbu = async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
@@ -34,9 +38,8 @@ exports.postaviNarudzbu = async (req,res)=>{
         return newOrderItem._id;  // spasavamo u bazu nizove
     }))
     const orderItemsIdsResolved =  await orderItemsIds;
-
     const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
-        const orderItem = await OrderItem.findById(orderItemId).populate('proizvod', 'cijena');
+        const orderItem = await OrderItem.findById(orderItemId).populate({path: 'proizvod', select: 'cijena', model: Proizvod });
         return orderItem.proizvod.cijena * orderItem.kolicina
     }))
 
@@ -44,7 +47,6 @@ exports.postaviNarudzbu = async (req,res)=>{
 
     let narudzba = new Narudzba({
         orderItems: orderItemsIdsResolved,
-        // orderItems: orderItemsIds,
         adresa1: req.body.adresa1,
         adresa2: req.body.adresa2,
         grad: req.body.grad,
