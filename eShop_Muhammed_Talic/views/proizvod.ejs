@@ -77,18 +77,19 @@
                                     class="d-block w-100 img-fluid"
                                     src="<%= proizvod.slike[0] %>"
                                     alt="slika"/>
+                        </button>
 
-                        <% for(var i=1; i<proizvod.slike.length; i++) {%>
+                        <% for(var j=1; j<proizvod.slike.length; j++) {%>
                                     <button
                                             type="button"
                                             data-mdb-target="#carouselExampleIndicators"
-                                            data-mdb-slide-to="1"
-                                            aria-label="Slide 2"
+                                            data-mdb-slide-to="<%= j %> "
+                                            aria-label="Slide <%= j + 1 %>"
                                             style="width: 100px;"
                                     >
                                         <img
                                                 class="d-block w-100 img-fluid"
-                                                src="<%= proizvod.slike[i] %>"
+                                                src="<%= proizvod.slike[j] %>"
                                         />
                                     </button>
                              <% } %>
