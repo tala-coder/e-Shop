@@ -66,6 +66,7 @@ const proizvodSchema = mongoose.Schema({
     kolicina: {
         type: Number,
         // required: true,
+        default: 1,
         min: 0,
         max: 255
     },

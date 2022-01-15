@@ -32,28 +32,18 @@
                 >
                     <!-- Slides -->
                     <div class="carousel-inner mb-5">
-                        <div class="carousel-item active"> <!-- ========== if i=1 active ILI USER MORA POSTAVITI MAKAR JEDNU SLIKU========== -->
-                            <img
-                                    src="https://www.thesun.co.uk/wp-content/uploads/2019/05/NINTCHDBPICT0004916734171.jpg"
-                                    class="d-block w-100"
-                                    alt="..."
-                            />
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                    src="https://www.cnet.com/a/img/jLy0-tOK6EPn7brn8XQ64zeIyMM=/940x0/2019/03/26/0a477eea-6510-4b0a-b219-29fd6f6221e9/huawei-p30-pro-18.jpg"
-                                    class="d-block w-100"
-                                    alt="..."
-                            />
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                    src="https://webmediums.com/media/webp_max_1600/1*QNz5j4j_D3sWRwaqjLDnYQ*jpeg.webp"
-                                    class="d-block w-100"
-                                    alt="..."
-                            />
-                        </div>
+
+                             <% for(var i=0; i<proizvod.slike.length; i++) {%>
+
+                                <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                                    <img
+                                            src="<%= proizvod.slike[i] %>" class="d-block w-100"
+                                            alt="slika"
+                                    />
+                                </div>
+                            <% } %>
                     </div>
+
 
                     <!-- Controls -->
                     <button
@@ -78,49 +68,34 @@
                     <!-- Thumbnails -->
                     <div class="carousel-indicators" style="margin-bottom: -20px;">
                         <button
-                                type="button"
-                                data-mdb-target="#carouselExampleIndicators"
-                                data-mdb-slide-to="0"
+                                type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0"
                                 class="active"
                                 aria-current="true"
-                                aria-label="Slide 1"
-                                style="width: 100px;"
+                                aria-label="Slide 1" style="width: 100px;"
                         >
                             <img
                                     class="d-block w-100 img-fluid"
-                                    src="https://www.thesun.co.uk/wp-content/uploads/2019/05/NINTCHDBPICT0004916734171.jpg"
-                             />
-                        </button>
-                        <button
-                                type="button"
-                                data-mdb-target="#carouselExampleIndicators"
-                                data-mdb-slide-to="1"
-                                aria-label="Slide 2"
-                                style="width: 100px;"
-                        >
-                            <img
-                                    class="d-block w-100 img-fluid"
-                                    src="https://www.cnet.com/a/img/jLy0-tOK6EPn7brn8XQ64zeIyMM=/940x0/2019/03/26/0a477eea-6510-4b0a-b219-29fd6f6221e9/huawei-p30-pro-18.jpg"
-                             />
-                        </button>
-                        <button
-                                type="button"
-                                data-mdb-target="#carouselExampleIndicators"
-                                data-mdb-slide-to="2"
-                                aria-label="Slide 3"
-                                style="width: 100px;"
-                        >
-                            <img
-                                    class="d-block w-100"
-                                    src=" "
-                                    class="img-fluid"
-                            />
-                        </button>
+                                    src="<%= proizvod.slike[0] %>"
+                                    alt="slika"/>
+
+                        <% for(var i=1; i<proizvod.slike.length; i++) {%>
+                                    <button
+                                            type="button"
+                                            data-mdb-target="#carouselExampleIndicators"
+                                            data-mdb-slide-to="1"
+                                            aria-label="Slide 2"
+                                            style="width: 100px;"
+                                    >
+                                        <img
+                                                class="d-block w-100 img-fluid"
+                                                src="<%= proizvod.slike[i] %>"
+                                        />
+                                    </button>
+                             <% } %>
                     </div>
                     <!-- Thumbnails -->
                 </div>
                 <!-- Carousel wrapper -->
-
             </aside>
             <aside class="col-sm-7 pt-0">
                 <%-include('./include/_tabMenuProizvod')%>
