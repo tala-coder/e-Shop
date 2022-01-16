@@ -15,16 +15,14 @@ router.post('/korpa', narudzba.dodajuKorpu)
 
 
 /*  NARUDZBE    */
-router.get(`/`, narudzba.dajNarudzbe)
 /*
 function(req, res) {
     // console.log(req.narudzbe);
     res.render('narudzba',  { narudzba: req.narudzbe , title: 'Narudžbe'});
 })
 */
-
+router.get(`/`, narudzba.dajNarudzbe)
 router.get(`/:id`, narudzba.dajNarudzbu)
-
 router.post('/', narudzba.postaviNarudzbu)
 router.delete('/:id', narudzba.obrisiNarudzbu)
 router.put('/:id', narudzba.PromijeniStatusNarudzbe);
