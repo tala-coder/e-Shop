@@ -3,18 +3,18 @@ const  Narudzba   = require('../models/narudzba');
 
 
 exports.dajNarudzbe = async (req, res, next) =>{ // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
-    const narudzbe = await Narudzba.find({ korisnik: res.locals.userId })
-        .populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
-        .populate({
-            path: 'orderItems', model: OrderItem, populate: {
-                path : 'proizvod', model: Proizvod }
-        });
-        // .populate({
+// .populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
+
+    const narudzbe = await Narudzba.find( )
+        .populate( {path : 'orderItems.proizvod', model: Proizvod, select: ['slika' ] })
+
+
+    // .populate({
         //   path: 'orderItems', populate: {
         //     path : 'proizvod', populate: 'kategorija', model: Proizvod}
         // })
 
-    console.log(narudzbe)
+    console.log("OVDJE", narudzbe)
     if(!narudzbe)
         res.status(500).json({success: false});
     req.narudzbe = narudzbe;
@@ -38,6 +38,7 @@ const  OrderItem   = require('../models/OrderItem'); // Cudan bug ? constructor
 exports.postaviNarudzbu = async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
+            korisnik: orderItem.korisnik,
             kolicina: orderItem.kolicina,
             proizvod: orderItem.proizvod
         })
@@ -98,4 +99,18 @@ exports.PromijeniStatusNarudzbe = async (req, res)=> {
     if(!narudzba)
         return res.status(400).send('Nije moguće urediti narudzbu!')
     res.send(narudzba);
+}
+
+
+
+/*
+    KORPA
+*/
+exports.dajKorpu = async (req, res, next) =>{
+    const korpa = await OrderItem.find({korisnik: res.locals.userId})
+        .populate({path : 'proizvod', select: 'kolicina slika cijena opis', model: Proizvod} )
+    if(!korpa)
+        res.status(500).json({success: false});
+    req.korpa = korpa;
+    next();
 }
