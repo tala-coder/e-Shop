@@ -33,13 +33,22 @@
             <p style="margin-bottom: 3px"><%=proizvod.cijena%><b> KM</b></p>
 
 
-            <a href="#!"  class="btn btn-primary" style="padding-left: 0.625em; padding-right: 0.625em"  >
+            <a href="#!"  class="btn btn-primary" style="padding-left: 0.625em; padding-right: 0.625em"
+                    <% if(user){ %>
+                        onclick="dodajUkorpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                    <% } else{ %>
+                         onclick="showAlert('Niste prijavljeni!')"
+                    <% } %> >
                 ZAPOČNI NARUDŽBU </a>
 
             <a href="#!" style="padding-left: 0.825em; padding-right: 0.825em" class="btn btn-danger mt-1 " id="korpa"
                <%= proizvod.akcija === false ? 'checked' : '' %>
-               onclick="dodajUkorpu('<%= user  ? userId : 'nisi logovan bro'%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
-            ><i class="far fa-bookmark" ></i></a>
+                    <% if(user){ %>
+                   onclick="dodajUkorpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                <% } else{ %>
+                   onclick="showAlert('Niste prijavljeni!')"
+                    <% } %> >
+                <i class="far fa-bookmark" ></i></a>
 
 
         </div>
@@ -63,6 +72,10 @@
 <% }); %>
 
 <script>
+
+    function showAlert(error) {
+        alert(error)
+    }
 
     function dodajUkorpu(korisnikId, proizvodId, kolicina ) {
         console.log(korisnikId, '+', proizvodId);

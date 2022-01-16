@@ -45,15 +45,31 @@
                             </dl>  <!-- item-property .// -->
                         </div> <!-- col.// -->
                     </div> <!-- row.// -->
-                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4">ZAPOČNI NARUDŽBU </a>
+
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4"
+                      <% if(user){ %>
+                       onclick="dodajUkorpu('<%=userId%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                    <% } else{ %>
+                       onclick="showAlert('Niste prijavljeni!')"
+                        <% } %> >
+                        ZAPOČNI NARUDŽBU
+                    </a>
                     <a href="#" class="btn btn-lg btn-outline-primary text-uppercase mb-4"
-                       onclick="dodajUkorpu('<%= user  ? userId : 'nisi logovan bro'%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')">
+                       <% if(user){ %>
+                       onclick="dodajUkorpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                        <% } else{ %>
+                        onclick="showAlert('Niste prijavljeni!')"
+                       <% } %> >
+
                     <i class="fas fa-shopping-cart"></i> dodaj u korpu </a>
                 </article> <!-- card-body.// -->
 
 
 
 <script>
+    function showAlert(error) {
+        alert(error)
+    }
 
     function dodajUkorpu(korisnikId, proizvodId, kolicina ) {
         console.log(korisnikId, '+', proizvodId);
