@@ -34,12 +34,13 @@ exports.dajNarudzbu = async (req, res) =>{
     res.send(narudzbe);
 }
 
-const  OrderItem   = require('../models/OrderItem'); // Cudan bug ? constructor
+const  OrderItem   = require('../models/OrderItem');
+const Kategorija = require("../models/kategorija"); // Cudan bug ? constructor
 exports.postaviNarudzbu = async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             korisnik: orderItem.korisnik,
-            kolicina: orderItem.kolicina,
+            kolicina: orderItem.kolicina , // || 1,
             proizvod: orderItem.proizvod
         })
         newOrderItem = await newOrderItem.save();
@@ -113,4 +114,18 @@ exports.dajKorpu = async (req, res, next) =>{
         res.status(500).json({success: false});
     req.korpa = korpa;
     next();
+}
+
+exports.dodajuKorpu = async (req, res, next) => {
+    let korpa = new OrderItem({
+        korisnik: req.body.korisnik,
+        proizvod: req.body.proizvod,
+        kolicina: req.body.kolicina || 1,
+    })
+    console.log(korpa)
+
+    korpa = await korpa.save();
+    if(!korpa)
+        return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajuKorpu.`})
+    res.send(korpa);
 }

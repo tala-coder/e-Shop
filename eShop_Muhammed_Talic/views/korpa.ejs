@@ -53,9 +53,11 @@
 
                         <% for(var i=0; i<korpa.length; i++) {%>
                              <tr>
-                                <th class="text-center" > <img   style="max-width: 60%; height: 60%; " src="<%=korpa[i].proizvod.slika%>" alt="slika">  </th>
+                                <th class="text-center" > <img   style="max-width: 60%; height: 60%; "
+                            src="<%=korpa[i].proizvod.slika || 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdumkalcollege.org%2Fnon-teaching-staff&psig=AOvVaw1y5yqOE9vzWASmjUwX2NTc&ust=1642389988060000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCLiU9dKptfUCFQAAAAAdAAAAABAJ' %>"
+                                                                 alt="slika">  </th>
 
-                                <td class="col-md-3 col-lg-4"><%=korpa[i].proizvod.opis%></td>
+                                <td class="col-md-3 col-lg-4"><%=korpa[i].proizvod.opis  || 'opis'%></td>
                                 <td>
                                     <!--  todo: dodat ID iz baze umjesto 2// ili int i staviti da bih mogao dobiti konacnu cijenu-->
                                     <select id="sel<%=i%>" onchange="sumiraj( 'sel<%=i%>' ,  'kes<%=i%>' ,  'ukupno<%=i%>' )"  class="form-select  form-control-sm  ms-4" aria-label="Default select example"  style="width:auto;">

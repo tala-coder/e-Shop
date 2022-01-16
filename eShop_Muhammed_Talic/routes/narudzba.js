@@ -3,14 +3,18 @@ const  narudzba   = require('../controllers/narudzba');
 const router = express.Router();
 
 
-
+/*  KORPA   */
 router.get(`/korpa`, narudzba.dajKorpu, function(req, res) {
-    console.log(req.korpa)
     res.render('korpa',  { korpa: req.korpa , title: 'Korpa', popust: '-50%', dostava: '7'});
 })
 
+router.post('/korpa', narudzba.dodajuKorpu)
 
 
+
+
+
+/*  NARUDZBE    */
 router.get(`/`, narudzba.dajNarudzbe)
 /*
 function(req, res) {

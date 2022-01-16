@@ -140,10 +140,19 @@ exports.brojProizvoda = async (req, res) =>{
     res.json({brojProizvoda: brojProizvoda});
 }
 
-exports.dajIzdvojeneProizvode = async (req, res) =>{
+exports.dajIzdvojeneProizvode = async (req, res, next) =>{
     const count = req.params.broj ? req.params.broj : 0
-    const proizvodi = await Proizvod.find({isFeatured: true}).limit(+count);
+    const proizvodi = await Proizvod.find({istaknut: true}).limit(+count)
+        .populate( 'kategorija' , 'naziv');
+    // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
+
+    const gradovi = await Proizvod.find().distinct('grad');
+
     if(!proizvodi)
-        res.status(500).json({success: false});
-    res.send(proizvodi);
+        res.status(500).json({success: false, bug: `exports.dajProizvode`});
+    req.proizvod = proizvodi;
+    req.gradovi = gradovi;
+    req.moment = moment;
+    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    next();
 }

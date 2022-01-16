@@ -1,3 +1,5 @@
+
+
 <article class="card-body p-2" style="height: 50vh">
                     <h3 class="title mb-0"><%= proizvod.naziv %></h3>
                     <span> Objavio korisnik  <a href="/TalaShop/korisnik/<%=proizvod.korisnik._id%> ">
@@ -44,5 +46,36 @@
                         </div> <!-- col.// -->
                     </div> <!-- row.// -->
                     <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4">ZAPOČNI NARUDŽBU </a>
-                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase mb-4"> <i class="fas fa-shopping-cart"></i> dodaj u korpu </a>
+                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase mb-4"
+                       onclick="dodajUkorpu('<%= user  ? userId : 'nisi logovan bro'%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')">
+                    <i class="fas fa-shopping-cart"></i> dodaj u korpu </a>
                 </article> <!-- card-body.// -->
+
+
+
+<script>
+
+    function dodajUkorpu(korisnikId, proizvodId, kolicina ) {
+        console.log(korisnikId, '+', proizvodId);
+
+        var data = {}
+        data.korisnik = korisnikId;
+        data.proizvod = proizvodId;
+        data.kolicina = kolicina;
+
+        console.log(data);
+
+
+        var request = {
+            "url" : `/TalaShop/narudzba/korpa`,
+            "method" : "POST",
+            contentType : "application/json",
+            processData : false,
+            data : JSON.stringify(data)
+        }
+
+        $.ajax(request).done(function(response){
+            alert("Dodali ste artikl u korpu!");
+        })
+    }
+</script>

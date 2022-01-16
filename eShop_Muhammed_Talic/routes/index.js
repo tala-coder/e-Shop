@@ -10,6 +10,11 @@ router.get('/', kategorija.dajKategorije, proizvod.dajProizvode,
         res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
 });
 
+router.get('/test', kategorija.dajKategorije, proizvod.dajIzdvojeneProizvode,
+    function(req, res) {
+        res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
+});
+
 router.get('/logout', function(req, res) {
   res.cookie('jwt', '', {maxAge: 1});
   res.redirect('/TalaShop');
