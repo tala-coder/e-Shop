@@ -132,16 +132,7 @@ const korisnikSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-// Kolekcija za test
-// exports.Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
-// exports.korisnikSchema = korisnikSchema;
-// Kolekcija za test
-Korisnik = mongoose.model('TEST_korisnik', korisnikSchema);
+Korisnik = mongoose.model('Korisnik', korisnikSchema);
 module.exports = Korisnik;
-
-// za PRODUKCIJU
-// exports.Korisnik = mongoose.model('Korisnik', korisnikSchema);
-// exports.korisnikSchema = korisnikSchema;
-
 
 

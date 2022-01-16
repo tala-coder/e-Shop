@@ -50,9 +50,11 @@ const narudzbaSchema = mongoose.Schema({
     { timestamps: true }
 )
 
-Narudzba = mongoose.model('TEST_Narudzba', narudzbaSchema);
+Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 module.exports = Narudzba;
-//
+//module.exports = mongoose.model('TEST_Narudzba', narudzbaSchema);
+
+
 // Narudzba = mongoose.model('Narudzba', narudzbaSchema);
 // module.exports = Narudzba;
 

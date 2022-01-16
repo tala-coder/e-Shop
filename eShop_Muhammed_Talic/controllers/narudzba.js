@@ -5,14 +5,9 @@ const  Narudzba   = require('../models/narudzba');
 exports.dajNarudzbe = async (req, res, next) =>{ // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
 // .populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
 
-    const narudzbe = await Narudzba.find( )
-        .populate( {path : 'orderItems.proizvod', model: Proizvod, select: ['slika' ] })
-
-
-    // .populate({
-        //   path: 'orderItems', populate: {
-        //     path : 'proizvod', populate: 'kategorija', model: Proizvod}
-        // })
+    const narudzbe = await Narudzba.find({})
+        .populate('korisnik' )
+        .populate({path : 'orderItems', populate: 'proizvod'})
 
     console.log("OVDJE", narudzbe)
     if(!narudzbe)
@@ -47,12 +42,12 @@ exports.postaviNarudzbu = async (req,res)=>{
         return newOrderItem._id;  // spasavamo u bazu nizove
     }))
     const orderItemsIdsResolved =  await orderItemsIds;
-    const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
-        const orderItem = await OrderItem.findById(orderItemId).populate({path: 'proizvod', select: 'cijena', model: Proizvod });
-        return orderItem.proizvod.cijena * orderItem.kolicina
-    }))
-
-    const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
+    // const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
+    //     const orderItem = await OrderItem.findById(orderItemId).populate({path: 'proizvod', select: 'cijena', model: Proizvod });
+    //     return orderItem.proizvod.cijena * orderItem.kolicina
+    // }))
+    //
+    // const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
 
     let narudzba = new Narudzba({
         orderItems: orderItemsIdsResolved,
@@ -63,7 +58,7 @@ exports.postaviNarudzbu = async (req,res)=>{
         zemlja: req.body.zemlja,
         telefon: req.body.telefon,
         status: req.body.status,
-        totalPrice: totalPrice,
+        totalPrice: 100, // req.body.cijena
         korisnik: req.body.korisnik,
         trgovac: req.body.trgovac,
     })

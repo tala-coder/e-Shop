@@ -119,11 +119,10 @@ const proizvodSchema = mongoose.Schema({
 // });
 
 
-/*
-za PRODUKCIJU
+
 Proizvod = mongoose.model('Proizvod', proizvodSchema);
-module.exports = Proizvod;*/
+module.exports = Proizvod;
 
 // za TESTIRANJE
-Proizvod = mongoose.model('test_Proizvod', proizvodSchema);
-module.exports = Proizvod;
+// Proizvod = mongoose.model('test_Proizvod', proizvodSchema);
+// module.exports = Proizvod;
