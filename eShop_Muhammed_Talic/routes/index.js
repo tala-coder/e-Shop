@@ -3,11 +3,12 @@ var router = express.Router();
 const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
 const proizvod = require("../controllers/proizvod");
+const korisnik = require("../controllers/korisnik");
 
 
-router.get('/', kategorija.dajKategorije, proizvod.dajProizvode,
+router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, korisnik.dajTrenutnogKorisnika,
     function(req, res) {
-        res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
+        res.render('home', {kategorije: req.kategorije, korisnik: req.korisnik, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
 });
 
 router.get('/test', kategorija.dajKategorije, proizvod.dajIzdvojeneProizvode,
