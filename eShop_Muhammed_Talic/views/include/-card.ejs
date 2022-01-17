@@ -67,6 +67,158 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <% if (user) { %>
+    <div class="modal   fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered  ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel"> <i class="fas fa-truck me-1"></i> Podaci za dostavu</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body p-4">
+                        <form id="dodajNarudzbu" action="/TalaShop/narudzba"  method="post">
+                            <div class="d-flex flex-row align-items-center mb-1 pb-1">
+                                <div class="row ">
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="adresa1"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Adresa 1" value="<%=korisnik.ulica%>" name="adresa1"
+                                            />
+                                            <label class="form-label" for="adresa1"> Adresa 1</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="telefon"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Telefon"  value="<%=korisnik.telefon%> " name="telefon"
+                                            />
+                                            <label class="form-label" for="telefon"> Telefon </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="adresa2"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Adresa"  value="" name="adresa2"
+                                            />
+                                            <label class="form-label" for="adresa2"> Adresa 2  </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="Grad"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Grad"  value="<%=korisnik.grad%>" name="grad"
+                                            />
+                                            <label class="form-label" for="telefon"> Grad </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="postanskiBroj"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Poštanski broj"  value="<%=korisnik.postanskiBroj%>" name="postanskiBroj"
+                                            />
+                                            <label class="form-label" for="postanskiBroj"> Poštanski broj </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-outline">
+                                            <input
+                                                    id="zemlja"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="Zemlja"  value="<%=korisnik.zemlja%>" name="zemlja"
+                                            />
+                                            <label class="form-label" for="zemlja"> Zemlja </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-outline">
+                                                    <textarea
+                                                            id="Poruka"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Poruka za korisnika"  value=" " name="poruka"></textarea>
+                                            <label class="form-label" for="Poruka"> Poruka za korisnika </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-outline mb-4">
+                                <input
+                                        id="formControlLgXsd"
+                                        class="form-control form-control-lg"
+                                        value="<%=korisnik.ime%>" name="ime" placeholder="Ime i Prezime"
+                                />
+                                <label class="form-label" for="formControlLgXsd">  Ime i Prezime </label>
+                            </div>
+
+                            <div class="row  ">
+                                <div class="col-7">
+                                    <div class="form-outline">
+                                        <input
+                                                id="formControlLgXM1"
+                                                class="form-control form-control-lg"
+                                                placeholder="**** **** **** ****"
+                                        />
+                                        <label class="form-label" for="formControlLgXM1">Broj kartice</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-outline">
+                                        <input
+                                                id="formControlLgExpk"
+                                                class="form-control form-control-lg"
+                                                placeholder="MM/YYYY"
+                                        />
+                                        <label class="form-label" for="formControlLgExpk">Expire</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-outline">
+                                        <input
+                                                type="password"
+                                                id="formControlLgcvv"
+                                                class="form-control form-control-lg"
+                                                placeholder="Cvv"
+                                        />
+                                        <label class="form-label" for="formControlLgcvv">Cvv</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> zatvori </button>
+                                <button type="submit" value="Submit" class="btn btn-primary" > KOMPLETIRAJ NARUDŽBU </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } else{ %>
+        login
+    <% } %>
+
+    <!-- Modal -->
 </div>
 
 <% }); %>
@@ -84,6 +236,11 @@
             data.korisnik = korisnikId;
             data.proizvod = proizvodId;
             data.kolicina = kolicina;
+            // data.kolicina = kolicina;
+            // data.kolicina = kolicina;
+            // data.kolicina = kolicina;
+            // data.kolicina = kolicina;
+            // data.telefon = telefon;
 
             console.log(data);
 

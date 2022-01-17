@@ -6,6 +6,30 @@ const orderItemSchema = mongoose.Schema({
     kolicina: { type: Number, required: true , default: 1},
     proizvod: { type: mongoose.Schema.Types.ObjectId, ref: 'Proizvod' },
     status:   { type: String,  default: 'u korpi'},
+        adresa1: {
+            type: String,
+            // required: true,
+        },
+        adresa2: {
+            type: String,
+        },
+        grad: {
+            type: String,
+            // required: true,
+        },
+        postanskiBroj: {
+            type: String,
+            // required: true,
+        },
+        zemlja: {
+            type: String,
+            // required: true,
+        },
+        telefon: {
+            type: String,
+            // required: true,
+        },
+
 },
     { timestamps: true }
 )

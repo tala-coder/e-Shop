@@ -31,44 +31,30 @@ exports.dajNarudzbu = async (req, res) =>{
 
 const  OrderItem   = require('../models/OrderItem');
 const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor
-exports.postaviNarudzbu = async (req,res)=>{
+exports.postaviNarudzbu = async (req,res, next)=>{
     const korpa = await OrderItem.find({korisnik: res.locals.userId})
 
-    const orderItemsIds = Promise.all(korpa.map(async (orderItem) =>{
-        console.log(orderItem._id, 'ovdje')  // upit vraca mi id kupca od proizvoda
-        await OrderItem.findByIdAndUpdate( orderItem._id  , {status: 'pending'}, {new: true});
-        // let newOrderItem = new OrderItem({
-            // korisnik: res.locals.userId,
-            // trgovac:  '61d43ad201719590d2fc83fa',
-            // status: 'pending',
-            // kolicina: orderItem.kolicina,
-            // proizvod: orderItem.proizvod
-        // })
+     await Promise.all(korpa.map(async (orderItem) => {
+         console.log(orderItem._id, 'ovdje')  // upit vraca mi id kupca od proizvoda
+          await OrderItem.findByIdAndUpdate(orderItem._id, {status: 'pending'}, {new: true});
+     }))
 
-        // console.log(orderItem._id, 'ovdje')
-        // newOrderItem = await OrderItem.findByIdAndUpdate( '61e4e28de5041e32dc955f25'  , newOrderItem, {new: true});
-
-        // newOrderItem = await newOrderItem.save();
-        return OrderItem._id;  // spasavamo u bazu nizove
-    }))
-
-    const orderItemsIdsResolved =  await orderItemsIds;
-
-    let narudzba = new Narudzba({
-        orderItems: orderItemsIdsResolved,
-        adresa1: req.body.adresa1,
-        adresa2: req.body.adresa2,
-        grad: req.body.grad,
-        postanskiBroj: req.body.postanskiBroj,
-        zemlja: req.body.zemlja,
-        telefon: req.body.telefon,
-        cijena: req.body.cijena, // pokusat iz baze izvuc konacnu cijenu
-    })
-    narudzba = await narudzba.save();
-
-    if(!narudzba)
-        return res.status(400).send('Narudzba nije kreirana!')
-    res.send(narudzba);
+    // next();
+    res.sendStatus(200);
+    // let narudzba = new Narudzba({
+    //     adresa1: req.body.adresa1,
+    //     adresa2: req.body.adresa2,
+    //     grad: req.body.grad,
+    //     postanskiBroj: req.body.postanskiBroj,
+    //     zemlja: req.body.zemlja,
+    //     telefon: req.body.telefon,
+    //     cijena: req.body.cijena, // pokusat iz baze izvuc konacnu cijenu
+    // })
+    // narudzba = await narudzba.save();
+    //
+    // if(!narudzba)
+    //     return res.status(400).send('Narudzba nije kreirana!')
+    // res.send(narudzba);
 }
 
 exports.obrisiNarudzbu = (req, res)=>{
@@ -116,10 +102,16 @@ exports.dajKorpu = async (req, res, next) =>{
 exports.dodajuKorpu = async (req, res, next) => {
     let korpa = new OrderItem({
         korisnik: req.body.korisnik,
-        trgovac:  '61d43ad201719590d2fc83fa',
+        trgovac:  req.body.trgovac,
         stanje:     req.body.stanje,
         proizvod: req.body.proizvod,
         kolicina: req.body.kolicina || 1,
+        adresa1: req.body.adresa1,
+        adresa2: req.body.adresa2,
+        grad: req.body.grad,
+        postanskiBroj: req.body.postanskiBroj,
+        zemlja: req.body.zemlja,
+        telefon: req.body.telefon,
     })
     console.log(korpa)
 
