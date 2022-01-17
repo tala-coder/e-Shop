@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const orderItemSchema = mongoose.Schema({
-    korisnik: {type: mongoose.Schema.Types.ObjectId,
-        ref: 'Korisnik' },
+    korisnik: { type: mongoose.Schema.Types.ObjectId, ref: 'Korisnik' },
+    trgovac:  { type: mongoose.Schema.Types.ObjectId, ref: 'Korisnik' },
     kolicina: { type: Number, required: true , default: 1},
-    proizvod: {type: mongoose.Schema.Types.ObjectId,
-        ref: 'Proizvod' }
+    proizvod: { type: mongoose.Schema.Types.ObjectId, ref: 'Proizvod' },
+    status:   { type: String,  default: 'u korpi'},
 },
     { timestamps: true }
 )

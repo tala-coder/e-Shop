@@ -30,24 +30,29 @@ exports.dajNarudzbu = async (req, res) =>{
 }
 
 const  OrderItem   = require('../models/OrderItem');
-const Kategorija = require("../models/kategorija"); // Cudan bug ? constructor
+const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor
 exports.postaviNarudzbu = async (req,res)=>{
-    const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
-        let newOrderItem = new OrderItem({
-            korisnik: orderItem.korisnik,
-            kolicina: orderItem.kolicina , // || 1,
-            proizvod: orderItem.proizvod
-        })
-        newOrderItem = await newOrderItem.save();
-        return newOrderItem._id;  // spasavamo u bazu nizove
+    const korpa = await OrderItem.find({korisnik: res.locals.userId})
+
+    const orderItemsIds = Promise.all(korpa.map(async (orderItem) =>{
+        console.log(orderItem._id, 'ovdje')  // upit vraca mi id kupca od proizvoda
+        await OrderItem.findByIdAndUpdate( orderItem._id  , {status: 'pending'}, {new: true});
+        // let newOrderItem = new OrderItem({
+            // korisnik: res.locals.userId,
+            // trgovac:  '61d43ad201719590d2fc83fa',
+            // status: 'pending',
+            // kolicina: orderItem.kolicina,
+            // proizvod: orderItem.proizvod
+        // })
+
+        // console.log(orderItem._id, 'ovdje')
+        // newOrderItem = await OrderItem.findByIdAndUpdate( '61e4e28de5041e32dc955f25'  , newOrderItem, {new: true});
+
+        // newOrderItem = await newOrderItem.save();
+        return OrderItem._id;  // spasavamo u bazu nizove
     }))
+
     const orderItemsIdsResolved =  await orderItemsIds;
-    // const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
-    //     const orderItem = await OrderItem.findById(orderItemId).populate({path: 'proizvod', select: 'cijena', model: Proizvod });
-    //     return orderItem.proizvod.cijena * orderItem.kolicina
-    // }))
-    //
-    // const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
 
     let narudzba = new Narudzba({
         orderItems: orderItemsIdsResolved,
@@ -57,10 +62,7 @@ exports.postaviNarudzbu = async (req,res)=>{
         postanskiBroj: req.body.postanskiBroj,
         zemlja: req.body.zemlja,
         telefon: req.body.telefon,
-        status: req.body.status,
-        totalPrice: 100, // req.body.cijena
-        korisnik: req.body.korisnik,
-        trgovac: req.body.trgovac,
+        cijena: req.body.cijena, // pokusat iz baze izvuc konacnu cijenu
     })
     narudzba = await narudzba.save();
 
@@ -103,7 +105,7 @@ exports.PromijeniStatusNarudzbe = async (req, res)=> {
     KORPA
 */
 exports.dajKorpu = async (req, res, next) =>{
-    const korpa = await OrderItem.find({korisnik: res.locals.userId})
+    const korpa = await OrderItem.find({korisnik: res.locals.userId, status: 'u korpi'})
         .populate({path : 'proizvod', select: 'kolicina slika cijena opis', model: Proizvod} )
     if(!korpa)
         res.status(500).json({success: false});
@@ -114,6 +116,8 @@ exports.dajKorpu = async (req, res, next) =>{
 exports.dodajuKorpu = async (req, res, next) => {
     let korpa = new OrderItem({
         korisnik: req.body.korisnik,
+        trgovac:  '61d43ad201719590d2fc83fa',
+        stanje:     req.body.stanje,
         proizvod: req.body.proizvod,
         kolicina: req.body.kolicina || 1,
     })
