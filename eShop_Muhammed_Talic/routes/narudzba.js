@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 /*  KORPA   */
-router.get(`/korpa`, narudzba.dajKorpu, korisnik.dajKorisnika,  function(req, res) {
+router.get(`/korpa`, narudzba.dajKorpu, korisnik.dajTrenutnogKorisnika,  function(req, res) {
     res.render('korpa',  { korpa: req.korpa , korisnik: req.korisnik , title: 'Korpa', popust: '-50%', dostava: '7'});
 })
 
