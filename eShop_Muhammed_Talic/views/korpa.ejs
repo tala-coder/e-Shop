@@ -46,14 +46,14 @@
                             <th scope="col">Količina</th>
                             <th scope="col">Cijena</th>
                             <th scope="col">Ukupno</th>
-                            <th scope="col"></th>
+                            <th scope="col">Ukloni</th>
                         </tr>
                         </thead>
                         <tbody class="align-middle">
 
                         <% for(var i=0; i<korpa.length; i++) {%>
                              <tr>
-                                <th class="text-center" > <img   style="max-width: 60%; height: 60%; "
+                                <th class="text-center" > <img   style="max-width: 50%; height: 50%; "
                             src="<%=korpa[i].proizvod.slika || 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdumkalcollege.org%2Fnon-teaching-staff&psig=AOvVaw1y5yqOE9vzWASmjUwX2NTc&ust=1642389988060000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCLiU9dKptfUCFQAAAAAdAAAAABAJ' %>"
                                                                  alt="slika">  </th>
 
@@ -127,84 +127,105 @@
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary mb-2"  id="button-addon3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-mdb-ripple-color="dark">
-                                Naruči
+                                <i class="fas fa-shopping-bag me-1"></i> Naruči
                             </button>
 
-                            <button class="btn btn-outline-primary" type="button" id="button-addon4" data-mdb-ripple-color="dark">
-                                vrati se na početnu
-                            </button>
+                            <a href="/TalaShop" class="btn btn-outline-primary " >
+                                vrati se na početnu</a>
                         </dl>
                     </div>
                 </div>
             </div>
             <!-- Modal -->
-             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <% if (user) { %>
+            <div class="modal   fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered  ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel"> kombi fa Podaci za dostavu</h5>
+                            <h4 class="modal-title" id="staticBackdropLabel"> <i class="fas fa-truck me-1"></i> Podaci za dostavu</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
-
-
-
-
-
                             <div class="card-body p-4">
-                                <form action="">
+                                <form id="dodajNarudzbu" action="/TalaShop/narudzba"  method="post">
                                     <div class="d-flex flex-row align-items-center mb-1 pb-1">
                                         <div class="row ">
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="form-outline">
                                                     <input
                                                             id="adresa1"
                                                             class="form-control form-control-lg"
-                                                            placeholder="Adresa" value="" name="adresa1"
+                                                            placeholder="Adresa 1" value="<%=korisnik.ulica%>" name="adresa1"
                                                     />
-                                                    <label class="form-label" for="adresa1"> Adresa 1 </label>
+                                                    <label class="form-label" for="adresa1"> Adresa 1</label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="form-outline">
                                                     <input
                                                             id="telefon"
                                                             class="form-control form-control-lg"
-                                                            placeholder="Telefon" value="" name="telefon"
+                                                            placeholder="Telefon"  value="<%=korisnik.telefon%> " name="telefon"
                                                     />
-                                                    <label class="form-label" for="telefon"> Broj telefona </label>
+                                                    <label class="form-label" for="telefon"> Telefon </label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="form-outline">
                                                     <input
                                                             id="adresa2"
                                                             class="form-control form-control-lg"
-                                                            placeholder="Adresa" value="" name="adresa2"
+                                                            placeholder="Adresa"  value="" name="adresa2"
                                                     />
-                                                    <label class="form-label" for="adresa2"> Adresa 2 </label>
+                                                    <label class="form-label" for="adresa2"> Adresa 2  </label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <div class="form-outline">
                                                     <input
-                                                            id="telefon"
+                                                            id="Grad"
                                                             class="form-control form-control-lg"
-                                                            placeholder="Telefon" value="" name="telefon"
+                                                            placeholder="Grad"  value="<%=korisnik.grad%>" name="grad"
                                                     />
-                                                    <label class="form-label" for="telefon"> Broj telefona </label>
+                                                    <label class="form-label" for="telefon"> Grad </label>
                                                 </div>
                                             </div>
-                                            Grad, Poštanski broj,zemlja
 
-                                            <div class="col-md-12"><label for="exampleFormControlTextarea1" class="form-label">Detaljnji opis</label>
-                                                <textarea name="detaljnjiOpis" value=" "  class="form-control" id="exampleFormControlTextarea1" rows="3" >  </textarea></div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-outline">
+                                                    <input
+                                                            id="postanskiBroj"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Poštanski broj"  value="<%=korisnik.postanskiBroj%>" name="postanskiBroj"
+                                                    />
+                                                    <label class="form-label" for="postanskiBroj"> Poštanski broj </label>
+                                                </div>
+                                            </div>
 
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-outline">
+                                                    <input
+                                                            id="zemlja"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Zemlja"  value="<%=korisnik.zemlja%>" name="zemlja"
+                                                    />
+                                                    <label class="form-label" for="zemlja"> Zemlja </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-outline">
+                                                    <textarea
+                                                            id="Poruka"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Poruka za korisnika"  value=" " name="poruka"></textarea>
+                                                    <label class="form-label" for="Poruka"> Poruka za korisnika </label>
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -213,8 +234,9 @@
                                         <input
                                                 id="formControlLgXsd"
                                                 class="form-control form-control-lg"
+                                                value="<%=korisnik.ime%>" name="ime" placeholder="Ime i Prezime"
                                         />
-                                        <label class="form-label" for="formControlLgXsd">Ime i Prezime</label>
+                                        <label class="form-label" for="formControlLgXsd">  Ime i Prezime </label>
                                     </div>
 
                                     <div class="row  ">
@@ -250,16 +272,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> zatvori </button>
+                                        <button type="submit" value="Submit" class="btn btn-primary" > KOMPLETIRAJ NARUDŽBU </button>
+                                    </div>
+
                                 </form>
                             </div>
-                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> zatvori </button>
-                            <button type="button" class="btn btn-primary"> KOMPLETIRAJ NARUDŽBU </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <% } else{ %>
+                login
+            <% } %>
+
+
             <!-- Modal -->
         </div>
     </div>
@@ -271,6 +299,43 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
 <script>
 
+
+    $("#dodajNarudzbu").submit(function(event){
+        event.preventDefault();
+
+        var unindexed_array = $(this).serializeArray();
+        var data = {}
+        <!--var korpa = <%=korpa%>;-->
+        // data.orderItems = JSON.parse(korpa) ;
+
+
+        $.map(unindexed_array, function(n){
+                data[n['name']] = n['value']
+        })
+        console.log(data);
+
+        var request = {
+            url  : `/TalaShop/narudzba`,
+            method   : "post",
+            contentType : "application/json",
+            processData : false,
+            data : data
+        }
+
+        $.ajax(request).done(function(response){
+            alert("Uspješno ste uredili svoj profil!");
+            <!--location.replace(`/TalaShop/korisnik/ korisnik ID`);-->
+        })
+
+    })
+
+
+
+
+
+
+
+    // CIJENA, POPUSTI I OSTALO
     var ukupnoZaPlatit = 0.0;
     $('.price').each(function()
     {        ukupnoZaPlatit += parseFloat($(this).text());  }); ukupnoZaPlatit = Math.round(ukupnoZaPlatit)
@@ -299,11 +364,18 @@
         $('#ukupnoZaPlatit').text(ciejnaSaPopustom + " KM");
     }
 
+
+
+    //MODAL
     var myModal = document.getElementById('myModal')
     var myInput = document.getElementById('myInput')
 
     myModal.addEventListener('shown.bs.modal', function () {
         myInput.focus()
     })
+
+
+
+
 </script>
 </html>
