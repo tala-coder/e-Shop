@@ -128,6 +128,20 @@ const korisnikSchema = new mongoose.Schema({
                 ref: "Kategorija",
             }],
 
+
+    // O KARTICI
+    //     brojKartice: {
+    //         type: String,
+    //         default: ''
+    //     },
+    //     expire: {
+    //         type: String,
+    //         default: ''
+    //     },
+    //     cvv: {
+    //         type: String,
+    //         default: ''
+    //     },
 },
     { timestamps: true }
 );
