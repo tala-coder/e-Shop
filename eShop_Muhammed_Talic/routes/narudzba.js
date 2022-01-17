@@ -1,11 +1,12 @@
 const  narudzba   = require('../controllers/narudzba');
+const  korisnik   = require('../controllers/korisnik');
  const express = require('express');
 const router = express.Router();
 
 
 /*  KORPA   */
-router.get(`/korpa`, narudzba.dajKorpu, function(req, res) {
-    res.render('korpa',  { korpa: req.korpa , title: 'Korpa', popust: '-50%', dostava: '7'});
+router.get(`/korpa`, narudzba.dajKorpu, korisnik.dajKorisnika,  function(req, res) {
+    res.render('korpa',  { korpa: req.korpa , korisnik: req.korisnik , title: 'Korpa', popust: '-50%', dostava: '7'});
 })
 
 router.post('/korpa', narudzba.dodajuKorpu)

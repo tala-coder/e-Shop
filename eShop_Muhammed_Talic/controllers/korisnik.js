@@ -69,7 +69,11 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
 })
 
 exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
-    const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
+    let korisnik = null;
+    if(!mongoose.isValidObjectId(req.params.id === undefined || req.params.id )){
+          korisnik = await Korisnik.findById(req.query.id).select('-passwordHash');}
+    else {
+          korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');}
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
     // const { ime, ...others } = korisnik._doc;
     // console.log(others
@@ -85,7 +89,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
-    let picture = req.body.spol == 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
+    let picture = req.body.spol === 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
 
     let korisnik = new Korisnik({
          nickName: req.body.nickName,
