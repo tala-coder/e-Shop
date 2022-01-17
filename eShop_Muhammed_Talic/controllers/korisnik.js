@@ -69,18 +69,28 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
 })
 
 exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
-    let korisnik = null;
-    if(!mongoose.isValidObjectId(req.params.id === undefined || req.params.id )){
-          korisnik = await Korisnik.findById(req.query.id).select('-passwordHash');}
-    else {
-          korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');}
+    if(!mongoose.isValidObjectId(req.params.id))
+        return res.status(400).json({message: `ID korisnika ne postoji`})
+    const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
     // const { ime, ...others } = korisnik._doc;
     // console.log(others
 
-    // console.log(korisnik)
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
+    req.korisnik = korisnik;
+    next();
+})
+
+exports.dajTrenutnogKorisnika = asyncHandler(async (req,res, next) => {
+    let id = res.locals.userId;
+    const korisnik = await Korisnik.findById( id ).select('-passwordHash');
+    // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+    // const { ime, ...others } = korisnik._doc;
+    // console.log(others
+
+    if(!korisnik)
+        res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajTrenutnogKorisnika`});
     req.korisnik = korisnik;
     next();
 })
@@ -89,7 +99,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
-    let picture = req.body.spol === 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
+    let picture = req.body.spol == 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
 
     let korisnik = new Korisnik({
          nickName: req.body.nickName,
