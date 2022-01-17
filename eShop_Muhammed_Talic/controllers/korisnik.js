@@ -90,7 +90,7 @@ exports.dajTrenutnogKorisnika = asyncHandler(async (req,res, next) => {
     // console.log(others
 
     if(!korisnik)
-        res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajTrenutnogKorisnika`});
+        next();
     req.korisnik = korisnik;
     next();
 })

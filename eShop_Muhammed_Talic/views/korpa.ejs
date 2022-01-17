@@ -9,7 +9,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
             rel="stylesheet"
     />
-    <!-- bootstrap -->
+    <!-- Bootstrap -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
             rel="stylesheet"
@@ -284,7 +284,7 @@
                 </div>
             </div>
             <% } else{ %>
-                login
+                showAlert('Niste prijavljeni!')
             <% } %>
 
 
@@ -298,41 +298,6 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
 <script>
-
-
-    $("#dodajNarudzbu").submit(function(event){
-        event.preventDefault();
-
-        var unindexed_array = $(this).serializeArray();
-        var data = {}
-        <!--var korpa = <%=korpa%>;-->
-        // data.orderItems = JSON.parse(korpa) ;
-
-
-        $.map(unindexed_array, function(n){
-                data[n['name']] = n['value']
-        })
-        console.log(data);
-
-        var request = {
-            url  : `/TalaShop/narudzba`,
-            method   : "post",
-            contentType : "application/json",
-            processData : false,
-            data : data
-        }
-
-        $.ajax(request).done(function(response){
-            alert("Uspješno ste uredili svoj profil!");
-            <!--location.replace(`/TalaShop/korisnik/ korisnik ID`);-->
-        })
-
-    })
-
-
-
-
-
 
 
     // CIJENA, POPUSTI I OSTALO
