@@ -42,7 +42,7 @@ exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajP
 
 exports.dajProizvod = async (req, res, next) =>{
     const proizvod = await Proizvod.findById(req.params.id)
-         .populate({ path: 'korisnik', select: 'nickName zemlja', model: Korisnik })
+         .populate({ path: 'korisnik', select: '_id nickName zemlja ulica telefon grad postanskiBroj ime', model: Korisnik })
          .populate({ path: 'kategorija', select: 'naziv', model: Kategorija });
     if(!proizvod)
         res.status(500).json({success: false, bug: `exports.dajProizvod`})

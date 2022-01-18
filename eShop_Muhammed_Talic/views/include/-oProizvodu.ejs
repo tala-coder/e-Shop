@@ -1,4 +1,6 @@
 
+<!-- Button trigger modal -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <article class="card-body p-2" style="height: 50vh">
                     <h3 class="title mb-0"><%= proizvod.naziv %></h3>
@@ -36,7 +38,7 @@
                                 <dt>Količina: </dt>
                                 <dd>
 
-                                    <select class="form-select  form-control-sm" aria-label="Default select example"  style="width:auto;">
+                                    <select class="form-select  form-control-sm" aria-label="Default select example" id="kolicina"  style="width:auto;">
                                         <% for(var i = 1; i <= proizvod.kolicina; i++) {%>
                                         <option value=<%=i%>> <%= i %> </option>
                                         <% } %>
@@ -46,9 +48,9 @@
                         </div> <!-- col.// -->
                     </div> <!-- row.// -->
 
-                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4" id="dodajNarudzbu"
-                      <% if(user){ %>
-                       onclick="dodajNarudzbu('<%=userId%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4"
+                            <% if(user){ %>   id="button-addon3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+
                     <% } else{ %>
                        onclick="showAlert('Niste prijavljeni!')"
                         <% } %> >
@@ -56,7 +58,7 @@
                     </a>
                     <a href="#" class="btn btn-lg btn-outline-primary text-uppercase mb-4"
                        <% if(user){ %>
-                       onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                       onclick="dodaj_u_korpu('<%=userId%>','<%=proizvod._id%>',  '<%=proizvod.korisnik._id%>')"
                         <% } else{ %>
                         onclick="showAlert('Niste prijavljeni!')"
                        <% } %> >
@@ -64,22 +66,207 @@
                         <i class="fas fa-shopping-cart me-1"></i> dodaj u korpu </a>
                 </article> <!-- card-body.// -->
 
+<% if(user){ %>
+<!-- Modal -->
+<div class="modal   fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel"> <i class="fas fa-truck me-1"></i> Podaci za dostavu</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body p-4">
+                    <!--                    <form id="dodajNarudzbu" action="/TalaShop/narudzba"  method="post">-->
+                    <div class="d-flex flex-row align-items-center mb-1 pb-1">
+                        <div class="row ">
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="adresa1"
+                                            class="form-control form-control-lg"
+                                            placeholder="Adresa 1" value="<%=proizvod.korisnik.ulica%>" name="adresa1"
+                                    />
+                                    <label class="form-label" for="adresa1"> Adresa 1</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="telefon"
+                                            class="form-control form-control-lg"
+                                            placeholder="Telefon"  value="<%=proizvod.korisnik.telefon%> " name="telefon"
+                                    />
+                                    <label class="form-label" for="telefon"> Telefon </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="adresa2"
+                                            class="form-control form-control-lg"
+                                            placeholder="Adresa"  value="" name="adresa2"
+                                    />
+                                    <label class="form-label" for="adresa2"> Adresa 2  </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="grad"
+                                            class="form-control form-control-lg"
+                                            placeholder="Grad"  value="<%=proizvod.korisnik.grad%>" name="grad"
+                                    />
+                                    <label class="form-label" for="telefon"> Grad </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="postanskiBroj"
+                                            class="form-control form-control-lg"
+                                            placeholder="Poštanski broj"  value="<%=proizvod.korisnik.postanskiBroj%>" name="postanskiBroj"
+                                    />
+                                    <label class="form-label" for="postanskiBroj"> Poštanski broj </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control form-control-lg" id="zemlja"
+                                            placeholder="Zemlja"  value="<%=proizvod.korisnik.zemlja%>" name="zemlja"
+                                    />
+                                    <label class="form-label" for="zemlja"> Zemlja </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-outline">
+                                                    <textarea
+                                                            id="poruka"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Poruka za korisnika"  value=" " name="poruka"></textarea>
+                                    <label class="form-label" for="Poruka"> Poruka za korisnika </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-outline mb-4">
+                        <input
+                                id="formControlLgXsd"
+                                class="form-control form-control-lg"
+                                value="<%=proizvod.korisnik.ime%>" name="ime" placeholder="Ime i Prezime"
+                        />
+                        <label class="form-label" for="formControlLgXsd">  Ime i Prezime </label>
+                    </div>
+
+                    <div class="row  ">
+                        <div class="col-7">
+                            <div class="form-outline">
+                                <input
+                                        id="formControlLgXM1"
+                                        class="form-control form-control-lg"
+                                        placeholder="**** **** **** ****"
+                                />
+                                <label class="form-label" for="formControlLgXM1">Broj kartice</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-outline">
+                                <input
+                                        id="formControlLgExpk"
+                                        class="form-control form-control-lg"
+                                        placeholder="MM/YYYY"
+                                />
+                                <label class="form-label" for="formControlLgExpk">Expire</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline">
+                                <input
+                                        type="password"
+                                        id="formControlLgcvv"
+                                        class="form-control form-control-lg"
+                                        placeholder="Cvv"
+                                />
+                                <label class="form-label" for="formControlLgcvv">Cvv</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> zatvori </button>
+                        <button type="submit" value="Submit" class="btn btn-primary" id="dodajNarudzbu" data-bs-dismiss="modal"
+                                onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.korisnik._id%>')"
+                        > KOMPLETIRAJ NARUDŽBU </button>
+                    </div>
+                    <!--                    </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<% } %>
 
 <script>
     function showAlert(error) {
         alert(error)
     }
 
-    function dodajNarudzbu(korisnikId, proizvodId, kolicina ) {
-        console.log(korisnikId, '+', proizvodId);
+    function dodajNarudzbu(korisnikId, proizvodId, trgovacId ) {
+            let data = {};
+            data.korisnik = korisnikId;
+            data.trgovac = trgovacId;
+            data.proizvod = proizvodId;
+            data.adresa1 = $("#adresa1").val();
+            data.adresa2 = $("#adresa2").val() ;
+            data.grad = $("#grad").val() ;
+            data.postanskiBroj = $("#postanskiBroj").val() ;
+            data.zemlja = $("#zemlja").val() ;
+            data.telefon = $("#telefon").val() ;
+            data.poruka = $("#poruka").val() ;
+            data.kolicina = $("#kolicina :selected").val() || 1;
 
-        var data = {}
+            data.status   = 'Čeka se odobrenje trgovca';
+
+            console.log(data)
+            var request = {
+                "url" : `/TalaShop/narudzba`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify(data)
+            }
+            $.ajax(request).done(function(response){
+                alert("Uspješno ste kreirali narudžbu!");
+            })
+        }
+
+    function dodaj_u_korpu(korisnikId, proizvodId, trgovacId ) {
+            let data = {};
         data.korisnik = korisnikId;
+        data.trgovac = trgovacId;
         data.proizvod = proizvodId;
-        data.kolicina = kolicina;
+        data.adresa1 = $("#adresa1").val();
+        data.adresa2 = $("#adresa2").val() ;
+        data.grad = $("#grad").val() ;
+        data.postanskiBroj = $("#postanskiBroj").val() ;
+        data.zemlja = $("#zemlja").val() ;
+        data.telefon = $("#telefon").val() ;
+        data.poruka = $("#poruka").val() ;
+        data.kolicina = $("#kolicina :selected").val()  || 1;
+
+        data.status   = 'Narudžba je u korpi';
 
         console.log(data);
-
 
         var request = {
             // "url" : `/TalaShop/narudzba/korpa`,
@@ -94,4 +281,5 @@
             alert("Dodali ste artikl u korpu!");
         })
     }
+
 </script>
