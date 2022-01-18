@@ -9,7 +9,7 @@ router.get(`/korpa`, narudzba.dajKorpu, korisnik.dajTrenutnogKorisnika,  functio
     res.render('korpa',  { korpa: req.korpa , korisnik: req.korisnik , title: 'Korpa', popust: '-50%', dostava: '7'});
 })
 
-router.post('/korpa', narudzba.dodajuKorpu)
+router.post('/korpa', narudzba.postaviNarudzbu);
 
 
 
@@ -24,7 +24,7 @@ function(req, res) {
 */
 router.get(`/`, narudzba.dajNarudzbe)
 router.get(`/:id`, narudzba.dajNarudzbu)
-router.post('/', narudzba.postaviNarudzbu)
+router.post('/', narudzba.dodajNarudzbu)
 router.delete('/:id', narudzba.obrisiNarudzbu)
 router.put('/:id', narudzba.PromijeniStatusNarudzbe);
 

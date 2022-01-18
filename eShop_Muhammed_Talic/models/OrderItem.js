@@ -5,7 +5,7 @@ const orderItemSchema = mongoose.Schema({
     trgovac:  { type: mongoose.Schema.Types.ObjectId, ref: 'Korisnik' },
     kolicina: { type: Number, required: true , default: 1},
     proizvod: { type: mongoose.Schema.Types.ObjectId, ref: 'Proizvod' },
-    status:   { type: String,  default: 'u korpi'},
+    status:   { type: String,  default: 'Čeka se odobrenje trgovca'},
         adresa1: {
             type: String,
             // required: true,
@@ -26,6 +26,10 @@ const orderItemSchema = mongoose.Schema({
             // required: true,
         },
         telefon: {
+            type: String,
+            // required: true,
+        },
+        poruka: {
             type: String,
             // required: true,
         },

@@ -18,8 +18,8 @@ router.post(`/`, proizvod.uploadArray,  proizvod.dodajProizvod);       //redirec
 router.delete('/:id',proizvod.obrisiProizvod);  //redirect na profil page
 router.get(`/brojProizvoda`, proizvod.brojProizvoda);
 router.get(`/izdvojeniProizvodi/:broj?`, proizvod.dajIzdvojeneProizvode)
-router.get(`/:id`, proizvod.dajProizvod, korisnik.dajKorisnika,    function(req, res) {
-    res.render('proizvod', { proizvod: req.proizvod, korisnik: req.korisnik, moment: req.moment  })
+router.get(`/:id`, proizvod.dajProizvod,      function(req, res) {
+    res.render('proizvod', { proizvod: req.proizvod,   moment: req.moment  })
 });
 
 

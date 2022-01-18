@@ -99,7 +99,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
-    let picture = req.body.spol == 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
+    let picture = req.body.spol === 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
 
     let korisnik = new Korisnik({
          nickName: req.body.nickName,

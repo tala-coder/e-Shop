@@ -46,9 +46,9 @@
                         </div> <!-- col.// -->
                     </div> <!-- row.// -->
 
-                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4"
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase mb-4" id="dodajNarudzbu"
                       <% if(user){ %>
-                       onclick="dodajUkorpu('<%=userId%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                       onclick="dodajNarudzbu('<%=userId%>', '<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
                     <% } else{ %>
                        onclick="showAlert('Niste prijavljeni!')"
                         <% } %> >
@@ -56,7 +56,7 @@
                     </a>
                     <a href="#" class="btn btn-lg btn-outline-primary text-uppercase mb-4"
                        <% if(user){ %>
-                       onclick="dodajUkorpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+                       onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
                         <% } else{ %>
                         onclick="showAlert('Niste prijavljeni!')"
                        <% } %> >
@@ -65,13 +65,12 @@
                 </article> <!-- card-body.// -->
 
 
-
 <script>
     function showAlert(error) {
         alert(error)
     }
 
-    function dodajUkorpu(korisnikId, proizvodId, kolicina ) {
+    function dodajNarudzbu(korisnikId, proizvodId, kolicina ) {
         console.log(korisnikId, '+', proizvodId);
 
         var data = {}
@@ -83,7 +82,8 @@
 
 
         var request = {
-            "url" : `/TalaShop/narudzba/korpa`,
+            // "url" : `/TalaShop/narudzba/korpa`,
+            "url" : `/TalaShop/narudzba`,
             "method" : "POST",
             contentType : "application/json",
             processData : false,

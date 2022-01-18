@@ -1,4 +1,4 @@
-const  Narudzba   = require('../models/narudzba');
+// const  Narudzba   = require('../models/narudzba');
 // const  OrderItem   = require('../models/OrderItem');
 
 
@@ -31,12 +31,14 @@ exports.dajNarudzbu = async (req, res) =>{
 
 const  OrderItem   = require('../models/OrderItem');
 const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor
+
+// ovo je funkcija promijeni status 'Čeka se odobrenje trgovca', napraviti funkciju posalji
 exports.postaviNarudzbu = async (req,res, next)=>{
     const korpa = await OrderItem.find({korisnik: res.locals.userId})
 
      await Promise.all(korpa.map(async (orderItem) => {
          console.log(orderItem._id, 'ovdje')  // upit vraca mi id kupca od proizvoda
-          await OrderItem.findByIdAndUpdate(orderItem._id, {status: 'pending'}, {new: true});
+          await OrderItem.findByIdAndUpdate(orderItem._id, {status: 'Čeka se odobrenje trgovca'}, {new: true}); // req.body.status
      }))
 
     // next();
@@ -55,6 +57,31 @@ exports.postaviNarudzbu = async (req,res, next)=>{
     // if(!narudzba)
     //     return res.status(400).send('Narudzba nije kreirana!')
     // res.send(narudzba);
+}
+
+exports.dodajNarudzbu = async (req, res, next) => {
+    let korpa = new OrderItem({
+        korisnik: req.body.korisnik,
+        trgovac:  req.body.trgovac,
+        stanje:     req.body.stanje,
+        proizvod: req.body.proizvod,
+        kolicina: req.body.kolicina || 1,
+        adresa1: req.body.adresa1,
+        adresa2: req.body.adresa2,
+        poruka: req.body.poruka,
+        grad: req.body.grad,
+        postanskiBroj: req.body.postanskiBroj,
+        zemlja: req.body.zemlja,
+        telefon: req.body.telefon,
+        status: req.body.status || 'Narudžba je u korpi' // ceka se odobrenje ?
+    })
+     const { ime, ...others } = korpa._doc;
+    console.log(others,  'others');
+    korpa = await korpa.save();
+
+    if(!korpa)
+        return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajNarudzbu.`})
+    res.send(korpa);
 }
 
 exports.obrisiNarudzbu = (req, res)=>{
@@ -91,7 +118,7 @@ exports.PromijeniStatusNarudzbe = async (req, res)=> {
     KORPA
 */
 exports.dajKorpu = async (req, res, next) =>{
-    const korpa = await OrderItem.find({korisnik: res.locals.userId, status: 'u korpi'})
+    const korpa = await OrderItem.find({korisnik: res.locals.userId, status: 'Narudžba je u korpi'})
         .populate({path : 'proizvod', select: 'kolicina slika cijena opis', model: Proizvod} )
     if(!korpa)
         res.status(500).json({success: false});
@@ -99,24 +126,3 @@ exports.dajKorpu = async (req, res, next) =>{
     next();
 }
 
-exports.dodajuKorpu = async (req, res, next) => {
-    let korpa = new OrderItem({
-        korisnik: req.body.korisnik,
-        trgovac:  req.body.trgovac,
-        stanje:     req.body.stanje,
-        proizvod: req.body.proizvod,
-        kolicina: req.body.kolicina || 1,
-        adresa1: req.body.adresa1,
-        adresa2: req.body.adresa2,
-        grad: req.body.grad,
-        postanskiBroj: req.body.postanskiBroj,
-        zemlja: req.body.zemlja,
-        telefon: req.body.telefon,
-    })
-    console.log(korpa)
-
-    korpa = await korpa.save();
-    if(!korpa)
-        return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajuKorpu.`})
-    res.send(korpa);
-}
