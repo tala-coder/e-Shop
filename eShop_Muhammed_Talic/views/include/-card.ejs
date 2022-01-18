@@ -34,7 +34,7 @@
             <a href="#!"  class="btn btn-primary"  id="button-addon3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"  style="padding-left: 0.625em; padding-right: 0.625em"
 
                     <% if(user){ %>
-               onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+               onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.korisnik._id%>')"
 
             <% } else{ %>
                onclick="showAlert('Niste prijavljeni!')"
@@ -43,7 +43,7 @@
 
 
             <a href="#!" style="padding-left: 0.825em; padding-right: 0.825em" class="btn btn-danger mt-1 " id="korpa"
-            <% if(user){ %>          onclick="dodaj_u_korpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.kolicina%>')"
+            <% if(user){ %>          onclick="dodaj_u_korpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.korisnik._id%>')"
             <% } else{ %>            onclick="showAlert('Niste prijavljeni!')"
                     <% } %> >
                 <i class="fas fa-shopping-cart" ></i></a>
@@ -141,7 +141,7 @@
                                 <div class="form-outline">
                                     <input
                                             class="form-control form-control-lg"
-                                            placeholder="Zemlja"  value="<%=korisnik.zemlja%>" name="zemlja"
+                                            placeholder="Zemlja"  value="<%=korisnik.zemlja%>" name="zemlja" id="zemlja"
                                     />
                                     <label class="form-label" for="zemlja"> Zemlja </label>
                                 </div>
@@ -226,14 +226,22 @@
     function showAlert(error) {
         alert(error)
     }
-    const data = {};
 
-    function dodajNarudzbu(korisnikId, proizvodId, kolicina ) {
-        console.log(korisnikId, '+', proizvodId);
-            data.korisnik = korisnikId;
-            data.proizvod = proizvodId;
-            data.kolicina = kolicina;
-            data.status   = 'Čeka se odobrenje trgovca';
+    const data = {};
+    function dodajNarudzbu(korisnikId, proizvodId, trgovacId ) {
+        data.korisnik = korisnikId;
+        data.trgovac = trgovacId;
+        data.proizvod = proizvodId;
+        data.adresa1 = $("#adresa1").val();
+        data.adresa2 = $("#adresa2").val() ;
+        data.grad = $("#grad").val() ;
+        data.postanskiBroj = $("#postanskiBroj").val() ;
+        data.zemlja = $("#zemlja").val() ;
+        data.telefon = $("#telefon").val() ;
+        data.poruka = $("#poruka").val() ;
+        data.kolicina = $("#kolicina :selected").val() || 1;
+        data.status   = 'Čeka se odobrenje trgovca';
+
     }
 
     function posalji(){
@@ -249,13 +257,20 @@
         })
     }
 
-    function dodaj_u_korpu(korisnikId, proizvodId, kolicina ) {
-        console.log(korisnikId, '+', proizvodId);
-            var data = {}
-            data.korisnik = korisnikId;
-            data.proizvod = proizvodId;
-            data.kolicina = kolicina;
-            data.status   = 'Narudžba je u korpi';
+    function dodaj_u_korpu(korisnikId, proizvodId, trgovacId ) {
+        let data = {};
+        data.korisnik = korisnikId;
+        data.trgovac = trgovacId;
+        data.proizvod = proizvodId;
+        data.adresa1 = $("#adresa1").val();
+        data.adresa2 = $("#adresa2").val() ;
+        data.grad = $("#grad").val() ;
+        data.postanskiBroj = $("#postanskiBroj").val() ;
+        data.zemlja = $("#zemlja").val() ;
+        data.telefon = $("#telefon").val() ;
+        data.poruka = $("#poruka").val() ;
+        data.kolicina = $("#kolicina :selected").val()  || 1;
+        data.status   = 'Narudžba je u korpi';
 
             console.log(data);
 
