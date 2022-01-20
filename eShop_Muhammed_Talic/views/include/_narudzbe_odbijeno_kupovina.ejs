@@ -12,10 +12,6 @@
 </head>
 <body>
 <div>
-    <div id="toolbar">
-        <button id="button" class="btn btn-outline-danger">odobreno</button>
-        <button id="button1" class="btn btn-outline-success">odbijeno</button>
-    </div>
     <div>
         <table
                 id="table"
@@ -25,20 +21,20 @@
         >
             <thead>
             <tr>
-                <th data-field="state" data-checkbox="true"></th>
+                <th  >Br.</th>
                 <th data-field="id">ID narudžbe</th>
                 <th data-field="name">Naziv proizvoda</th>
                 <th data-field="price">Cijena</th>
             </tr>
             </thead>
             <tbody>
-            <% for(var i=0; i<korpa.length; i++) {%>
+            <% for(var i=0; i<odbijeno_kupac.length; i++) {%>
                 <tr>
-                    <th scope="row" class="id"> 1 </th>
-                    <td class="id"> <%=korpa[i]._id%>  </td>
-                    <td class="id"> <%=korpa[i].proizvod.naziv%> </td>
-<!--                    <td class="id"> <%=korpa[i].proizvod.cijena%> </td>-->
-                    <td class="id"> <%= (korpa[i].proizvod.cijena * korpa[i].proizvod.kolicina)  %> </td>
+                    <th scope="row" class="id"> <%=i+1%> </th>
+                    <td class="id"> <%=odbijeno_kupac[i]._id%>  </td>
+                    <td class="id"> <%=odbijeno_kupac[i].proizvod.naziv%> </td>
+<!--                    <td class="id"> <%=odbijeno_kupac[i].proizvod.cijena%> </td>-->
+                    <td class="id"> <%= (odbijeno_kupac[i].proizvod.cijena * odbijeno_kupac[i].proizvod.kolicina)  %> </td>
                 </tr>
             <% } %>
 
@@ -54,34 +50,6 @@
 <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
 <script>
-    var $table = $('#table');
-    var $button = $('#button')
-    var $button1 = $('#button1')
-
-    $(function() {
-        $button.click(function () {
-            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-                return row.id
-            })
-            $table.bootstrapTable('remove', {
-                field: 'id',
-                values: ids
-            })
-            console.log(ids)
-        })
-
-
-        $button1.click(function () {
-            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-                console.log(row)
-                return row.id
-            })
-            $table.bootstrapTable('remove', {
-                field: 'id',
-                values: ids
-            })
-        })
-    })
 </script>
 </body>
 </html>

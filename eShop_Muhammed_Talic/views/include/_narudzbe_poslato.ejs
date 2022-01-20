@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <title> <%=title%> </title>
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+</head>
+<body>
+
+<div>
+    <div id="toolbar">
+        <button id="button" class="btn btn-outline-success"> odobreno </button>
+        <button id="button1" class="btn btn-outline-danger"> odbijeno </button>
+    </div>
+    <div>
+        <table
+                id="table"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-height="428"
+        >
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="id">ID narudžbe</th>
+                <th data-field="name">Naziv proizvoda</th>
+                <th data-field="price">Cijena</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var i=0; i<poslato.length; i++) {%>
+                <tr>
+                    <th scope="row" class="id"> 1 </th>
+                    <td class="id"> <%=poslato[i]._id%>  </td>
+                    <td class="id"> <%=poslato[i].proizvod.naziv%> </td>
+                    <td class="id"> <%=poslato[i].proizvod.cijena%> </td>
+<!--                    <td class="id"> <%= (poslato[i].proizvod.cijena * poslato[i].proizvod.kolicina)  %> </td>-->
+                </tr>
+            <% } %>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script>
+    var $table = $('#table');
+    var $button = $('#button')
+    var $button1 = $('#button1')
+
+    $(function() {
+        $button.click(function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id
+            })
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            })
+            var request = {
+                "url" : `/TalaShop/narudzba/korpa?status=Odobreno`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify(ids)
+            }
+            $.ajax(request).done(function(response){
+            })
+        })
+
+
+        $button1.click(function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                console.log(row)
+                return row.id
+            })
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            })
+            var request = {
+                "url" : `/TalaShop/narudzba/korpa?status=Odbijeno`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify(ids)
+            }
+            $.ajax(request).done(function(response){
+            })
+        })
+    })
+</script>
+</body>
+</html>

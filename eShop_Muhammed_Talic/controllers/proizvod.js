@@ -55,10 +55,10 @@ exports.dajProizvod = async (req, res, next) =>{
 exports.urediProizvod =  asyncHandler(  async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id))
         return res.status(400).json({message: `ID proizvoda ne postoji`})
-    console.log("ovdje smo")
-    console.log(req.body);
-    console.log(req.params);
-    console.log(req.protocol);
+    // console.log("ovdje smo")
+    // console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.protocol);
     let slike = [];
     const putanja = `${req.protocol}://${req.get('host')}/public/images/`;
 
