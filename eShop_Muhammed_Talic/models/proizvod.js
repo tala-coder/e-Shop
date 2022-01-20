@@ -53,8 +53,8 @@ const proizvodSchema = mongoose.Schema({
         default: ''
     },
     cijena : {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
     },
     boja : {
         type: String,
