@@ -211,10 +211,10 @@
 
                                 <div class="collapse " id="trgovac1">
                                     <label class="pb-1">Kategorije usluga:</label> <br>
-                                    <% for(var i=0; i<kategorija.length; i++) {%>
+                                    <% for(var k=0; k<kategorija.length; k++) {%>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="kategorijeUsluga" id="<%=kategorija[i]._id %>+t"     value="<%=kategorija[i]._id %>" >
-                                        <label class="form-check-label" for="<%=kategorija[i]._id %>+t"><%= kategorija[i].naziv %></label>
+                                        <input class="form-check-input" type="checkbox" name="kategorijeUsluga" id="<%=kategorija[k]._id %>+t"     value="<%=kategorija[k]._id %>" >
+                                        <label class="form-check-label" for="<%=kategorija[k]._id %>+t"><%= kategorija[k].naziv %></label>
                                     </div>
                                     <% } %>
                                 </div>

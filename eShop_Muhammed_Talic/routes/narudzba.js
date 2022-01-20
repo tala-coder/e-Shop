@@ -5,11 +5,20 @@ const router = express.Router();
 
 
 /*  KORPA   */
-router.get(`/korpa`, narudzba.dajKorpu, korisnik.dajTrenutnogKorisnika,  function(req, res) {
+router.get(`/korpa`, narudzba.dajNarudzbe, korisnik.dajTrenutnogKorisnika,  function(req, res) {
     res.render('korpa',  { korpa: req.korpa , korisnik: req.korisnik , title: 'Korpa', popust: '-50%', dostava: '7'});
 })
+/*  NARUDZBE  */
+router.get(`/`, narudzba.dajNarudzbe, korisnik.dajTrenutnogKorisnika,  function(req, res) {
+let title = req.query.status;
+    res.render('narudzba',  { poslato: req.poslano, odobreno: req.odobreno, odbijeno: req.odbijeno,
+        poslato_kupac: req.poslano_kupac, odobreno_kupac: req.odobreno_kupac, odbijeno_kupac: req.odbijeno_kupac,
+        korisnik: req.korisnik , title: title  || '' });
+})
 
-router.post('/korpa', narudzba.postaviNarudzbu);
+
+router.post('/korpa', narudzba.PromijeniStatusNarudzbe);
+
 
 
 
@@ -22,8 +31,8 @@ function(req, res) {
     res.render('narudzba',  { narudzba: req.narudzbe , title: 'Narudžbe'});
 })
 */
-router.get(`/`, narudzba.dajNarudzbe)
-router.get(`/:id`, narudzba.dajNarudzbu)
+// router.get(`/`, narudzba.dajNarudzbe)
+// router.get(`/:id`, narudzba.dajNarudzbu)
 router.post('/', narudzba.dodajNarudzbu)
 router.delete('/:id', narudzba.obrisiNarudzbu)
 router.put('/:id', narudzba.PromijeniStatusNarudzbe);

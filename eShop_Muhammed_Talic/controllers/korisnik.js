@@ -74,7 +74,6 @@ exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
     const korisnik = await Korisnik.findById(req.params.id).select('-passwordHash');
     // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
     // const { ime, ...others } = korisnik._doc;
-    // console.log(others
 
     if(!korisnik)
         res.status(500).json({message: `Korisnik sa ID-om ${req.params.id} ne postoji!.`, bug: `exports.dajKorisnika`});
@@ -115,8 +114,8 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
         slika: picture,
          ulica : req.body.ulica,
          postanskiBroj : req.body.postanskiBroj,
-         interesi: req.body.interesi,
-        trgovina : {
+         interesi: req.body.interesi || null,
+        trgovina :(  {
             nazivFirme  : req.body.nazivFirme,
             telefonFirme  : req.body.telefonFirme,
             mailFirme: req.body.mailFirme,
@@ -124,7 +123,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
             gradFirme: req.body.gradFirme,
             adresePoslovnica: req.body.adresePoslovnica,
             kategorijeUsluga: req.body.kategorijeUsluga
-        }
+        } )  || null,
 
     })
     korisnik = await korisnik.save();

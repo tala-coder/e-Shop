@@ -126,6 +126,7 @@ const korisnikSchema = new mongoose.Schema({
     interesi: [{ // bez referenci uradit
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Kategorija",
+        default : null
             }],
 
 
