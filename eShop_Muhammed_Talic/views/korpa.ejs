@@ -38,7 +38,7 @@
 
             <div class=" col-lg-9 border-left">
                 <div class="card table-responsive">
-                    <table class="table   table-hover   text-center" >
+                    <table class="table   table-hover   text-center" id="myTable">
                         <thead class="  bg-dark bg-gradient text-white">
                         <tr>
                             <th scope="col">Slika proizvoda</th>
@@ -76,8 +76,9 @@
                                     </div> </td>
 
                                 <td class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm px-3 text-ceter" >
-                                        <i class="fas fa-times"></i>
+                                    <button type="button" class="btn btn-danger btn-sm px-3 text-ceter" id="button1" value="Delete"  onclick="deleteRow(this, '<%=korpa[i]._id%>')" >
+                                        <i class="fas fa-times"  ></i>
+<!--                                        <input type="button" class="deleteDep" value="Delete"/>                                         -->
                                     </button>
                                 </td>
                             </tr>
@@ -298,6 +299,27 @@
 <script>
 
 
+        function deleteRow(r, id) {
+
+            let text = "Proizvod će biti uklonjen iz korpe.";
+            if (confirm(text) === true) {
+                var i = r.parentNode.parentNode.rowIndex;
+                document.getElementById("myTable").deleteRow(i);
+                console.log(id)
+                var request = {
+                    "url" : `/TalaShop/narudzba/korpa?status=Obrisano`,
+                    "method" : "POST",
+                    contentType : "application/json",
+                    processData : false,
+                    data : JSON.stringify([id] )
+                }
+                $.ajax(request).done(function(response){
+                    location.reload();
+                })
+            }
+        }
+
+
     // CIJENA, POPUSTI I OSTALO
     var ukupnoZaPlatit = 0.0;
     $('.price').each(function()
@@ -327,7 +349,7 @@
         $('#ukupnoZaPlatit').text(ciejnaSaPopustom + " KM");
     }
 
-    //MODAL
+    MODAL
     var myModal = document.getElementById('myModal')
     var myInput = document.getElementById('myInput')
 

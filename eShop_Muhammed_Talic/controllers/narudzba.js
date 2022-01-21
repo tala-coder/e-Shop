@@ -94,7 +94,7 @@ exports.dodajNarudzbu = async (req, res, next) => {
     })
     korpa = await korpa.save();
 
-    console.log( trgovac, korisnik, 'trgovac i kupac, ovdje satao, bug isti ID mi spasi')
+
     if(!korpa)
         return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajNarudzbu.`})
     res.send(korpa);
