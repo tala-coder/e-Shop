@@ -80,7 +80,7 @@
                             aria-expanded="true"
                             aria-controls="collapseExample1"
                     >
-                        <i class="fas fa-tachometer-alt fa-fw me-3"></i
+                        <i class="fas fa-cart-arrow-down fa-fw me-3"></i
                         ><span>Trgovina</span>
                     </a>
                     <!-- Collapsed content -->
@@ -109,14 +109,14 @@
                             aria-expanded="true"
                             aria-controls="collapseExample2"
                     >
-                        <i class="fas fa-chart-area fa-fw me-3"></i
-                        ><span>Kupovina</span>
+                        <i class="fas fa-cart-plus fa-fw me-3"></i
+                         ><span>Moje narudžbe</span>
                     </a>
                     <!-- Collapsed content -->
                     <ul
                             href="/TalaShop/narudzba/korpa"
                             id="collapseExample2"
-                            class="collapse list-group list-group-flush"
+                            class="list-group list-group-flush collapse show"
                     >
                         <li class="list-group-item py-1">
                             <a href="/TalaShop/narudzba?status=Poslato_kupovina"  class="text-reset"> Nove narudžbe </a>
@@ -138,8 +138,8 @@
                             aria-expanded="true"
                             aria-controls="collapseExample3"
                     >
-                        <i class="fas fa-chart-area fa-fw me-3"></i
-                        ><span>Statistika</span>
+                        <i class="fas fa-poll-h  fa-fw me-3"></i
+                         ><span>Statistika</span>
                     </a>
                     <!-- Collapsed content -->
                     <ul
@@ -163,28 +163,35 @@
     <!--Main layout-->
     <main>
         <div class="container p-0">
+
             <% switch (title) {
             case 'Odobreno' : %>
+            <h1 class="display-5 text-center">  Lista odobrenih narudžbi </h1>
             <%- include('include/_narudzbe_odobreno.ejs') %>
                     <% break;
 
             case 'Odbijeno' : %>
+            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>
             <%- include('include/_narudzbe_odbijeno.ejs') %>
                     <% break;
 
             case 'Odbijeno_kupovina' : %>
+            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>
             <%- include('include/_narudzbe_odbijeno_kupovina.ejs') %>
                     <% break;
 
             case 'Odobreno_kupovina' : %>
+            <h1 class="display-5 text-center">  Lista odobrenih narudžbi </h1>
             <%- include('include/_narudzbe_odobreno_kupovina.ejs') %>
                     <% break;
 
             case 'Poslato_kupovina' : %>
+            <h1 class="display-5 text-center">  Lista poslatih narudžbi </h1>
             <%- include('include/_narudzbe_poslato_kupovina.ejs') %>
                     <% break;
 
             default : %>
+            <h1 class="display-5 text-center">  Lista primljenih narudžbi </h1>
             <%- include('include/_narudzbe_poslato.ejs') %>
                     <% ;
 

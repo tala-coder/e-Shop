@@ -58,7 +58,8 @@ exports.PromijeniStatusNarudzbe = async (req,res, next)=>{
 
 
     // next();
-    res.sendStatus(200);
+    // res.sendStatus(200);
+    res.redirect('/TalaShop/narudzba/korpa');
     // let narudzba = new Narudzba({
     //     adresa1: req.body.adresa1,
     //     adresa2: req.body.adresa2,
