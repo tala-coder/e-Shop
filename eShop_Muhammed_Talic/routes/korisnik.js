@@ -5,6 +5,18 @@ const proizvod = require("../controllers/proizvod");
 const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
 
+
+/*      HEAD ADMIN      */
+router.get(`/headadmin`,  korisnik.dajKorisnike,
+    function (req, res){
+    let title = req.query;
+        res.render('HEADadmin', { korisnici: req.korisnici, title:  title || '',  moment: req.moment });
+    });
+
+
+
+
+
 router.get(`/register`, kategorija.dajKategorije,   function(req, res) {
         res.render('register', { kategorija: req.kategorije , title: 'Registracija'});
 })

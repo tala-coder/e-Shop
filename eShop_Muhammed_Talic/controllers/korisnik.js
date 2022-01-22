@@ -18,7 +18,8 @@ exports.dajKorisnike = async (req, res, next) =>{
     if(!korisnici) {
         res.status(500).json({success: false})
     }
-    res.send(korisnici);
+    // res.send(korisnici);
+    req.korisnici = korisnici;
     next();
 }
 

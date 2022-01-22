@@ -23,7 +23,7 @@ function authJwt() {
 }
 // revoke token if user no longer exists
 async function isRevoked(req, payload, done) {
-    if(!payload.jelAdmin) {
+    if(!payload.arhiviran) {
         done(null, true)
     }
     done();

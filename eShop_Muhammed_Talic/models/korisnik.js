@@ -106,6 +106,10 @@ const korisnikSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    status: {
+        type: String,
+        default: 'aktivan'
+    },
     ulica: {
         type: String,
         default: ''
