@@ -17,12 +17,12 @@
                 id="myTable"
                 data-toggle="table"
                 data-toolbar="#toolbar"
-                data-height="428"
+                data-height="608"
         >
             <thead>
             <tr>
                 <th class="h6" >Br.</th>
-                <th data-field="name" class="h5">Kategorija</th>
+                <th data-field="name" class="h5">Ime i prezime</th>
                 <th data-field="mail" class="h5">Mail</th>
                 <th data-field="mess" class="h5"> Poruka </th>
                 <th data-field="status" class="h5"> Status </th>
@@ -56,10 +56,28 @@
 
 
                     </td>
-                    <td class="id"> <button class="btn btn-outline-dark" id="button1" value="blokiraj"  onclick="blokiraj(this, <%=korisnici[i]._id%>)"
+                    <td class="id">
+                        <% switch (korisnici[i].status) {
+                        case 'aktivan' : %>
+                        <button class="btn btn-outline-dark" id="button1" value="blokiraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'blokiraj' )"
                         > Blokiraj </button>
-                        <button class="btn btn-outline-dark" id="button1" value="arhiviraj"  onclick="arhiviraj(this, <%=korisnici[i]._id%>)"
+                        <button class="btn btn-outline-dark" id="button2" value="arhiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'arhiviraj')"
                         > Arhiviraj </button>
+                        <% break;
+
+                        case 'blokiran' : %>
+                        <button class="btn btn-outline-dark" id="button3" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktiviraj')"
+                        > Aktiviraj </button>
+                        <% break;
+
+                        case 'arhiviran' : %>
+                        <button class="btn btn-outline-dark" id="button4" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktiviraj')"
+                        > Aktiviraj </button>
+                        <% break;
+
+                        } %>
+
+
                     </td>
                 </tr>
             <% } %>
@@ -76,42 +94,20 @@
 <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
 <script>
-    function blokiraj(r, id) {
-
-        // let text = "Potvrdite još jednom.";
-        // if (confirm(text) === true) {
-
-            console.log(id)
-            // var request = {
-            //     "url" : `/TalaShop/narudzba/korpa?status=Obrisano`,
-            //     "method" : "POST",
-            //     contentType : "application/json",
-            //     processData : false,
-            //     data : JSON.stringify([id] )
-            // }
-            // $.ajax(request).done(function(response){
-            //     location.reload();
-            // })
-        // }
+    function promeniStatus(r, id, status) {
+            console.log(id, status)
+            var request = {
+                "url" : `/TalaShop/korisnik/headadmin/korpa?status=Obrisano`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify([id] )
+            }
+            $.ajax(request).done(function(response){
+                location.reload();
+            })
     }
-    function arhiviraj(r, id) {
 
-        // let text = "Potvrdite još jednom.";
-        // if (confirm(text) === true) {
-
-            console.log(id)
-            // var request = {
-            //     "url" : `/TalaShop/narudzba/korpa?status=Obrisano`,
-            //     "method" : "POST",
-            //     contentType : "application/json",
-            //     processData : false,
-            //     data : JSON.stringify([id] )
-            // }
-            // $.ajax(request).done(function(response){
-            //     location.reload();
-            // })
-        // }
-    }
     function sendmess(r, id) {
 
         // let text = "Potvrdite još jednom.";

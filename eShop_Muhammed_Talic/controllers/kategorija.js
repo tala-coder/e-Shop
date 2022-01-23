@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 
 exports.dajKategorije = asyncHandler(async (req, res, next) =>{
-    const kategorije = await Kategorija.find();
+    const kategorije = await Kategorija.find().sort({ createdAt: 'desc'});
     if(!kategorije) {
         res.status(500).json({success: false, bug: `exports.dajKategorije`});
     }
@@ -19,11 +19,9 @@ exports.dajKategoriju = async(req,res)=>{
     res.status(200).send(kategorija);
 }
 
-exports.postaviKategoriju = async (req,res)=>{
+exports.postaviKategoriju = async (req,res, next) => {
     let kategorija = new Kategorija({
-        naziv: req.body.naziv,
-        ikona: req.body.ikona,
-        boja: req.body.boja
+        naziv: req.body.naziv
     })
     kategorija = await kategorija.save();
     if(!kategorija)

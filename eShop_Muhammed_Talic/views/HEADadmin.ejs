@@ -96,7 +96,7 @@
                         </li>
 
                         <li class="list-group-item py-1">
-                        <a href="/TalaShop/korisnik/headadmin?status=Lista korisnika"  class="text-reset"> Statistika </a>
+                        <a href="/TalaShop/korisnik/headadmin?status=Statistika korisnika"  class="text-reset"> Statistika </a>
                         </li>
 
                     </ul>
@@ -124,7 +124,7 @@
                             <a href="/TalaShop/korisnik/headadmin?status=Lista kategorija"  class="text-reset"> Lista kategorija  </a>
                         </li>
                         <li class="list-group-item py-1">
-                            <a href="/TalaShop/korisnik/headadmin?status=Statistika_kategorija"  class="text-reset"> Statistika </a>
+                            <a href="/TalaShop/korisnik/headadmin?status=Statistika kategorija"  class="text-reset"> Statistika </a>
                         </li>
 
                     </ul>
@@ -148,10 +148,10 @@
                             class="collapse list-group list-group-flush"
                     >
                         <li class="list-group-item py-1">
-                            <a href="/TalaShop/korisnik/headadmin?status=prodaja"  class="text-reset"> Prodaja  </a>
+                            <a href="/TalaShop/korisnik/headadmin?status=Statistika1"  class="text-reset"> Prodaja  </a>
                         </li>
                         <li class="list-group-item py-1">
-                            <a href="/TalaShop/korisnik/headadmin?status=kupovina"  class="text-reset"> Kupovina  </a>
+                            <a href="/TalaShop/korisnik/headadmin?status=Statistika2"  class="text-reset"> Kupovina  </a>
                         </li>
                     </ul>
                     <!-- Collapse 2 -->
@@ -162,40 +162,37 @@
     </header>
     <!--Main layout-->
     <main>
-        <div class="container p-0">
+        <div class="container p-0 ">
 
-            <% switch (title) {
-            case 'prodaja' : %>
-            <h1 class="display-5 text-center">  Lista registrovanih korisnika </h1>
-            <%- include('include/_lista_registrovanih_korisnika.ejs') %>
+            <% switch (title.status) {
+            case 'Lista korisnika' : %>
+<!--            <h1 class="display-5 text-center">  Lista registrovanih korisnika </h1>-->
+            <%- include('head_admin/_lista_registrovanih_korisnika.ejs') %>
                     <% break;
 
-            case 'kupovina' : %>
-            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>
-            aaa
+            case 'Statistika korisnika' : %>
+<!--            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>-->
             <%- include('include/_narudzbe_odbijeno.ejs') %>
                     <% break;
 
-            case 'Statistika_kategorija' : %>
-            <h1 class="display-5 text-center">  Statistika kategorija</h1>
-            bbb
+            case 'Lista kategorija' : %>
+<!--            <h1 class="display-5 text-center h3">  Lista kategorija </h1> -->
+            <%- include('head_admin/_lista_kategorija.ejs') %>
+            <% break;
+
+            case 'Statistika kategorija' : %>
+<!--            <h1 class="display-5 text-center">  Statistika kategorija</h1> -->
             <%- include('include/lista_kategorija.ejs') %>
                     <% break;
 
-            case 'Lista kategorija' : %>
-            <h1 class="display-5 text-center h3">  Lista kategorija </h1>
-            ccc
-            <%- include('include/_lista_kategorija.ejs') %>
-                    <% break;
-
             case 'Statistika korisnici' : %>
-            <h1 class="display-5 text-center">  Lista poslatih narudžbi </h1>
+<!--            <h1 class="display-5 text-center">  Lista poslatih narudžbi </h1>-->
             <%- include('include/_narudzbe_poslato_kupovina.ejs') %>
                     <% break;
 
             default : %>
 <!--            <h1 class="display-4 text-center  " style="background-color:#bcc0cb">  Lista registrovanih korisnika </h1>-->
-            <%- include('include/_lista_registrovanih_korisnika.ejs') %>
+            <%- include('head_admin/_lista_registrovanih_korisnika.ejs') %>
                      <% ;
 
             } %>
