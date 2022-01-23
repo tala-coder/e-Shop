@@ -23,6 +23,32 @@ exports.dajKorisnike = async (req, res, next) =>{
     next();
 }
 
+exports.statistika = asyncHandler(async (req, res, next) =>{
+    const status = await Korisnik.aggregate([
+        {$group : {_id:"$status", count:{$sum:1}}}
+    ]);
+    if(!status) {
+        res.status(500).json({success: false})
+    }
+
+    const zemlja = await Korisnik.aggregate([
+        {$group : {_id:"$zemlja", count:{$sum:1}}}
+    ]);
+    if(!zemlja)
+        res.status(500).json({success: false})
+    req.status = status;
+
+
+    const spol = await Korisnik.aggregate([
+        {$group : {_id:"$spol", count:{$sum:1}}}
+    ]);
+    if(!spol) {
+        res.status(500).json({success: false})
+    }
+    req.spol = spol;
+    next();
+})
+
 
 exports.urediKorisnika =  asyncHandler( async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id))
