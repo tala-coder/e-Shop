@@ -59,19 +59,19 @@
                     <td class="id">
                         <% switch (korisnici[i].status) {
                         case 'aktivan' : %>
-                        <button class="btn btn-outline-dark" id="button1" value="blokiraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'blokiraj' )"
+                        <button class="btn btn-outline-dark" id="button1" value="blokiraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'blokiran' )"
                         > Blokiraj </button>
-                        <button class="btn btn-outline-dark" id="button2" value="arhiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'arhiviraj')"
+                        <button class="btn btn-outline-dark" id="button2" value="arhiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'arhiviran')"
                         > Arhiviraj </button>
                         <% break;
 
                         case 'blokiran' : %>
-                        <button class="btn btn-outline-dark" id="button3" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktiviraj')"
+                        <button class="btn btn-outline-dark" id="button3" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktivan')"
                         > Aktiviraj </button>
                         <% break;
 
                         case 'arhiviran' : %>
-                        <button class="btn btn-outline-dark" id="button4" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktiviraj')"
+                        <button class="btn btn-outline-dark" id="button4" value="aktiviraj"  onclick="promeniStatus(this, '<%=korisnici[i]._id%>', 'aktivan')"
                         > Aktiviraj </button>
                         <% break;
 
@@ -96,12 +96,12 @@
 <script>
     function promeniStatus(r, id, status) {
             console.log(id, status)
+            let data = {};
+            data.status = status;
             var request = {
-                "url" : `/TalaShop/korisnik/headadmin/korpa?status=Obrisano`,
-                "method" : "POST",
-                contentType : "application/json",
-                processData : false,
-                data : JSON.stringify([id] )
+                "url" : `/TalaShop/korisnik/headadmin/${id}`,
+                "method" : "PUT",
+                data : data
             }
             $.ajax(request).done(function(response){
                 location.reload();

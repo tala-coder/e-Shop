@@ -7,12 +7,15 @@ const kategorija = require("../controllers/kategorija");
 
 
 /*      HEAD ADMIN      */
-router.get(`/headadmin`,  korisnik.dajKorisnike,
+router.get(`/headadmin`,  korisnik.dajKorisnike, kategorija.dajKategorije,
     function (req, res){
     let title = req.query;
-        res.render('HEADadmin', { korisnici: req.korisnici, title:  title || '',  moment: req.moment });
+        res.render('HEADadmin', { korisnici: req.korisnici, kategorije: req.kategorije, title:  title || '',
+
+            moment: req.moment });
     });
 
+router.put('/headadmin/:id', korisnik.promeniStatus);
 
 
 

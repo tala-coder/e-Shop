@@ -159,11 +159,6 @@ exports.logujSe = async (req, res) => {
     else
         res.status(400).json({message: `Pogresan password!`, bug: `exports.logujSe`});
 }
-/*
-return res.cookie("acces_token", token {
-    httpOnly: true,
-        secure: secret,
-})*/
 
 exports.obrisiKorisnika = async (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id))
@@ -182,3 +177,17 @@ exports.brojKorisnika = async (req, res) => {
         res.status(500).json({success: false})
     res.send({brojKorisnika: brojKorisnika});
 }*/
+
+
+exports.promeniStatus = async (req, res)=> {
+    console.log(req.body.status, req.params.id);
+    const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
+        {
+            status: req.body.status
+        },
+        { new: true}
+    )
+    if(!korisnik)
+        return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
+    res.send(korisnik);
+}
