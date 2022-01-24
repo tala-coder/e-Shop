@@ -5,16 +5,13 @@ var io = null;
 
 router.get('/',
     function(req, res) {
-    let count = 0;
     if (!io){
         io = require('socket.io')(req.connection.server);
-
         io.sockets.on('connection', (socket) => {
-            socket.emit('countUpdated', count) // if io.emit ako dode novi korisnik, svakom ce se prikazati
+            socket.emit('poruka', ' Dobro dosli na chat talashop');
 
-            socket.on('increment', () => {
-                count++
-                io.emit('countUpdated', count)
+            socket.on('posaljiPoruku', (msg) => {
+                io.emit('poruka', msg)
             })
         })
     }
@@ -23,3 +20,17 @@ router.get('/',
 
 
 module.exports = router;
+
+
+
+// 5.tut
+/*
+io.sockets.on('connection', (socket) => {
+            socket.emit('countUpdated', count) // if io.emit ako dode novi korisnik, svakom ce se prikazati
+
+            socket.on('increment', () => {
+                count++
+                io.emit('countUpdated', count)
+            })
+        })
+*/

@@ -7,13 +7,32 @@
   </head>
   <body>
     <h1> </h1>
-    <p>Welcome to test</p>
-  <button id="increment"> +1 </button>
+    Chat App
+
+    <form id="message-form">
+      <input name="message" placeholder="Message">
+      <button>Send</button>
+    </form>
+
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    const socket = io();
 
-    const socket = io()
+    socket.on('poruka', (mess) =>{
+      console.log(mess)
+    })
+
+
+    document.querySelector('#message-form').addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      const message = e.target.elements.message.value
+
+      socket.emit('posaljiPoruku', message)
+    })
+
+
 
 
   </script>
@@ -21,5 +40,16 @@
 
 
 <!--
+// tut 5.ejs
+<button id="increment"> +1 </button>
+
+    socket.on('countUpdated', (count) => {
+      console.log('The count has been updated!', count)
+    })
+
+    document.querySelector('#increment').addEventListener('click', () => {
+      console.log('Clicked')
+      socket.emit('increment')
+    })
 
 -->
