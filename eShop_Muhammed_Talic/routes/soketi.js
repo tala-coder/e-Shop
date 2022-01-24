@@ -9,9 +9,14 @@ router.get('/',
         io = require('socket.io')(req.connection.server);
         io.sockets.on('connection', (socket) => {
             socket.emit('poruka', ' Dobro dosli na chat talashop');
+            socket.broadcast.emit('poruka', 'Chatu se pridruzila nova osoba');
 
-            socket.on('posaljiPoruku', (msg) => {
-                io.emit('poruka', msg)
+            // socket.on('posaljiPoruku', (msg) => {
+            //     io.emit('poruka', msg)
+            // })
+
+            socket.on('disconnect', () => {
+                io.emit('poruka', 'korisnik je napustio chat')
             })
         })
     }
@@ -33,4 +38,12 @@ io.sockets.on('connection', (socket) => {
                 io.emit('countUpdated', count)
             })
         })
+*/
+
+/*
+socket.emit('poruka', ' Dobro dosli na chat talashop');
+
+            socket.on('posaljiPoruku', (msg) => {
+                io.emit('poruka', msg)
+            })
 */

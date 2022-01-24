@@ -9,11 +9,6 @@
     <h1> </h1>
     Chat App
 
-    <form id="message-form">
-      <input name="message" placeholder="Message">
-      <button>Send</button>
-    </form>
-
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -22,18 +17,6 @@
     socket.on('poruka', (mess) =>{
       console.log(mess)
     })
-
-
-    document.querySelector('#message-form').addEventListener('submit', (e) => {
-      e.preventDefault()
-
-      const message = e.target.elements.message.value
-
-      socket.emit('posaljiPoruku', message)
-    })
-
-
-
 
   </script>
 </html>
@@ -52,4 +35,25 @@
       socket.emit('increment')
     })
 
+-->
+
+<!--
+// tut 5.ejs
+<form id="message-form">
+      <input name="message" placeholder="Message">
+      <button>Send</button>
+    </form>
+
+socket.on('poruka', (mess) =>{
+      console.log(mess)
+    })
+
+
+    document.querySelector('#message-form').addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      const message = e.target.elements.message.value
+
+      socket.emit('posaljiPoruku', message)
+    })
 -->
