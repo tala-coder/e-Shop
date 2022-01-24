@@ -20,7 +20,12 @@
 
     <script id="message-template" type="text/html">
       <div>
-        <p>{{mess}}</p>
+        <p> {{createAt}} - {{mess}} </p>
+      </div>
+    </script>
+    <script id="location-message-template" type="text/html">
+      <div>
+        <p><a href="{{url}}" target="_blank">Trenutna adresa</a></p>
       </div>
     </script>
 
@@ -39,7 +44,8 @@
     socket.on('poruka', (mess) => {
       console.log(mess)
       const html = Mustache.render(messageTemplate, {
-        mess
+        mess: mess.text,
+        createAt: moment(mess.createdAt).format('h:mm a')
       })
       $messages.insertAdjacentHTML('beforeend', html)
     })
@@ -49,6 +55,32 @@
       e.preventDefault()
       const message = e.target.elements.message.value
       socket.emit('posaljiPoruku', message)
+    })
+
+
+    const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
+    socket.on('locationMessage', (url) => {
+      console.log(url)
+      const html = Mustache.render(locationMessageTemplate, {
+        url
+      })
+      $messages.insertAdjacentHTML('beforeend', html)
+    })
+
+    const $sendLocationButton = document.querySelector('#send-location')
+    $sendLocationButton.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        return alert('Geolocation is not supported by your browser.')
+      }
+
+      // $sendLocationButton.setAttribute('disabled', 'disabled')
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        socket.emit('sendLocation', {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }, )
+      })
     })
 
 
