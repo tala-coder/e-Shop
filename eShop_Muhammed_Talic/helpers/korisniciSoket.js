@@ -1,14 +1,4 @@
-const generateMessage = (text) => {
-    return {
-        text,
-        createdAt: new Date().getTime()
-    }
-}
-
-
-
-/*  KORISNICI, ROOMS    */
-const users = []
+/*const users = []
 
 const dodajUsera = ({ id, username, room }) => {
     username = username.trim().toLowerCase()
@@ -38,13 +28,13 @@ const dodajUsera = ({ id, username, room }) => {
     return { user }
 }
 
-/*const removeUser = (id) => {
+/!*const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id)
 
     if (index !== -1) {
         return users.splice(index, 1)[0]
     }
-}*/
+}*!/
 
 const getUser = (id) => {
     return users.find((user) => user.id === id)
@@ -58,7 +48,9 @@ const getUsersInRoom = (room) => {
 module.exports = {
     dodajUsera, // removeUser,
     getUser,
-    getUsersInRoom,
-    generateMessage
-}
+    getUsersInRoom
+}*/
 
+
+
+console.log(users)
