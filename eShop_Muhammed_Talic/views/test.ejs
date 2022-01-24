@@ -235,7 +235,9 @@
     const socket = io();
     const $messages = document.querySelector('#messages')
     // Templates
-    const messageTemplate = document.querySelector('#message-template').innerHTML
+    const messageTemplate = document.querySelector('#message-template').innerHTML;
+    // Options
+    const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
     socket.on('poruka', (mess) => {
       console.log(mess)
@@ -279,6 +281,7 @@
       })
     })
 
+    socket.emit('join', { username, room })
 
   </script>
 </html>

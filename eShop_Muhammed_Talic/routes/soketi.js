@@ -9,9 +9,18 @@ router.get('/',
     if (!io){
         io = require('socket.io')(req.socket.server);
         io.sockets.on('connection', (socket) => {
-            socket.emit('poruka', generateMessage('Dobro došli na chat TalaShop'));
 
-            socket.broadcast.emit('poruka', generateMessage('Chatu se pridruzila nova osoba'));
+            socket.on('join', ({ username, room }) => {
+                socket.join(room)
+
+                socket.emit('poruka', generateMessage('Welcome!'))
+                socket.broadcast.to(room).emit('poruka', generateMessage(`${username} has joined!`))
+
+                // socket.emit, io.emit,    socket.broadcast.emit
+                //            , io.to.emit, socket.broadcast.to.emit
+            })
+            // socket.emit('poruka', generateMessage('Dobro došli na chat TalaShop'));
+            // socket.broadcast.emit('poruka', generateMessage('Chatu se pridruzila nova osoba'));
 
             socket.on('posaljiPoruku', (msg) => {
                 io.emit('poruka', generateMessage(msg))
