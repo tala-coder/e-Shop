@@ -6,6 +6,14 @@ const generateMessage = (username, text) => {
     }
 }
 
+const generateLocation = (username, url) => {
+    return {
+        username,
+        url,
+        createdAt: new Date().getTime()
+    }
+}
+
 
 
 /*  KORISNICI, ROOMS    */
@@ -61,6 +69,7 @@ module.exports = {
     removeUser,
     getUser,
     getUsersInRoom,
-    generateMessage
+    generateMessage,
+    generateLocation
 }
 

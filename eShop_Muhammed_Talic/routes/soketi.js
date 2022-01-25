@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var io = null;
-const {generateMessage, dodajUsera, removeUser, getUser, getUsersInRoom} = require('../helpers/soketi')
+const {generateMessage, generateLocation, dodajUsera, removeUser, getUser, getUsersInRoom} = require('../helpers/soketi')
 
 
 router.get('/',
@@ -11,14 +11,14 @@ router.get('/',
         io.sockets.on('connection', (socket) => {
             var room = 'pmf';
 
-            socket.on('join', ({username, room}) => {
-                const user =  dodajUsera({id: socket.id, username, room});
+            socket.on('join',  ({username, room}) => {
+                dodajUsera({id: socket.id, username, room});
                 socket.join(room);
                 // console.log(user, 'dodaj usera')
 
                 socket.emit('poruka', generateMessage('TalaShop admin', 'Dobro došli!'));
-                 // socket.broadcast.emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
-                 socket.broadcast.to(room).emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
+                // socket.broadcast.emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
+                socket.broadcast.to(room).emit('poruka', generateMessage('TalaShop admin', `${username} se priključio razgovoru!`));
 
                 // socket.emit, io.emit,    socket.broadcast.emit
                 //            , io.to.emit, socket.broadcast.to.emit
@@ -34,9 +34,10 @@ router.get('/',
             })
 
             socket.on('sendLocation',  (coords) => {
-                // const user =  getUser(socket.id)
-                // io.to(room).emit('locationMessage', (user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
-                io.emit('locationMessage', ( `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
+                const user =  getUser(socket.id);
+                let lokacija = `https://google.com/maps?q=${coords.latitude},${coords.longitude}`;
+                io.to(room).emit('locationMessage', generateLocation(user.username, lokacija))
+                // io.emit('locationMessage', ( `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
             })
 
             socket.on('disconnect', () => {

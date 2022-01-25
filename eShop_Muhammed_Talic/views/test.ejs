@@ -45,7 +45,7 @@
     button {
       cursor: pointer;
       padding: 12px;
-      background: #7C5CBF;
+      background: #1f33be;
       border: none;
       color: white;
       font-size: 16px;
@@ -53,7 +53,7 @@
     }
 
     button:hover {
-      background: #6b47b8;
+      background: #1886c4;
     }
 
     button:disabled {
@@ -191,20 +191,22 @@
 <body>
 <div class="chat">
   <div class="chat__sidebar">
-
+    <h3> PMF chat room!  </h3>
   </div>
   <div class="chat__main">
     <div id="messages" class="chat__messages"></div>
 
     <div class="compose">
       <form id="message-form">
-        <input name="message" id="input" placeholder="Message" required autocomplete="off">
-        <button>Send</button>
+        <input name="message" id="input" placeholder="Poruka" required autocomplete="off">
+        <button>Pošalji</button>
       </form>
-      <button id="send-location">Send location</button>
+      <button id="send-location">Pošalji lokaciju</button>
     </div>
   </div>
 </div>
+
+
 
 <script id="message-template" type="text/html">
   <div class="message">
@@ -218,7 +220,11 @@
 
 <script id="location-message-template" type="text/html">
    <div class="message">
-    <p><a href="{{url}}" target="_blank">My current location</a></p>
+     <p>
+       <span class="message__name">{{username}}</span>
+       <span class="message__meta">{{createdAt}}</span>
+     </p>
+     <p><a href="{{lokacija}}" target="_blank">Trenutna lokacija</a></p>
   </div>
 </script>
 
@@ -258,9 +264,12 @@
 
 
     const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
-    socket.on('locationMessage', (url) => {
+    socket.on('locationMessage', (mess) => {
+      console.log('primam lokaciju', mess)
       const html = Mustache.render(locationMessageTemplate, {
-         url
+         username: mess.username,
+         lokacija: mess.url,
+         createdAt: moment(mess.createdAt).format('h:mm a')
       })
       $messages.insertAdjacentHTML('beforeend', html)
     })
