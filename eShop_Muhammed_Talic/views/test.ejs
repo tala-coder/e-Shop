@@ -198,7 +198,7 @@
 
     <div class="compose">
       <form id="message-form">
-        <input name="message" placeholder="Message">
+        <input name="message" id="input" placeholder="Message" required autocomplete="off">
         <button>Send</button>
       </form>
       <button id="send-location">Send location</button>
@@ -209,7 +209,7 @@
 <script id="message-template" type="text/html">
   <div class="message">
     <p>
-      <span class="message__name">Some User Name</span>
+      <span class="message__name">{{username}}</span>
       <span class="message__meta">{{createdAt}}</span>
     </p>
     <p>{{mess}}</p>
@@ -217,10 +217,7 @@
 </script>
 
 <script id="location-message-template" type="text/html">
-  <div class="message">
-    <p>
-      <span class="message__name">Some User Name</span>
-    </p>
+   <div class="message">
     <p><a href="{{url}}" target="_blank">My current location</a></p>
   </div>
 </script>
@@ -240,8 +237,9 @@
     const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
     socket.on('poruka', (mess) => {
-      console.log(mess)
+      console.log(mess, 'ovdje bug')
       const html = Mustache.render(messageTemplate, {
+        username: mess.username,
         mess: mess.text,
         createdAt: moment(mess.createdAt).format('h:mm a')
       })
@@ -251,16 +249,18 @@
 
     document.querySelector('#message-form').addEventListener('submit', (e) => {
       e.preventDefault()
-      const message = e.target.elements.message.value
-      socket.emit('posaljiPoruku', message)
+      const message = e.target.elements.message.value;
+      socket.emit('posaljiPoruku', message);
+      console.log(message, 'poruka poslana')
+      document.getElementById('input').value = ''
+      document.getElementById('input').focus()
     })
 
 
     const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
     socket.on('locationMessage', (url) => {
-      console.log(url)
       const html = Mustache.render(locationMessageTemplate, {
-        url
+         url
       })
       $messages.insertAdjacentHTML('beforeend', html)
     })
@@ -279,9 +279,11 @@
           longitude: position.coords.longitude
         }, )
       })
-    })
+    });
 
-    socket.emit('join', { username, room })
+
+    socket.emit('join', { username, room });
+    console.log(username, room)
 
   </script>
 </html>

@@ -51,6 +51,3 @@ module.exports = {
     getUsersInRoom
 }*/
 
-
-
-console.log(users)
