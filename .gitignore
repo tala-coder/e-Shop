@@ -1,5 +1,5 @@
 mongodb tutorijali
-node_modules/
+/node_modules
 MongoDBCompass.exe - Shortcut.lnk
 Slike_kursa
 sql_apk.sql
