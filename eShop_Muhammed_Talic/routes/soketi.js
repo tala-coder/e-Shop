@@ -7,17 +7,18 @@ const {generateMessage, dodajUsera, removeUser, getUser, getUsersInRoom} = requi
 router.get('/',
       function(req, res) {
     if (!io){
-        io = require('socket.io')(req.socket.server);
+        io = require('socket.io')(req.connection.server);
         io.sockets.on('connection', (socket) => {
+            var room = 'pmf';
 
             socket.on('join', ({username, room}) => {
-                 const user =  dodajUsera({id: socket.id, username, room});
-                socket.join(user.room);
-                console.log(user, 'dodaj usera')
+                const user =  dodajUsera({id: socket.id, username, room});
+                socket.join(room);
+                // console.log(user, 'dodaj usera')
 
                 socket.emit('poruka', generateMessage('TalaShop admin', 'Dobro došli!'));
-                 socket.broadcast.emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
-                 // socket.broadcast.to(user.room).emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
+                 // socket.broadcast.emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
+                 socket.broadcast.to(room).emit('poruka', generateMessage('TalaShop admin',`${username} se priključio razgovoru!`));
 
                 // socket.emit, io.emit,    socket.broadcast.emit
                 //            , io.to.emit, socket.broadcast.to.emit
@@ -27,24 +28,24 @@ router.get('/',
 
             socket.on('posaljiPoruku', (msg) => {
                 const user = getUser(socket.id)
-                // console.log(user, 'daj usera')
-                io.emit('poruka', generateMessage(user.username, msg))
-                // io.to(user.room).emit('poruka', generateMessage( msg))
+                console.log(user, 'daj usera')
+                // io.emit('poruka', generateMessage(user.username, msg))
+                io.to(room).emit('poruka', generateMessage(user.username, msg))
             })
 
             socket.on('sendLocation',  (coords) => {
                 // const user =  getUser(socket.id)
-                // io.to(user.room).emit('locationMessage', (user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
+                // io.to(room).emit('locationMessage', (user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
                 io.emit('locationMessage', ( `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
             })
 
             socket.on('disconnect', () => {
                 const user = removeUser(socket.id);
-                console.log(user)
+                // console.log(user, 'diskonekt user')
 
                 if (user) {
-                    // io.to(user.room).emit('poruka', generateMessage(`${user.username} je napustio razgovor!`))
-                    io.emit('poruka', generateMessage('TalaShop admin',`${user.username} je napustio razgovor!`))
+                    io.to(room).emit('poruka', generateMessage('TalaShop admin',`${user.username} je napustio razgovor!`))
+                    // io.emit('poruka', generateMessage('TalaShop admin',`${user.username} je napustio razgovor!`))
                 }
                 // io.emit('poruka', generateMessage(`${user.username} je napustio razgovor!`))
             })
