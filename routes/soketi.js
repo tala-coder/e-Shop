@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var io = null;
 const {generateMessage, generateLocation, dodajUsera, removeUser, getUser, getUsersInRoom} = require('../helpers/soketi')
-
-
+ 
 router.get('/',
       function(req, res) {
     if (!io){
