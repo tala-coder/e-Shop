@@ -2,7 +2,5 @@ mongodb tutorijali
 node_modules
 MongoDBCompass.exe - Shortcut.lnk
 Slike_kursa
-sql_apk.sql
-helpers/.env
-.env
+sql_apk.sql 
 eShop_Muhammed_Talic/public/stylesheets/style.css
