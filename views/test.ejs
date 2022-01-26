@@ -191,7 +191,7 @@
 
 <div class="chat" >
   <div class="chat__sidebar">
-    <h3 style="margin: 10px"> PMF chat room!  </h3>
+    <h3 style="margin: 10px"> Private chat!  </h3>
   </div>
   <div class="chat__main" >
     <div id="messages"  class="chat__messages">
@@ -220,15 +220,6 @@
   </div>
 </script>
 
-<script id="location-message-template" type="text/html">
-   <div class="message" >
-     <p>
-       <span class="message__name">{{username}}</span>
-       <span class="message__meta">{{createdAt}}</span>
-     </p>
-     <p><a href="{{lokacija}}" target="_blank">Trenutna lokacija</a></p>
-  </div>
-</script>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
@@ -248,7 +239,7 @@
     // Options
     const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
-    socket.on('poruka', (mess) => {
+    socket.on('porukaPrivate', (mess) => {
       console.log(mess, 'ovdje bug')
       const html = Mustache.render(messageTemplate, {
         username: mess.username,
@@ -263,42 +254,14 @@
     document.querySelector('#message-form').addEventListener('submit', (e) => {
       e.preventDefault()
       const message = e.target.elements.message.value;
-      socket.emit('posaljiPoruku', message);
+      socket.emit('posaljiPorukuPrivate', message);
       console.log(message, 'poruka poslana')
       document.getElementById('input').value = ''
       document.getElementById('input').focus()
-    })
+    }
 
 
-    const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
-    socket.on('locationMessage', (mess) => {
-      console.log('primam lokaciju', mess)
-      const html = Mustache.render(locationMessageTemplate, {
-         username: mess.username,
-         lokacija: mess.url,
-         createdAt: moment(mess.createdAt).format('h:mm a')
-      })
-      messages.insertAdjacentHTML('beforeend', html);
-      skrolaj_dolje();
-    })
-
-    const sendLocationButton = document.querySelector('#send-location')
-    sendLocationButton.addEventListener('click', () => {
-      if (!navigator.geolocation) {
-        return alert('Geolocation is not supported by your browser.')
-      }
-
-      // $sendLocationButton.setAttribute('disabled', 'disabled')
-
-      navigator.geolocation.getCurrentPosition((position) => {
-        socket.emit('sendLocation', {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }, )
-      })
-    });
-
-
+   );
 
     socket.emit('join', { username, room });
     console.log(username, room)

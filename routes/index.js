@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
 const proizvod = require("../controllers/proizvod");
 const korisnik = require("../controllers/korisnik");
@@ -68,7 +67,7 @@ router.get('/inbox', function(req, res) {
             })
         })
     }
-    res.render('PMF_room_CHAT')
+    res.render('soketi/PMF_room_CHAT')
 });
 
 router.get('/logout', function(req, res) {

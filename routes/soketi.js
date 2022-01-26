@@ -1,6 +1,53 @@
 var express = require('express');
+const { generateMessage, removeUser} = require("../helpers/soketi");
 var router = express.Router();
 
+
+let io = null;
+let chat1 = {username: '', id: undefined};
+let chat2 = {username: '', id: undefined};
+
+router.get('/',
+    function(req, res) {
+        if (!io){
+            io = require('socket.io')(req.connection.server);
+            io.sockets.on('connection', (socket) => {
+                var room = 'kupac-trgovac';
+
+                socket.on('join',  ({username, room}) => {
+                    if (chat1.id === undefined){
+                        chat1.username = username;
+                        chat1.id = socket.id;
+                    }
+                    else if (chat2.id === undefined){
+                        chat2.username = username;
+                        chat2.id = socket.id;
+                    }
+                    socket.join(room);
+                    console.log(chat1, 'dodaj usera chat 1', chat2, 'dodaj usera chat2')
+                })
+
+                // zavrsiti u ejs-u
+                socket.on('posaljiPorukuPrivate', (msg) => {
+                    let user = null;
+                    socket.id === chat1.id ? user = chat1 : user = chat2 ;
+
+                    console.log(user, 'daj usera')
+                    io.to(room).emit('porukaPrivate', generateMessage(user.username, msg))
+                })
+
+                socket.on('disconnect', () => {
+                    let user = null;
+                    socket.id === chat1.id ? user = chat1 : user = chat2 ;
+                    user.id = undefined;
+                    console.log('korisnik', user.username, ' je napustio chat')
+                })
+            })
+        }
+        res.render('test')
+    });
+// socket.emit, io.emit,    socket.broadcast.emit
+//            , io.to.emit, socket.broadcast.to.emit
 
 /*
 let io = null;
