@@ -8,7 +8,7 @@ exports.connectDB = async () => {
     try {
         const connect = await mongoose.connect(mongoConnectionUrl);
         console.log('\x1b[34m', ` Spajanje sa bazom '${connect.connection.name}' je uspjelo!
-  ${process.env.linkShopa}${process.env.nazivShopa}`
+  Stranicu možete posjetiti klikom na: http://localhost:3000/TalaShop`
         );
     } catch (error) {
         console.error('\x1b[31m', `Spajanje sa bazom nije uspjelo! ${error.message}`);

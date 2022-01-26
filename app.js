@@ -19,7 +19,6 @@ DB.connectDB();
 //env
 const dotenv = require('dotenv')
 dotenv.config({path:__dirname+'/.env'});
-const nazivShopa = process.env.nazivShopa;
 
 
 app.use(logger('dev'));
@@ -58,12 +57,12 @@ app.use(`/TalaShop/narudzba`,   narudzbaRoutes);
 */
 
 app.use('*', auth.checkUser);
-app.use(`/${nazivShopa}`, indexRoutes);
-app.use(`/${nazivShopa}/soketi`, soketiRoutes);
-app.use(`/${nazivShopa}/kategorija`, kategorijaRoutes);
-app.use(`/${nazivShopa}/proizvod`,   proizvodRoutes);
-app.use(`/${nazivShopa}/korisnik`,   korisnikRoutes);
-app.use(`/${nazivShopa}/narudzba`,   narudzbaRoutes);
+app.use(`/TalaShop`, indexRoutes);
+app.use(`/TalaShop/soketi`, soketiRoutes);
+app.use(`/TalaShop/kategorija`, kategorijaRoutes);
+app.use(`/TalaShop/proizvod`,   proizvodRoutes);
+app.use(`/TalaShop/korisnik`,   korisnikRoutes);
+app.use(`/TalaShop/narudzba`,   narudzbaRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
