@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var io = null;
-const {generateMessage, generateLocation, dodajUsera, removeUser, getUser, getUsersInRoom} = require('../helpers/soketi')
+
+
+/*
+let io = null;
+const {generateMessage, generateLocation, dodajUsera, removeUser, getUser} = require('../helpers/soketi')
 
 router.get('/',
       function(req, res) {
@@ -53,6 +56,7 @@ router.get('/',
     }
     res.render('test')
 });
+*/
 
 
 module.exports = router;
