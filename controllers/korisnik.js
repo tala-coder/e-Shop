@@ -1,4 +1,5 @@
 const Korisnik = require('../models/korisnik');
+const Poruka = require('../models/Poruke');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
@@ -169,7 +170,7 @@ exports.logujSe = async (req, res) => {
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
         const token = jwt.sign(
-            {korisnikId: korisnik.id, korisnikIme: korisnik.ime, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
+            {korisnikId: korisnik.id, korisnikIme: korisnik.ime,  korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
             secret,
             {expiresIn : '1d'})
          res.cookie("jwt", token, {
@@ -216,4 +217,36 @@ exports.promeniStatus = async (req, res)=> {
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
     res.send(korisnik);
+}
+
+
+/* PORUKA */
+exports.dodajPoruku = async (req, res, next) => {
+    const msg = await Poruka.findOne({soba: req.body.room} ).select();
+    // ako ne postoj soba kreiraj je.
+    if (!msg) {
+    let poruka = new Poruka({
+        kupac: req.body.kupac,
+        trgovac:  req.body.trgovac,
+        soba:   req.body.room
+    })
+    poruka = await poruka.save();
+    if(!poruka){
+        return res.status(400).json({success: false , message:`poruka se ne može kreirati!`, bug:`exports.dodajPoruku.`})}
+        next();
+    }
+    // res.send(poruka);
+    else{
+        next();
+    }
+}
+
+exports.dajKorisnikeZaChat = async (req, res, next) =>{
+    const korisnici = await Poruka.find( {trgovac: res.locals.nickname}) // ovdje bug
+    if(!korisnici) {
+        res.status(500).json({success: false})
+    }
+    console.log('korisnici', korisnici)
+    req.korisnici = korisnici;
+    next();
 }

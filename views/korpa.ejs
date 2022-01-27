@@ -312,7 +312,10 @@
                     "method" : "POST",
                     contentType : "application/json",
                     processData : false,
-                    data : JSON.stringify([id] )
+                    data : JSON.stringify([id] ),
+                    success : function (result) {
+                        // promeniti div u htmlu
+                    }
                 }
                 $.ajax(request).done(function(response){
                     location.reload();

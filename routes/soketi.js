@@ -1,5 +1,6 @@
 var express = require('express');
-const { generateMessage, removeUser} = require("../helpers/soketi");
+const { generateMessage } = require("../helpers/soketi");
+const korisnik = require("../controllers/korisnik");
 var router = express.Router();
 
 
@@ -7,14 +8,14 @@ let io = null;
 let chat1 = {username: '', id: undefined};
 let chat2 = {username: '', id: undefined};
 
-router.get('/',
+router.get('/', korisnik.dajKorisnikeZaChat,
     function(req, res) {
         if (!io){
             io = require('socket.io')(req.connection.server);
             io.sockets.on('connection', (socket) => {
-                var room = 'kupac-trgovac';
-
+                var room = undefined;
                 socket.on('join',  ({username, room}) => {
+                    room = this.room;
                     if (chat1.id === undefined){
                         chat1.username = username;
                         chat1.id = socket.id;
@@ -22,17 +23,18 @@ router.get('/',
                     else if (chat2.id === undefined){
                         chat2.username = username;
                         chat2.id = socket.id;
+
                     }
                     socket.join(room);
                     console.log(chat1, 'dodaj usera chat 1', chat2, 'dodaj usera chat2')
                 })
 
-                // zavrsiti u ejs-u
                 socket.on('posaljiPorukuPrivate', (msg) => {
                     let user = null;
                     socket.id === chat1.id ? user = chat1 : user = chat2 ;
-
-                    console.log(user, 'daj usera')
+                    console.log('poruka', msg)
+//dodat samo jednu poruku (msg)
+//                     console.log(user, 'daj usera', msg)
                     io.to(room).emit('porukaPrivate', generateMessage(user.username, msg))
                 })
 
@@ -40,12 +42,18 @@ router.get('/',
                     let user = null;
                     socket.id === chat1.id ? user = chat1 : user = chat2 ;
                     user.id = undefined;
-                    console.log('korisnik', user.username, ' je napustio chat')
+                    // console.log('korisnik', user.username, ' je napustio chat')
                 })
             })
         }
-        res.render('test')
+        res.render('test', {korisnici: req.korisnici} )
     });
+
+
+router.post('/dodajPoruku', korisnik.dodajPoruku,
+    function(req, res) {
+        res.sendStatus(200);
+    })
 // socket.emit, io.emit,    socket.broadcast.emit
 //            , io.to.emit, socket.broadcast.to.emit
 

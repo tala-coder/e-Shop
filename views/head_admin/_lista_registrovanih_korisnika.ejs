@@ -35,7 +35,7 @@
                     <td class="id"> <%=i+1%> </td>
                      <td class="h6"> <%=korisnici[i].ime%> <%=korisnici[i].prezime%> </td>
                      <td class="h6"> <%=korisnici[i].mail%> </td>
-                    <td class="id"> <button class="btn btn-outline-dark" value="sendmess"  onclick="sendmess(this, <%=korisnici[i]._id%>)">
+                    <td class="id"> <button class="btn btn-outline-dark" value="sendmess"  onclick="sendmess(this, '<%=korisnici[i].nickName%>', '<%=nickname%>' )">
                             Pošalji poruku </button>
                     </td>
                     <td class="id">
@@ -108,23 +108,24 @@
             })
     }
 
-    function sendmess(r, id) {
-
-        // let text = "Potvrdite još jednom.";
-        // if (confirm(text) === true) {
-
-            console.log(id)
-            // var request = {
-            //     "url" : `/TalaShop/narudzba/korpa?status=Obrisano`,
-            //     "method" : "POST",
-            //     contentType : "application/json",
-            //     processData : false,
-            //     data : JSON.stringify([id] )
-            // }
-            // $.ajax(request).done(function(response){
-            //     location.reload();
-            // })
-        // }
+    function sendmess(r, trgovac, kupac) {
+            let data = {};
+            data.kupac = kupac.replace(/\s+/g, '');
+            data.trgovac = trgovac.replace(/\s+/g, '');
+            let room = `${kupac}${trgovac}`.replace(/\s+/g, '');
+            data.room = room;
+        console.log(data)
+        let putanja = ('/TalaShop/soketi?username=' + kupac + '&room=' + room).replace(' ', '');
+            var request = {
+                "url" : `/TalaShop/soketi/dodajPoruku`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify(data)
+            }
+            $.ajax(request).done(function(response){
+                location.replace(putanja);
+            })
     }
 </script>
 </body>

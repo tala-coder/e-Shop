@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="bs" xmlns="http://www.w3.org/1999/html">
 <head>
   <title>Chat App</title>
   <style>
@@ -191,7 +191,14 @@
 
 <div class="chat" >
   <div class="chat__sidebar">
-    <h3 style="margin: 10px"> Private chat!  </h3>
+    <h3 style="margin: 10px"> Privatni razgovori  </h3>
+    <% for(var i=0; i<korisnici.length; i++) {%>
+    <div style="margin: 10px">
+    <a style="color: navajowhite" href="/TalaShop/soketi?username=<%=korisnici[i].trgovac%>&room=<%=korisnici[i]._id%>"> <%=korisnici[i].kupac%> </a>
+  </div>
+
+    <% } %>
+
   </div>
   <div class="chat__main" >
     <div id="messages"  class="chat__messages">
@@ -203,8 +210,7 @@
         <input name="message" id="input" placeholder="Poruka" required autocomplete="off">
         <button id="btn">Pošalji</button>
       </form>
-      <button id="send-location">Pošalji lokaciju</button>
-    </div>
+     </div>
   </div>
 </div>
 
