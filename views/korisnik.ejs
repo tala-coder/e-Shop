@@ -39,7 +39,9 @@
                         <p class="text-muted mb-4"> <%=  korisnik.telefon %> </p>
 
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" class="btn btn-primary ms-1">Poruka</button>
+                            <button type="button" class="btn btn-primary ms-1"
+                                    onclick="sendmess(this, '<%=korisnik.nickName%>', '<%=nickname%>' )">
+                                Poruka</button>
                         </div>
                     </div>
                 </div>
@@ -88,4 +90,25 @@
 type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js">
  </script>
+<script>
+    function sendmess(r, trgovac, kupac) {
+        let data = {};
+        data.kupac = kupac.replace(/\s+/g, '');
+        data.trgovac = trgovac.replace(/\s+/g, '');
+        let room = `${kupac}${trgovac}`.replace(/\s+/g, '');
+        data.room = room;
+        console.log(data)
+        let putanja = ('/TalaShop/soketi?username=' + kupac + '&room=' + room).replace(' ', '');
+        var request = {
+            "url" : `/TalaShop/soketi/dodajPoruku`,
+            "method" : "POST",
+            contentType : "application/json",
+            processData : false,
+            data : JSON.stringify(data)
+        }
+        $.ajax(request).done(function(response){
+            location.replace(putanja);
+        })
+    }
+</script>
 </html>

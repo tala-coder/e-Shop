@@ -32,7 +32,7 @@ router.get('/urediProfil/:id',   korisnik.dajKorisnika, kategorija.dajKategorije
 
 router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, // moguci bug, konfuzija
     function (req, res){
-        res.render('korisnik', { korisnik: req.korisnik, proizvod: req.proizvod,  moment: req.moment });
+        res.render('korisnik', { korisnik: req.korisnik,   proizvod: req.proizvod,  moment: req.moment });
 });
 
 

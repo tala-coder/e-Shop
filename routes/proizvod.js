@@ -18,7 +18,7 @@ router.post(`/`, proizvod.uploadArray,  proizvod.dodajProizvod);       //redirec
 router.delete('/:id',proizvod.obrisiProizvod);  //redirect na profil page
 router.get(`/brojProizvoda`, proizvod.brojProizvoda);
 router.get(`/izdvojeniProizvodi/:broj?`, proizvod.dajIzdvojeneProizvode)
-router.get(`/:id`, proizvod.dajProizvod,      function(req, res) {
+router.get(`/:id`, proizvod.dajProizvod, korisnik.dajKorisnikeZaChat,      function(req, res) {
     res.render('proizvod', { proizvod: req.proizvod,   moment: req.moment  })
 });
 
