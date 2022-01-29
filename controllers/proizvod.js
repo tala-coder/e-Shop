@@ -10,11 +10,19 @@ exports.uploadArray = upload.array('avatar', 10);
 
 
 exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
-    let filter = {};
+    let filter_kategorije = {};
+    let filter_grad = {};
     if(req.query.kategorije)
-        filter = {kategorija: req.query.kategorije.split(",")};
+        filter_kategorije = {kategorija: req.query.kategorije.split(",")};
+    if (req.query.grad)
+        filter_grad = {grad: req.query.grad};
 
-    const proizvodi = await Proizvod.find(filter)
+    console.log(req.body, 'ovdje san')
+    // console.log(filter_kategorije, filter_grad, 'filterii queryy')
+
+
+    // const proizvodi = await Proizvod.find(filter_kategorije, )
+    const proizvodi = await Proizvod.find({$and:[filter_grad, filter_kategorije]} )
         .populate( 'kategorija' , 'naziv')
     // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 

@@ -47,18 +47,23 @@
             <div class="col-md-2 col-lg-2 pe-0 ">
                 <div class="card mb-2 ">
                     <div class="card-body text-left sidebar">
+<!--
+                        <form action="/TalaShop" method="get">
+-->
                         <h3>Kategorije</h3>
 
+                        <fieldset id="checkArray">
                         <% for (let i=0; i< kategorije.length; i++)       {%>
                         <div class="form-check">
                             <label>
-                                <input class="form-check-input" type="checkbox" value=<%=kategorije[i].naziv%> id= <%= kategorije[i]._id %> name="kategorije"/>
+                                <input class="form-check-input" type="checkbox" value='<%=kategorije[i].naziv%>' id="kategorija" name="kategorija"/>
                             </label>
                             <label class="form-check-label" for=<%= kategorije[i]._id %>> </label>
                                 <label class="form-check-label" for=<%= kategorije[i]._id %>>
                                    <p style="font-size: 1.000em; margin: 0px"> <%= kategorije[i].naziv %> </p>
                                 </label>
                         </div> <%}%>
+                            </fieldset>
 
                         <div>
                             <h3 class="mt-3">Grad</h3>
@@ -66,7 +71,7 @@
                                 
                                 <option selected> Svi gradovi </option>
                                 <% gradovi.forEach(function(grad) { %>
-                                <option value=<%= grad %>> <%= grad %></option>
+                                <option value="<%= grad %>"> <%= grad %></option>
                                 <% }); %>
 
                             </select>
@@ -84,7 +89,10 @@
                             <input type="text" class="form-control" value="" />
                             <span class="input-group-text">KM</span>
                          </div>
-                             <button type="button" class="btn btn-primary mt-3">Osvježi rezultate</button>
+                             <button type="submit" class="btn btn-primary mt-3"  onclick="filter()">Osvježi rezultate</button>
+<!--
+                        </form>
+-->
                      </div>
                 </div>
 
@@ -99,3 +107,31 @@
         </div>
     </div>
     </div>
+<script>
+
+    console.log(document.querySelector('.form-check-input').checked);
+    function filter(){
+            var cboxes = document.getElementsByName('kategorija');
+            var len = cboxes.length;
+            for (var i=0; i<len; i++) {
+                if (cboxes[i].checked)
+                    console.log(cboxes[i].value)
+         }
+    }
+        // var request = {
+            // "url" : `/TalaShop?kategorije=61cb8f75a710a8ed02eaf475,61d4340a2c1abaaa5ef142b4&grad=Kakanj`,
+            // "url" : `/TalaShop?`,
+            // "method" : "GET",
+            // contentType : "application/json",
+            // processData : false,
+            // success : function (result) {
+            //     // promeniti div u htmlu
+            // }
+        // }
+        // $.ajax(request).done(function(response){
+        //     location.replace(`/TalaShop`);
+        // })
+
+
+
+</script>

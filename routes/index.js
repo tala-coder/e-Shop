@@ -6,9 +6,16 @@ const korisnik = require("../controllers/korisnik");
 
 
 router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, korisnik.dajTrenutnogKorisnika,
-    function(req, res) {
-        res.render('home', {kategorije: req.kategorije, korisnik: req.korisnik, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
-});
+    async function (req, res) {
+        console.log(req.body)
+        res.render('home', {
+            kategorije: req.kategorije,
+            korisnik: req.korisnik,
+            proizvod: req.proizvod,
+            moment: req.moment,
+            gradovi: req.gradovi
+        })
+    });
 
 router.get('/test', kategorija.dajKategorije, proizvod.dajIzdvojeneProizvode,
     function(req, res) {
@@ -20,6 +27,7 @@ let io = null;
 
 
 const {generateMessage, generateLocation, dodajUsera, removeUser, getUser} = require('../helpers/soketi')
+const {log} = require("debug");
 router.get('/inbox', function(req, res) {
     if (!io){
         io = require('socket.io')(req.connection.server);
