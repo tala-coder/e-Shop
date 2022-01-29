@@ -9,7 +9,7 @@ const upload = multer({ storage: storage })
 exports.uploadArray = upload.array('avatar', 10);
 
 
-exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
+exports.dajProizvode = asyncHandler(async (req, res, next) => {
     let filter_kategorije = {};
     let filter_grad = {};
     if(req.query.kategorije)
@@ -17,12 +17,26 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => { // dajProizvode 
     if (req.query.grad)
         filter_grad = {grad: req.query.grad};
 
-    console.log(req.body, 'ovdje san')
-    // console.log(filter_kategorije, filter_grad, 'filterii queryy')
+    // console.log(req.body, 'ovdje sam')
+    // SEARCH:    https://stackoverflow.com/questions/29648626/moongose-mongodb-like-operator-in-search
+    var naziv = '';
+    console.log(req.query)
+    if (req.query.naziv)
+        naziv = req.query.naziv
+    console.log(naziv)
 
+    var toSearch = naziv.split(" ").map(function(n) {
+        return {
+            naziv: new RegExp(n.trim(), 'i')
+        };
+    });
+    /*const search = await Proizvod.find({ $and: [toSearch[0]] });
+    console.log('search', search )
+    console.log('kategorije', filter_kategorije )
+    const proizvodi = await Proizvod.find(filter_kategorije, )
+    const proizvodi = await Proizvod.find({$and:[filter_grad, filter_kategorije]  } )*/
 
-    // const proizvodi = await Proizvod.find(filter_kategorije, )
-    const proizvodi = await Proizvod.find({$and:[filter_grad, filter_kategorije]} )
+    const proizvodi = await Proizvod.find({$and:  [filter_grad, filter_kategorije, toSearch[0]]    } )
         .populate( 'kategorija' , 'naziv')
     // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 

@@ -7,7 +7,6 @@ const korisnik = require("../controllers/korisnik");
 
 router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, korisnik.dajTrenutnogKorisnika,
     async function (req, res) {
-        console.log(req.body)
         res.render('home', {
             kategorije: req.kategorije,
             korisnik: req.korisnik,

@@ -54,10 +54,12 @@
                             type="search"
                             class="form-control rounded"
                             placeholder="Search"
+                            id="search"
                             style="min-width: 125px;"
+                            onkeydown="if (event.keyCode === 13) {document.getElementById('trazi').click(); return false;}"
                     />
                     <span class="input-group-text border-0 d-none d-lg-flex"
-                    ><i class="fas fa-search"></i
+                    ><i id="trazi" onclick="trazi()" class="fas fa-search"></i
                         ></span>
                 </form>
 
@@ -140,5 +142,33 @@
     </div>
     <!-- Container wrapper -->
 </nav>
-
 <!-- Navbar -->
+<script>
+    function trazi(){
+        let search = document.getElementById('search').value;
+        console.log(search);
+        let url = window.location.href;
+
+        var request = {
+            "url" : '/TalaShop',
+            "method" : "GET",
+        }
+        $.ajax(request).done(function(response){
+                location.replace(`/TalaShop?naziv=${search}`)
+        })
+
+        // $.ajax({
+        //     url: url,
+        //     type: 'GET',
+        //     contentType: "application/json",
+        //     data: {
+        //         naziv: search ,
+        //     },
+        //     success: function(data) {
+        //         window.location.href = window.location.href;
+        //     }
+        // });
+
+    }
+
+</script>
