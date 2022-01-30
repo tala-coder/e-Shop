@@ -5,7 +5,7 @@ const proizvod = require("../controllers/proizvod");
 const korisnik = require("../controllers/korisnik");
 
 
-router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, korisnik.dajTrenutnogKorisnika,
+router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, proizvod.dajGrad, korisnik.dajTrenutnogKorisnika,
     async function (req, res) {
         res.render('home', {
             kategorije: req.kategorije,
@@ -16,7 +16,7 @@ router.get('/', kategorija.dajKategorije, proizvod.dajProizvode, korisnik.dajTre
         })
     });
 
-router.get('/test', kategorija.dajKategorije, proizvod.dajIzdvojeneProizvode,
+router.get('/test', kategorija.dajKategorije, proizvod.dajIzdvojeneProizvode, proizvod.dajGrad,
     function(req, res) {
         res.render('home', {kategorije: req.kategorije, proizvod: req.proizvod, moment: req.moment, gradovi: req.gradovi})
 });

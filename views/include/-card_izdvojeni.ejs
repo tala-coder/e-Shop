@@ -1,0 +1,401 @@
+<style>
+   .blink_me {animation: blinker 1s linear infinite;}.pe-5{padding-right:3rem!important}.pb-0{padding-bottom:0!important}.pb-1{padding-bottom:.25rem!important}.pb-2{padding-bottom:.5rem!important}.pb-3{padding-bottom:1rem!important}.pb-4{padding-bottom:1.5rem!important}.pb-5{padding-bottom:3rem!important}
+
+    @keyframes blinker { 50% {
+        opacity: 0;} }
+
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 24.85%;
+        }
+    }
+</style>
+
+<% proizvod.forEach(function(proizvod) { %>
+<%if (proizvod.istaknut ) { %>
+
+<div class="col-lg-3 col-md-3  pb-4" >
+    <div class="card">
+        <img
+                src="<%=proizvod.slika%> "
+                class="card-img-top"
+                alt="Slika proizvoda" height="175px"
+                style="object-fit: contain"/>
+
+
+        <div class="card-body pt-0 pb-1"  >
+            <h3 class="card-title m-0 mt-3"  > <%=proizvod.naziv%></h3>
+            <p class="card-text m-0" >
+                <%= proizvod.kategorija.naziv %>
+            </p>
+            <p style="margin-bottom: 3px"><%=proizvod.cijena%><b> KM</b></p>
+
+
+            <!-- Button trigger modal -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <a href="#!"  class="btn btn-primary"  id="button-addon3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"  style="padding-left: 0.625em; padding-right: 0.625em"
+
+                    <% if(user){ %>
+               onclick="dodajNarudzbu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.korisnik._id%>')"
+
+            <% } else{ %>
+               onclick="showAlert('Niste prijavljeni!')"
+                    <% } %> >
+                ZAPOČNI NARUDŽBU </a>
+
+
+            <a href="#!" style="padding-left: 0.825em; padding-right: 0.825em" class="btn btn-danger mt-1 " id="korpa"
+            <% if(user){ %>          onclick="dodaj_u_korpu('<%=userId%>','<%=proizvod._id%>', '<%=proizvod.korisnik._id%>')"
+            <% } else{ %>            onclick="showAlert('Niste prijavljeni!')"
+                    <% } %> >
+                <i class="fas fa-shopping-cart" ></i></a>
+
+        </div>
+        <div  style="padding-bottom: 2px">
+            <a href="/TalaShop/proizvod/<%=proizvod._id%>" class="btn btn-outline-primary " >
+                Vidi detaljno</a>
+        </div>
+        <div class=" card-footer text-muted row justify-content-between pt-0 ps-2 pb-0 pe-2 m-0">
+
+            <div  class="col-4 text-start mt-3 p-0" >
+                <i class="far fa-eye"></i>
+                <span class="light color__dark--3">702</span>
+            </div>
+            <div  class="col-8 text-end  mt-3 p-0" >
+                <p    > <%= moment(proizvod.updatedAt).endOf('second').fromNow() %></p>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+<% }); %>
+
+<% if(user){ %>
+<!-- Modal -->
+<div class="modal   fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered  ">
+        <div class="modal-content">
+            <div class="modal-header">
+<!--                <h4 class="modal-title" id="staticBackdropLabel"> <i class="fas fa-truck me-1"></i> Podaci za dostavu</h4>-->
+                <h4 class="modal-title" id="staticBackdropLabel"> <i class="fab fa-fedex me-1"></i> Podaci za dostavu</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body p-4">
+                    <!--                    <form id="dodajNarudzbu" action="/TalaShop/narudzba"  method="post">-->
+                    <div class="d-flex flex-row align-items-center mb-1 pb-1">
+                        <div class="row ">
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="adresa1"
+                                            class="form-control form-control-lg"
+                                            placeholder="Adresa 1" value="<%=korisnik.ulica%>" name="adresa1"
+                                    />
+                                    <label class="form-label" for="adresa1"> Adresa 1</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="telefon"
+                                            class="form-control form-control-lg"
+                                            placeholder="Telefon"  value="<%=korisnik.telefon%> " name="telefon"
+                                    />
+                                    <label class="form-label" for="telefon"> Telefon </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="adresa2"
+                                            class="form-control form-control-lg"
+                                            placeholder="Adresa"  value="" name="adresa2"
+                                    />
+                                    <label class="form-label" for="adresa2"> Adresa 2  </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="grad"
+                                            class="form-control form-control-lg"
+                                            placeholder="Grad"  value="<%=korisnik.grad%>" name="grad"
+                                    />
+                                    <label class="form-label" for="telefon"> Grad </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            id="postanskiBroj"
+                                            class="form-control form-control-lg"
+                                            placeholder="Poštanski broj"  value="<%=korisnik.postanskiBroj%>" name="postanskiBroj"
+                                    />
+                                    <label class="form-label" for="postanskiBroj"> Poštanski broj </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control form-control-lg"
+                                            placeholder="Zemlja"  value="<%=korisnik.zemlja%>" name="zemlja" id="zemlja"
+                                    />
+                                    <label class="form-label" for="zemlja"> Zemlja </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-outline">
+                                                    <textarea
+                                                            id="poruka"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="Poruka za korisnika"  value=" " name="poruka"></textarea>
+                                    <label class="form-label" for="Poruka"> Poruka za korisnika </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-outline mb-4">
+                        <input
+                                id="formControlLgXsd"
+                                class="form-control form-control-lg"
+                                value="<%=korisnik.ime%>" name="ime" placeholder="Ime i Prezime"
+                        />
+                        <label class="form-label" for="formControlLgXsd">  Ime i Prezime </label>
+                    </div>
+
+                    <div class="row  ">
+                        <div class="col-7">
+                            <div class="form-outline">
+                                <input
+                                        id="formControlLgXM1"
+                                        class="form-control form-control-lg"
+                                        placeholder="**** **** **** ****"
+                                />
+                                <label class="form-label" for="formControlLgXM1">Broj kartice</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-outline">
+                                <input
+                                        id="formControlLgExpk"
+                                        class="form-control form-control-lg"
+                                        placeholder="MM/YYYY"
+                                />
+                                <label class="form-label" for="formControlLgExpk">Expire</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-outline">
+                                <input
+                                        type="password"
+                                        id="formControlLgcvv"
+                                        class="form-control form-control-lg"
+                                        placeholder="Cvv"
+                                />
+                                <label class="form-label" for="formControlLgcvv">Cvv</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> zatvori </button>
+                        <button type="submit" value="Submit" class="btn btn-primary" id="dodajNarudzbu" data-bs-dismiss="modal"
+                                onclick="posalji()"
+                        > KOMPLETIRAJ NARUDŽBU </button>
+                    </div>
+                    <!--                    </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<% } %>
+
+
+
+
+<!--toast sound-->
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/toasty.js"></script>
+<script>
+    function showAlert(error) {
+        alert(error)
+    }
+
+    const data = {};
+    function dodajNarudzbu(korisnikId, proizvodId, trgovacId ) {
+        data.korisnik = korisnikId;
+        data.trgovac = trgovacId;
+        data.proizvod = proizvodId;
+        data.adresa1 = $("#adresa1").val();
+        data.adresa2 = $("#adresa2").val() ;
+        data.grad = $("#grad").val() ;
+        data.postanskiBroj = $("#postanskiBroj").val() ;
+        data.zemlja = $("#zemlja").val() ;
+        data.telefon = $("#telefon").val() ;
+        data.poruka = $("#poruka").val() ;
+        data.kolicina = $("#kolicina :selected").val() || 1;
+        data.status   = 'Čeka se odobrenje trgovca';
+
+    }
+
+    function posalji(){
+        var request = {
+            "url" : `/TalaShop/narudzba`,
+            "method" : "POST",
+            contentType : "application/json",
+            processData : false,
+            data : JSON.stringify(data)
+        }
+        $.ajax(request).done(function(response){
+            // alert("Dodali ste artikl u korpu!");
+        })
+    }
+
+    function dodaj_u_korpu(korisnikId, proizvodId, trgovacId ) {
+        let data = {};
+        data.korisnik = korisnikId;
+        data.trgovac = trgovacId;
+        data.proizvod = proizvodId;
+        data.adresa1 = $("#adresa1").val();
+        data.adresa2 = $("#adresa2").val() ;
+        data.grad = $("#grad").val() ;
+        data.postanskiBroj = $("#postanskiBroj").val() ;
+        data.zemlja = $("#zemlja").val() ;
+        data.telefon = $("#telefon").val() ;
+        data.poruka = $("#poruka").val() ;
+        data.kolicina = $("#kolicina :selected").val()  || 1;
+        data.status   = 'Narudžba je u korpi';
+
+            console.log(data);
+
+            var request = {
+                // "url" : `/TalaShop/narudzba/korpa`,
+                "url" : `/TalaShop/narudzba`,
+                "method" : "POST",
+                contentType : "application/json",
+                processData : false,
+                data : JSON.stringify(data)
+            }
+
+            $.ajax(request).done(function(response){
+                alert("Dodali ste artikl u korpu!");
+            })
+    }
+
+    // TOAST + ZVUK
+    // OVAJ DIO KODA JE KOPIRAN SA STRANICE ('https://stackoverflow.com/questions/52458430/bootstrap-4-snackbar-toast') I DORADEN
+    const button = document.getElementById("dodajNarudzbu");
+    button.addEventListener('click', function () {
+        displayNotification("Uspješno ste kreirali narudžbu!", "blue");
+    }, false );
+    // Notifications ===============================================================
+    var toast_id = 1;
+    function getContainer() {
+        var toast_container = document.getElementById('toast-container');
+        if (toast_container != null)
+        {
+            return toast_container;
+        }
+        toast_container = document.createElement("div");
+        toast_container.id = "toast-container";
+        toast_container.classList = "toast-container position-fixed bottom-0 start-50 translate-middle-x pb-5";
+        toast_container.setAttribute("style", "z-index: 11");
+        document.body.appendChild(toast_container);
+        return toast_container;
+    }
+    function createToast(color, color_text, id) {
+        var newDiv = document.createElement("div");
+        newDiv.classList.add('toast');
+        newDiv.classList.add(color);
+        newDiv.classList.add(color_text);
+        newDiv.id = "toast-"+id;
+        newDiv.setAttribute("role", "alert");
+        newDiv.setAttribute("aria-live", "assertive");
+        newDiv.setAttribute("aria-atomic", "true");
+        return newDiv;
+    }
+    function createSnack(message, id) {
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("toast-body");
+        newDiv.classList.add("d-flex");
+        newDiv.appendChild(createMessage(message, id));
+        newDiv.appendChild(createCloseButton(id));
+        return newDiv;
+    }
+    function createMessage(message, id) {
+        var newDiv = document.createElement("div");
+        newDiv.id = "message-"+id;
+        newDiv.innerHTML = message;
+        return newDiv;
+    }
+    function createCloseButton(id) {
+        var newButton = document.createElement("button")
+        newButton.classList.add("btn-close");
+        newButton.classList.add("btn-close");
+        newButton.classList.add("btn-close-white");
+        newButton.classList.add("me-2");
+        newButton.classList.add("m-auto");
+        newButton.setAttribute("type", "button");
+        newButton.setAttribute("data-bs-dismiss", "toast");
+        newButton.setAttribute("aria-label", "Close");
+        return newButton;
+    }
+    function displayNotification(message, color, time, hide){
+        let color_text = 'bg-primary';
+        var color = 'bg-primary';
+        switch(color) {
+            case 'white':
+            case 'light':
+                color = 'bg-light';
+                color_text = 'text-dark';
+                break;
+            default:
+                color = 'bg-primary';
+                color_text = 'text-white';
+                break;
+        }
+        if(time == null){
+            time = 2000;
+        }
+        if(hide == null){
+            hide = true;
+        }
+        var option =
+            {
+                delay: time,
+                autohide: hide
+            };
+
+        var toast_container = getContainer();
+        toast = createToast(color, color_text, toast_id);
+        toast_container.appendChild(toast);
+        toast.appendChild(createSnack(message, toast_id));
+        var toast = new bootstrap.Toast(toast, option);
+        toast.show();
+        toast_id = toast_id + 1;
+    }
+    $(document).ready(function() {
+        var options = {
+            enableSounds: true,
+            sounds: {
+                info: "https://res.cloudinary.com/dxfq3iotg/video/upload/v1557233294/info.mp3",
+            },
+        };
+
+        var toast = new Toasty(options);
+        toast.configure(options);
+        $('#dodajNarudzbu').click(function() {
+            toast.info("This toast notification with sound");
+        });
+    });
+</script>

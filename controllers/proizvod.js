@@ -11,7 +11,7 @@ exports.uploadArray = upload.array('avatar', 10);
 
 exports.dajProizvode = asyncHandler(async (req, res, next) => {
     let filter_kategorije = {};
-    let filter_grad = {};
+    let filter_grad = {}; 
     if(req.query.kategorije)
         filter_kategorije = {kategorija: req.query.kategorije.split(",")};
     if (req.query.grad)
@@ -20,10 +20,10 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => {
     // console.log(req.body, 'ovdje sam')
     // SEARCH:    https://stackoverflow.com/questions/29648626/moongose-mongodb-like-operator-in-search
     var naziv = '';
-    console.log(req.query)
+    // console.log(req.query)
     if (req.query.naziv)
         naziv = req.query.naziv
-    console.log(naziv)
+    // console.log(naziv)
 
     var toSearch = naziv.split(" ").map(function(n) {
         return {
@@ -36,20 +36,24 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => {
     const proizvodi = await Proizvod.find(filter_kategorije, )
     const proizvodi = await Proizvod.find({$and:[filter_grad, filter_kategorije]  } )*/
 
-    const proizvodi = await Proizvod.find({$and:  [filter_grad, filter_kategorije, toSearch[0]]    } )
+    const proizvodi = await Proizvod.find({$and:  [filter_grad, filter_kategorije, toSearch[0] ]    } )
         .populate( 'kategorija' , 'naziv')
     // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 
-    const gradovi = await Proizvod.find().distinct('grad');
 
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     req.proizvod = proizvodi;
-    req.gradovi = gradovi;
     req.moment = moment;
     // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
 })
+
+exports.dajGrad = asyncHandler(async (req, res, next) => {
+    req.gradovi = await Proizvod.find().distinct('grad');
+    next()
+})
+
 
 exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
     const proizvodi = await Proizvod.find({korisnik: req.params.id})
@@ -168,12 +172,9 @@ exports.dajIzdvojeneProizvode = async (req, res, next) =>{
         .populate( 'kategorija' , 'naziv');
     // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 
-    const gradovi = await Proizvod.find().distinct('grad');
-
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     req.proizvod = proizvodi;
-    req.gradovi = gradovi;
     req.moment = moment;
     // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
