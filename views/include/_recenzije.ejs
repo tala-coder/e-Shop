@@ -1,42 +1,39 @@
 
-<div class="card">
-    <div class="card-body">
+<!--<div class="card mb-2">
+    <div class="card-body" >
         <div class="row">
             <div class="col-md-2">
-                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" alt="slika"/>
                 <p class=" text-center text-muted">15 Minutes Ago</p>
             </div>
             <div class="col-md-10">
                 <p>
-                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html" id="slikaKorisnika"><strong>Maniruzzaman Akash</strong></a>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 
                 </p>
-                <div class="clearfix"></div>
+                <div class="clearfix" id="komentar"></div>
                 <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic  It was popularised in the 1960s with the release, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                 <p>
                     <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Odgovori </a>
-                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Sviđa mi se</a>
                 </p>
             </div>
         </div>
-        <div class="card card-inner">
-            <div class="card-body">
-                <div class="row">
-            </div>
-        </div>
     </div>
-</div>
+</div>-->
 
-    <div class="container  text-dark">
-        <div class="row d-flex justify-content-center">
-<!--            // col-lg-8 col-xl-6-->
+<div  class="card mb-2"   id="komentarDiv"> </div>
+
+<div class="container  text-dark">
+<div class="row d-flex justify-content-center">
+ <!--            // col-lg-8 col-xl-6-->
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body p-3">
+                    <div class="card-body ">
                         <div class="d-flex flex-start w-100">
                             <img
                                     class="rounded-circle shadow-1-strong me-3"
@@ -86,7 +83,7 @@
                                     >
                                 </div>
                                 <div class="d-flex justify-content-end mt-3">
-                                     <button type="button" class="btn btn-primary"> Postavi pitanje</button>
+                                     <button type="button" class="btn btn-primary" onclick="addRow()" > Objavi </button>
                                 </div>
                             </div>
                         </div>
@@ -94,14 +91,44 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-jQuery(document).ready(function($){
+    function addRow () {
+        document.querySelector('#komentarDiv').insertAdjacentHTML(
+            'afterbegin',
+            `
+            <div class="card-body" >
+             <div class="row">
+            <div class="col-md-2">
+                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" alt="slika"/>
+                <p class=" text-center text-muted">15 Minutes Ago</p>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html" id="slikaKorisnika"><strong>Maniruzzaman Akash</strong></a>
+                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 
+                </p>
+                <div class="clearfix" id="komentar"></div>
+                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic  It was popularised in the 1960s with the release, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>
+                    <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Odgovori </a>
+                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Sviđa mi se</a>
+                </p>
+            </div>
+        </div>
+    </div>
+            `
+        )
+    }
+
+
+    jQuery(document).ready(function($){
 $(".btnrating").on('click',(function(e) {
 
     var previous_value = $("#selected_rating").val();
