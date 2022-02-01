@@ -83,6 +83,10 @@ const proizvodSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    usluga: {
+        type: Boolean,
+        default: false,
+    },
     besplatnaDostava: {
         type: Boolean,
         default: false,
