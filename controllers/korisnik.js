@@ -117,7 +117,7 @@ exports.dajTrenutnogKorisnika = asyncHandler(async (req,res, next) => {
     // console.log(others
 
     if(!korisnik)
-        next();
+        return next();
     req.korisnik = korisnik;
     next();
 })
@@ -246,7 +246,6 @@ exports.dajKorisnikeZaChat = async (req, res, next) =>{
     if(!korisnici) {
         res.status(500).json({success: false})
     }
-    console.log('korisnici', korisnici)
     req.korisnici = korisnici;
     next();
 }

@@ -1,14 +1,13 @@
-
-<!--<div class="card mb-2">
+<% for(var i=0; i<recenzija.length; i++) {%>
     <div class="card-body" >
         <div class="row">
-            <div class="col-md-2">
-                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" alt="slika"/>
-                <p class=" text-center text-muted">15 Minutes Ago</p>
+            <div class="col-md-2 text-center pe-0">
+                <img src=" <%=recenzija[i].korisnik.slika%>  " class="rounded-circle shadow-1-strong img-fluid" alt="slika" width="99"  height="99"  />
+                <p class=" text-center text-muted"> <%= moment(recenzija[i].createdAt).endOf('second').fromNow()%></p>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 ps-0">
                 <p>
-                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html" id="slikaKorisnika"><strong>Maniruzzaman Akash</strong></a>
+                    <a class="float-left" href="/TalaShop/korisnik/<%=recenzija[i].korisnik._id%>" id="slikaKorisnika"><strong><%=recenzija[i].korisnik.ime%> <%=recenzija[i].korisnik.prezime%></strong></a>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
@@ -16,7 +15,7 @@
 
                 </p>
                 <div class="clearfix" id="komentar"></div>
-                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic  It was popularised in the 1960s with the release, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p> <%=recenzija[i].komentar%> </p>
                 <p>
                     <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Odgovori </a>
                     <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Sviđa mi se</a>
@@ -24,20 +23,22 @@
             </div>
         </div>
     </div>
-</div>-->
+<% } %>
 
 <div  class="card mb-2"   id="komentarDiv"> </div>
 
-<div class="container  text-dark">
-<div class="row d-flex justify-content-center">
- <!--            // col-lg-8 col-xl-6-->
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body ">
                         <div class="d-flex flex-start w-100">
                             <img
                                     class="rounded-circle shadow-1-strong me-3"
-                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                                    <% if(user){ %>
+                                    src="<%= korisnik.slika %>"
+                                     <% } else{ %>
+                                    src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                    <% } %>
+
                                     alt="avatar"
                                     width="65"
                                     height="65"
@@ -77,37 +78,44 @@
                                     </div>
 <!--                                 </ul>-->
                                 <div class="form-outline">
-                                    <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                                    <textarea class="form-control" id="textAreaExample" value='' rows="2"></textarea>
                                     <label class="form-label" for="textAreaExample"
                                     >Kakav je vaš dojam? </label
                                     >
                                 </div>
                                 <div class="d-flex justify-content-end mt-3">
-                                     <button type="button" class="btn btn-primary" onclick="addRow()" > Objavi </button>
+                                             <% if(user){ %>
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="addRow('<%=user%>', '<%=proizvod.korisnik._id%>' ,
+                                                    '<%=korisnik.slika%>', '<%=korisnik._id%>' , '<%=proizvod._id%>'  )" > Objavi </button>
+                                              <% } else{ %>
+                                        <button type="button" class="btn btn-primary"  > Objavi </button>
+                                             <% } %>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-    function addRow () {
+
+    function addRow (username, id, slika, idkomentosobe, idproizvoda) {
+        let text = document.getElementById('textAreaExample').value;
         document.querySelector('#komentarDiv').insertAdjacentHTML(
             'afterbegin',
             `
             <div class="card-body" >
              <div class="row">
-            <div class="col-md-2">
-                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" alt="slika"/>
-                <p class=" text-center text-muted">15 Minutes Ago</p>
+            <div class="col-md-2 text-center pe-0">
+                <img src=" ${slika}  " class="rounded-circle shadow-1-strong img-fluid" alt="slika" width="99"  height="99"  />
+                <p class=" text-center text-muted">Prije minutu</p>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 ps-0">
                 <p>
-                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html" id="slikaKorisnika"><strong>Maniruzzaman Akash</strong></a>
+                    <a class="float-left" href="/TalaShop/korisnik/${id}" id="slikaKorisnika"><strong>${username}</strong></a>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
@@ -115,7 +123,7 @@
 
                 </p>
                 <div class="clearfix" id="komentar"></div>
-                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic  It was popularised in the 1960s with the release, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p> ${text} </p>
                 <p>
                     <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Odgovori </a>
                     <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Sviđa mi se</a>
@@ -125,8 +133,22 @@
     </div>
             `
         )
-    }
+        document.getElementById('textAreaExample').value = '';
+        $.ajax({
+            url: `/TalaShop/proizvod/${idproizvoda}/dodajKomentar`,
+            type: 'POST',
+            data: {
+                tip: 'Proizvod',
+                korisnik: idkomentosobe,
+                proizvod: idproizvoda,
+                rating: 4,
+                komentar: text
+            },
+            beforeSend: function () {}
+        }).done(function (data) {
 
+        })
+    }
 
     jQuery(document).ready(function($){
 $(".btnrating").on('click',(function(e) {
