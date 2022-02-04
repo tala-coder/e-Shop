@@ -26,8 +26,7 @@ let io = null;
 
 
 const {generateMessage, generateLocation, dodajUsera, removeUser, getUser} = require('../helpers/soketi')
-const {log} = require("debug");
-router.get('/inbox', function(req, res) {
+ router.get('/inbox', function(req, res) {
     if (!io){
         io = require('socket.io')(req.connection.server);
         io.sockets.on('connection', (socket) => {

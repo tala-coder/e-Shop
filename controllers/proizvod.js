@@ -5,13 +5,14 @@ const moment = require('moment');
 moment.locale('bs');
 const multer  = require('multer');
 const { storage } = require('../helpers/multer');
+const Recenzija = require("../models/recenzije");
 const upload = multer({ storage: storage })
 exports.uploadArray = upload.array('avatar', 10);
 
 
 exports.dajProizvode = asyncHandler(async (req, res, next) => {
     let filter_kategorije = {};
-    let filter_grad = {}; 
+    let filter_grad = {};
     if(req.query.kategorije)
         filter_kategorije = {kategorija: req.query.kategorije.split(",")};
     if (req.query.grad)
@@ -50,7 +51,8 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => {
 })
 
 exports.dajGrad = asyncHandler(async (req, res, next) => {
-    req.gradovi = await Proizvod.find().distinct('grad');
+    gradovi = await Proizvod.find().distinct('grad');
+    req.gradovi = gradovi;
     next()
 })
 
@@ -68,12 +70,29 @@ exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajP
 
 exports.dajProizvod = async (req, res, next) =>{
     const proizvod = await Proizvod.findById(req.params.id)
-         .populate({ path: 'korisnik', select: '_id nickName zemlja ulica telefon grad postanskiBroj ime', model: Korisnik })
+         .populate({ path: 'korisnik', select: '_id slika nickName zemlja ulica telefon grad postanskiBroj ime', model: Korisnik })
          .populate({ path: 'kategorija', select: 'naziv', model: Kategorija });
     if(!proizvod)
         res.status(500).json({success: false, bug: `exports.dajProizvod`})
 
     req.proizvod = proizvod;
+    req.moment = moment;
+
+    next();
+}
+
+exports.dajProizvodiKomentar = async (req, res, next) =>{
+    const proizvod = await Proizvod.findById(req.params.id)
+         .populate({ path: 'korisnik', select: '_id slika nickName ime', model: Korisnik })
+    const recenzija = await Recenzija.find({proizvod: req.params.id})
+         .populate({ path: 'korisnik', select: '_id slika nickName ime prezime', model: Korisnik })
+    if(!proizvod)
+        res.status(500).json({success: false, bug: `exports.dajProizvodiKomentar - proizvod`})
+    if(!recenzija)
+        res.status(500).json({success: false, bug: `exports.dajProizvodiKomentar - recenzija`})
+
+    req.proizvod = proizvod;
+    req.recenzija = recenzija;
     req.moment = moment;
     next();
 }
@@ -179,3 +198,17 @@ exports.dajIzdvojeneProizvode = async (req, res, next) =>{
     // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
 }
+
+exports.dodajKomentar =  asyncHandler(async (req, res) =>{
+    let recenzija = new Recenzija({
+        tip: req.body.tip,
+        korisnik: req.body.korisnik,
+        proizvod: req.body.proizvod,
+        rating: req.body.rating,
+        komentar: req.body.komentar
+    })
+    recenzija = await recenzija.save();
+    if(!recenzija)
+        return res.status(500).json({success: false, message: `Nije moguće postaviti recenziju!`, bug: `exports.postaviKomentar`});
+    res.send(recenzija);
+})
