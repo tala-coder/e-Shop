@@ -8,8 +8,11 @@ exports.requireAuth = (req, res, next) => {
                 console.log(err.message);
                 res.redirect('/TalaShop/korisnik/login');
         } else {
-            console.log(decodedToken);
-            next();
+            console.log(decodedToken, 'decoded');
+            if (decodedToken.korisnikStatus === 'arhiviran')
+                res.status(400).json({message: `Pogresano !`, bug: `exports.logujSe`});
+            else
+                next();
         }
     })
 }
@@ -34,6 +37,7 @@ exports.checkUser = (req, res, next) => {
             res.locals.admin = decodedToken.jelAdmin;
             res.locals.userId = decodedToken.korisnikId;
             res.locals.slika = decodedToken.korisnikSlika;
+            res.locals.status = decodedToken.korisnikStatus;
             next();
         }
     })

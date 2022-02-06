@@ -11,6 +11,19 @@ const RecenzijaTrgovac = require("../models/recenzije_korisnik");
 const upload = multer({ storage: storage })
 exports.uploadSingle = upload.single('avatar');
 
+/*const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+client.messages
+    .create({
+        body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+        from: '+19106295923',
+        to: '+38762047721'
+    })
+    .then(message => console.log(message.sid));*/
+
+
+
 
 exports.logujSeForma = asyncHandler(async function(req, res) {
     res.render('login', { title: 'Login' });
@@ -193,11 +206,18 @@ exports.logujSe = async (req, res) => {
     const secret = "tajna";
     if (!korisnik)
         return res.status(400).json({message: `Korisnik nije registrovan!.`, bug: `exports.logujSe`});
+
     else if( korisnik.mail !== req.body.mail)
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
+
+    else if( korisnik.status === 'blokiran' )
+        res.status(400).json({message: `Korisnik ${korisnik.ime} je blokiran na 15 dana!`, bug: `exports.logujSe`});
+
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
         const token = jwt.sign(
-            {korisnikId: korisnik.id, korisnikSlika: korisnik.slika, korisnikIme: korisnik.ime,  korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
+            {korisnikId: korisnik.id, korisnikSlika: korisnik.slika, korisnikIme: korisnik.ime,
+                jelArhiviran: korisnik.jelArhiviran, korisnikStatus: korisnik.status,
+                korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
             secret,
             {expiresIn : '1d'})
          res.cookie("jwt", token, {
@@ -212,6 +232,8 @@ exports.logujSe = async (req, res) => {
     }
     else
         res.status(400).json({message: `Pogresan password!`, bug: `exports.logujSe`});
+
+
 }
 
 exports.obrisiKorisnika = async (req, res) => {

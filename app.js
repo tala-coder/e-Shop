@@ -3,8 +3,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const errorHandler = require('./helpers/error-handler');
+var logger = require('morgan'); 
 const auth = require('./helpers/authMiddleware');
 var app = express();
 
@@ -25,7 +24,7 @@ app.use(logger('dev'));
 // TODO: ukloniti komentar // use JWT auth to secure the api
 // app.use(authJwt());
 // global error handler
-app.use(errorHandler);
+// app.use(errorHandler);
 
 
 

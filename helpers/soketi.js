@@ -20,8 +20,10 @@ const generateLocation = (username, url) => {
 const users = []
 
 const dodajUsera = ({ id, username, room }) => {
-    username = username.trim().toLowerCase()
-    room = room.trim().toLowerCase()
+    // username = username.trim().toLowerCase()
+    username = username.toLowerCase()
+    // room = room.trim().toLowerCase()
+    room = room.toLowerCase()
 
     if (!username || !room) {
         return {

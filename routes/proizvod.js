@@ -19,7 +19,7 @@ router.post(`/`, proizvod.uploadArray,  proizvod.dodajProizvod);       //redirec
 router.delete('/:id',proizvod.obrisiProizvod);  //redirect na profil page
 router.get(`/brojProizvoda`, proizvod.brojProizvoda);
 router.get(`/izdvojeniProizvodi/:broj?`, proizvod.dajIzdvojeneProizvode)
-router.get(`/:id`, proizvod.dajProizvodiKomentar, /*korisnik.dajKorisnikeZaChat, */ dajTrenutnogKorisnika,     function(req, res) {
+router.get(`/:id`, proizvod.dajProizvodiKomentar, /*korisnik.dajKorisnikeZaChat, */ korisnik.dajTrenutnogKorisnika,     function(req, res) {
     res.render('proizvod', { proizvod: req.proizvod,  korisnik: req.korisnik, recenzija: req.recenzija,  moment: req.moment  })
 });
 router.post(`/:id/dodajKomentar`, proizvod.dodajKomentar);       //redirect na profil page

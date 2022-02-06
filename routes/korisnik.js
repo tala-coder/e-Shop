@@ -31,7 +31,7 @@ router.get('/urediProfil/:id',   korisnik.dajKorisnika, kategorija.dajKategorije
 });
 
 
-router.get(`/:id`,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, korisnik.dajKomentare, // moguci bug, konfuzija
+router.get(`/:id`, auth.requireAuth,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, korisnik.dajKomentare, // moguci bug, konfuzija
     function (req, res){
         res.render('korisnik', { korisnik: req.korisnik,   recenzija: req.recenzija,  proizvod: req.proizvod,  moment: req.moment });
 });
@@ -41,7 +41,7 @@ router.get(`/`,  korisnik.dajKorisnike, );
 router.post(`/register`,  korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
 router.delete('/:id', korisnik.obrisiKorisnika);
-router.post('/urediProfil/:id', korisnik.uploadSingle, korisnik.urediKorisnika);    // Pokusat sa NPM od profesora
+router.post('/urediProfil/:id',  korisnik.uploadSingle, korisnik.urediKorisnika);    // Pokusat sa NPM od profesora
 router.post('/:id/dodajKomentar', korisnik.dodajKomentar);    // Pokusat sa NPM od profesora
 
 // router.put('/:id', korisnik.uploadSingle,  korisnik.urediKorisnika);

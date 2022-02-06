@@ -1,19 +1,11 @@
- const sGmail = require('@sendgrid/mail')
+ const sGmail = require('@sendgrid/mail');
  const API_KEY = process.env.SENDGRID_API_KEY;
+ sGmail.setApiKey(API_KEY);
 
-sGmail.setApiKey(API_KEY);
-
-const message = {
-    to: 'fajkesejdic@gmail.com', // kupac
-    from: 'muhammedtalic.it@gmail.com',
-    subject: 'subject..',
-    text: 'text neki,,, ',
-    html: ' <h1>Naslov neki</h1> ',
-}
 
  // Nakon kreirane narudžbe, šalje se e-mail kupcu da je narudžba uspješno
  // poslana, te kupac dobija e-mail i pri promjeni statusa narudžbe;
-
+// +19106295923
 
 
 
@@ -39,9 +31,9 @@ exports.PromijeniStatusNarudzbe = async (req,res, next)=>{
         console.log(nizMailova, 'nizMailova');
         await sGmail.send({
                 to: nizMailova, // kupac
-                from: {
+                from: {  //
                     name: 'Tala Shop',
-                    email:'muhammedtalic.it@gmail.com'
+                    email:'tala.shop.2022@gmail.com'
                 },
                 subject: 'Narudžba',
                 text: 'Vaša narudžba je odobrena.',
