@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
 const multer  = require('multer');
 const { storage } = require('../helpers/multer');
+const Recenzija = require("../models/recenzije");
+const RecenzijaTrgovac = require("../models/recenzije_korisnik");
 const upload = multer({ storage: storage })
 exports.uploadSingle = upload.single('avatar');
 
@@ -109,6 +111,31 @@ exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
     next();
 })
 
+exports.dodajKomentar =  asyncHandler(async (req, res) =>{
+    let recenzija = new RecenzijaTrgovac({
+        korisnik: req.body.korisnik,
+        trgovac: req.body.trgovac,
+        rating: req.body.rating,
+        komentar: req.body.komentar
+    })
+    recenzija = await recenzija.save();
+    if(!recenzija)
+        return res.status(500).json({success: false, message: `Nije moguće postaviti recenziju!`, bug: `exports.postaviKomentarTrgovac`});
+    // res.send(recenzija);
+})
+
+exports.dajKomentare = asyncHandler(async (req,res, next)=>{
+    if(!mongoose.isValidObjectId(req.params.id))
+        return res.status(400).json({message: `ID korisnika ne postoji`})
+    const recenzija = await RecenzijaTrgovac.find({trgovac: req.params.id})
+        .populate({ path: 'korisnik', select: '_id slika nickName ime prezime', model: Korisnik })
+
+    if(!recenzija)
+        res.status(500).json({  bug: `exports.dajkomentartrgovac`});
+    req.recenzija = recenzija;
+    next();
+})
+
 exports.dajTrenutnogKorisnika = asyncHandler(async (req,res, next) => {
     let id = res.locals.userId;
     const korisnik = await Korisnik.findById( id ).select('-passwordHash');
@@ -170,7 +197,7 @@ exports.logujSe = async (req, res) => {
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
         const token = jwt.sign(
-            {korisnikId: korisnik.id, korisnikIme: korisnik.ime,  korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
+            {korisnikId: korisnik.id, korisnikSlika: korisnik.slika, korisnikIme: korisnik.ime,  korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
             secret,
             {expiresIn : '1d'})
          res.cookie("jwt", token, {

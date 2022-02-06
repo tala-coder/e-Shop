@@ -33,6 +33,7 @@ exports.checkUser = (req, res, next) => {
             res.locals.nickname = decodedToken.korisnikNickname;
             res.locals.admin = decodedToken.jelAdmin;
             res.locals.userId = decodedToken.korisnikId;
+            res.locals.slika = decodedToken.korisnikSlika;
             next();
         }
     })

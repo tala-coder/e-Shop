@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const recenzijaSchema = mongoose.Schema(
+const recenzijaTrgovacSchema = mongoose.Schema(
     {
         korisnik: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Korisnik",
         },
-        proizvod: {
+        trgovac: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Proizvod",
+            ref: "Korisnik",
         },
         rating: {
             type: Number,
@@ -21,5 +21,5 @@ const recenzijaSchema = mongoose.Schema(
         timestamps: true,
     }
 );
-Recenzija = mongoose.model('Recenzija', recenzijaSchema);
-module.exports = Recenzija;
+RecenzijaTrgovac = mongoose.model('RecenzijaTrgovac', recenzijaTrgovacSchema);
+module.exports = RecenzijaTrgovac;

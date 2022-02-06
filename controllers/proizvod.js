@@ -86,6 +86,7 @@ exports.dajProizvodiKomentar = async (req, res, next) =>{
          .populate({ path: 'korisnik', select: '_id slika nickName ime', model: Korisnik })
     const recenzija = await Recenzija.find({proizvod: req.params.id})
          .populate({ path: 'korisnik', select: '_id slika nickName ime prezime', model: Korisnik })
+
     if(!proizvod)
         res.status(500).json({success: false, bug: `exports.dajProizvodiKomentar - proizvod`})
     if(!recenzija)
@@ -201,7 +202,6 @@ exports.dajIzdvojeneProizvode = async (req, res, next) =>{
 
 exports.dodajKomentar =  asyncHandler(async (req, res) =>{
     let recenzija = new Recenzija({
-        tip: req.body.tip,
         korisnik: req.body.korisnik,
         proizvod: req.body.proizvod,
         rating: req.body.rating,

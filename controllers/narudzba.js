@@ -1,28 +1,18 @@
+ const sGmail = require('@sendgrid/mail')
+ const API_KEY = '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';
 
-// exports.dajNarudzbe = async (req, res, next) =>{ // .sort({'narudzbaTime'} : -1); -> https://mongoosejs.com/docs/api/query.html#query_Query-sort
-// // .populate({path: 'korisnik', select: 'nickName zemlja', model: Korisnik }).sort('createdAt')
-//     const narudzbe = await Narudzba.find({})
-//         .populate('korisnik' )
-//         .populate({path : 'orderItems', populate: 'proizvod'})
-//
-//     if(!narudzbe)
-//         res.status(500).json({success: false});
-//     req.narudzbe = narudzbe;
-//     res.send(narudzbe)
-//     // next();
-// }
+sGmail.setApiKey(API_KEY);
 
-// exports.dajNarudzbu = async (req, res) =>{
-//     const narudzbe = await Narudzba.findById(req.params.id)
-//         .populate('korisnik', 'imePrezime')
-//         .populate({
-//             path: 'orderItems', populate: {
-//                 path : 'proizvod', populate: 'kategorija'}
-//         });
-//     if(!narudzbe)
-//         res.status(500).json({success: false});
-//     res.send(narudzbe);
-// }
+const message = {
+    to: 'muhammedtalic.it@gmail.com',
+    from: 'tala.shop.2022@gmail.com',
+    
+}
+
+
+
+
+
 
 const  OrderItem   = require('../models/OrderItem');
 //const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor

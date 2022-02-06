@@ -1,12 +1,12 @@
 
 <% for(var i=0; i<recenzija.length; i++) {%>
     <div class="card-body pb-0" >
-        <div class="row">
-            <div class="col-md-2 text-center pe-0">
+        <div class="row  ">
+            <div class="col-md-2 text-center pe-0 ">
                 <img src=" <%=recenzija[i].korisnik.slika%>  " class="rounded-circle shadow-1-strong img-fluid" alt="slika" width="79"  height="79"  />
                 <p class=" text-center text-muted"> <%= moment(recenzija[i].createdAt).endOf('second').fromNow()%></p>
             </div>
-            <div class="col-md-10 ps-0 ">
+            <div class="col-md-10 ps-0  ">
                 <p class="m-0">
                     <a class="float-left" href="/TalaShop/korisnik/<%=recenzija[i].korisnik._id%>" id="slikaKorisnika"><strong><%=recenzija[i].korisnik.ime%> <%=recenzija[i].korisnik.prezime%></strong></a>
                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
@@ -88,7 +88,10 @@
                                              <% if(user){ %>
                                     <button type="button" class="btn btn-primary"
                                             onclick="addRow('<%=user%>',
-                                                    '<%=korisnik.slika%>', '<%=korisnik._id%>' , '<%=proizvod._id%>'  )" > Objavi </button>
+                                                    '<%=slika%>',
+                                                    '<%=userId%>',
+                                                    '<%=korisnik._id%>'
+                                                    )" > Objavi </button>
                                               <% } else{ %>
                                         <button type="button" class="btn btn-primary"  > Objavi </button>
                                              <% } %>
@@ -103,15 +106,16 @@
 
 <script>
 
-    function addRow (username,  slika, idkomentosobe, idproizvoda) {
+    function addRow (username, slika, idkomentosobe, idTrgovca) {
+        console.log(username, slika, idkomentosobe, idTrgovca, 'ocdjeeeeee')
         let text = document.getElementById('textAreaExample').value;
         document.querySelector('#komentarDiv').insertAdjacentHTML(
             'afterbegin',
             `
-            <div class="card-body pb-0" >
+            <div class="card-body pb-0"  >
              <div class="row">
             <div class="col-md-2 text-center pe-0">
-                <img src=" ${slika}  " class="rounded-circle shadow-1-strong img-fluid" alt="slika" width="99"  height="99"  />
+                <img src=" ${slika}  " class="rounded-circle shadow-1-strong img-fluid" alt="slika" width="79"  height="79"  />
                 <p class=" text-center text-muted">Prije minutu</p>
             </div>
             <div class="col-md-10 ps-0">
@@ -136,12 +140,11 @@
         )
         document.getElementById('textAreaExample').value = '';
         $.ajax({
-            url: `/TalaShop/proizvod/${idproizvoda}/dodajKomentar`,
+            url: `/TalaShop/korisnik/${idTrgovca}/dodajKomentar`,
             type: 'POST',
             data: {
-                tip: 'Proizvod',
                 korisnik: idkomentosobe,
-                proizvod: idproizvoda,
+                trgovac: idTrgovca,
                 rating: 4,
                 komentar: text
             },
