@@ -4,33 +4,52 @@
 sGmail.setApiKey(API_KEY);
 
 const message = {
-    to: 'fajkesejdic@gmail.com',
+    to: 'fajkesejdic@gmail.com', // kupac
     from: 'muhammedtalic.it@gmail.com',
     subject: 'subject..',
     text: 'text neki,,, ',
     html: ' <h1>Naslov neki</h1> ',
 }
 
-
+ // Nakon kreirane narudžbe, šalje se e-mail kupcu da je narudžba uspješno
+ // poslana, te kupac dobija e-mail i pri promjeni statusa narudžbe;
 
 
 
 
 
 const  OrderItem   = require('../models/OrderItem');
-//const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor
+ const Korisnik = require("../models/korisnik");
+//const Kategorija   = require("../models/kategorija"); // Cudan bug ? constructor ?
 
 
 exports.PromijeniStatusNarudzbe = async (req,res, next)=>{
     const korpa = await OrderItem.find({korisnik: res.locals.userId, status:'Narudžba je u korpi'}) // potencijalni bug
-
     let data = req.body;
+    var nizMailova = [];
 
     if (req.query.status === 'Odobreno') {
         await Promise.all(data.map(async (id) => {
-            console.log('nesto')
             await OrderItem.findByIdAndUpdate(id, {status: 'Odobreno'}, {new: true}); // req.body.status
+            const mail = await OrderItem.findById(id, {status: 'Odobreno'})
+                .populate({ path: 'korisnik', select: 'mail', model: Korisnik });
+
+            // if (nizMailova.includes(mail.korisnik.mail) === false) nizMailova.push(mail.korisnik.mail); // set array
         }))
+        console.log(nizMailova, 'nizMailova');
+        await sGmail.send({
+                to: nizMailova, // kupac
+                from: {
+                    name: 'Tala Shop',
+                    email:'muhammedtalic.it@gmail.com'
+                },
+                subject: 'Narudžba',
+                text: 'Vaša narudžba je odobrena.',
+                html: ` <p>Poštovani,  </p>  
+                        <p> Vaša narudžba je odobrena.</p> 
+                        <small> Tala<b style="color: #003399" >Shop</b> Team</small>`,
+            }
+        );
     }
     else if (req.query.status === 'Odbijeno') {
         await Promise.all(data.map(async (id) => {
@@ -87,8 +106,17 @@ exports.dodajNarudzbu = async (req, res, next) => {
         status: req.body.status || 'Narudžba je u korpi'
     })
     korpa = await korpa.save();
-    await sGmail.send(message);
-
+    /*await sGmail.send({
+            to: 'tala.shop.2022@gmail.com', // kupac
+            from: {
+                name: 'Tala Shop',
+                email:'muhammedtalic.it@gmail.com',
+            },
+            subject: 'Narudzba',
+            text: 'Uspješno ste kreirali narudžbu.',
+            html: ' <p>Uspješno ste kreirali narudžbu.</p> ',
+        }
+    );*/
     if(!korpa)
         return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajNarudzbu.`})
     res.send(korpa);
@@ -120,19 +148,6 @@ exports.obrisiNarudzbu = (req, res)=>{
     //     return res.status(500).json({success: false, error: err})
     // })
 }
-
-// exports.PromijeniStatusNarudzbe = async (req, res)=> {
-//     const narudzba = await Narudzba.findByIdAndUpdate(
-//         req.params.id,
-//         {
-//             status: req.body.status
-//         },
-//         { new: true}
-//     )
-//     if(!narudzba)
-//         return res.status(400).send('Nije moguće urediti narudzbu!')
-//     res.send(narudzba);
-// }
 
 exports.dajNarudzbe = async (req, res, next) =>{
     const korpa = await OrderItem.find({korisnik: res.locals.userId, status: 'Narudžba je u korpi'})
