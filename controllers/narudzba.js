@@ -1,13 +1,16 @@
  const sGmail = require('@sendgrid/mail')
- const API_KEY = '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';
+ const API_KEY = process.env.SENDGRID_API_KEY;
 
 sGmail.setApiKey(API_KEY);
 
 const message = {
-    to: 'muhammedtalic.it@gmail.com',
-    from: 'tala.shop.2022@gmail.com',
-    
+    to: 'fajkesejdic@gmail.com',
+    from: 'muhammedtalic.it@gmail.com',
+    subject: 'subject..',
+    text: 'text neki,,, ',
+    html: ' <h1>Naslov neki</h1> ',
 }
+
 
 
 
@@ -84,7 +87,7 @@ exports.dodajNarudzbu = async (req, res, next) => {
         status: req.body.status || 'Narudžba je u korpi'
     })
     korpa = await korpa.save();
-
+    await sGmail.send(message);
 
     if(!korpa)
         return res.status(400).json({success: false , message:`korpa se ne može kreirati!`, bug:`exports.dodajNarudzbu.`})
