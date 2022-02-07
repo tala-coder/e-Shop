@@ -4,15 +4,19 @@ const korisnik = require("../controllers/korisnik");
 const proizvod = require("../controllers/proizvod");
 const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
+const narudzba = require("../controllers/narudzba");
+const {brojkategorija} = require("../controllers/kategorija");
 
 
 
 /*      HEAD ADMIN      */
-router.get(`/headadmin`,  korisnik.dajKorisnike, korisnik.statistika, kategorija.dajKategorije, /*kategorija.statistika,*/
+router.get(`/headadmin`,  korisnik.dajKorisnike, korisnik.statistika, narudzba.dajGodisnjuZaradu,
+    narudzba.dajMjesecnuZaradu, kategorija.dajKategorije, kategorija.brojkategorija,
     function (req, res){
     let title = req.query;
-        res.render('HEADadmin', { /*kat: req.kat,*/  korisnici: req.korisnici, status: req.status, spol: req.spol, kategorije: req.kategorije, title:  title || '',
-
+        res.render('HEADadmin', { prihodiMjesec: req.prihodiMjesec, prihodiGodina: req.prihodiGodina,
+            korisnici: req.korisnici, status: req.status, spol: req.spol,
+            kategorije: req.kategorije, title:  title || '', brojkategorija: req.brojkategorija,
             moment: req.moment });
     });
 

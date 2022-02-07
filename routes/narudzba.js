@@ -51,5 +51,6 @@ router.get(`/get/userorders/:userid`, async (req, res) =>{
 })
 
 router.get(`/prihodi/mjesec`, narudzba.dajMjesecnuZaradu)
+router.get(`/prihodi/godina`, narudzba.dajGodisnjuZaradu)
 
 module.exports = router;

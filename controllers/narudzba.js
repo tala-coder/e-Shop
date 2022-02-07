@@ -174,28 +174,57 @@ exports.dajNarudzbe = async (req, res, next) =>{
     next();
 }
 
-exports.dajMjesecnuZaradu = async (req, res) => {
+exports.dajMjesecnuZaradu = async (req, res, next) => {
      const date = new Date();
      const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
      const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
      try {
-         const income = await Order.aggregate([
+         const prihodiMjesec = await OrderItem.aggregate([
              { $match: { createdAt: { $gte: previousMonth } } },
              {
                  $project: {
                      month: { $month: "$createdAt" },
-                     cijenaProizvoda: "$amount",
+                     prodato: "$cijenaProizvoda",
                  },
              },
              {
                  $group: {
                      _id: "$month",
-                     total: { $sum: "$sales" },
+                     ukupno: { $sum: "$prodato" },
                  },
              },
          ]);
-         res.status(200).json(income);
+         req.prihodiMjesec = prihodiMjesec;
+         // res.status(200).json(prihodiMjesec);
+         next();
+     } catch (err) {
+         res.status(500).json(err);
+     }
+ };
+
+ exports.dajGodisnjuZaradu = async (req, res, next) => {
+     const date = new Date();
+     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+     try {
+         const prihodiGodina = await OrderItem.aggregate([
+             { $match: { createdAt: { $gte: lastYear } } },
+             {
+                 $project: {
+                     month: { $month: "$createdAt" },
+                 },
+             },
+             {
+                 $group: {
+                     _id: "$month",
+                     ukupno: { $sum: 1 },
+                 },
+             },
+         ]);
+         req.prihodiGodina = prihodiGodina;
+         // res.status(200).json(prihodiGodina);
+         next();
      } catch (err) {
          res.status(500).json(err);
      }

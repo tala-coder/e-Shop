@@ -54,5 +54,13 @@ exports.obrisiKetegoriju = (req, res)=>{
     })
 }
 
+exports.brojkategorija = async (req, res, next) =>{
+    const brojkategorija = await Kategorija.countDocuments();
+    if(!brojkategorija)
+        res.status(500).json({success: false});
+    // res.json({brojkategorija: brojkategorija});
+     req.brojkategorija = brojkategorija ;
+    next();
+}
 
 

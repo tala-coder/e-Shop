@@ -130,7 +130,6 @@
                     <!-- Collapse 2 -->
                     <!-- Collapse 3 -->
 
-                 <!--
                     <a
                             class="list-group-item list-group-item-action py-2 ripple"
                             aria-current="true"
@@ -142,20 +141,16 @@
                         <i class="fas fa-poll-h  fa-fw me-3"></i
                          ><span> Ostala statistika</span>
                     </a>
-                    &lt;!&ndash; Collapsed content &ndash;&gt;
+                    <!-- Collapsed content -->
                     <ul
                             href="/TalaShop/narudzba/korpa"
                             id="collapseExample3"
                             class="collapse list-group list-group-flush"
                     >
                         <li class="list-group-item py-1">
-                            <a href="/TalaShop/korisnik/headadmin?status=Statistika1"  class="text-reset"> Prodaja  </a>
-                        </li>
-                        <li class="list-group-item py-1">
-                            <a href="/TalaShop/korisnik/headadmin?status=Statistika2"  class="text-reset"> Kupovina  </a>
+                            <a href="/TalaShop/korisnik/headadmin?status=Prihodi"  class="text-reset"> Prodaja  </a>
                         </li>
                     </ul>
-                 -->
                     <!-- Collapse 2 -->
                 </div>
             </div>
@@ -175,6 +170,11 @@
             case 'Statistika korisnika' : %>
 <!--            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>-->
             <%- include('head_admin/_statistika_korisnik.ejs') %>
+                    <% break;
+
+            case 'Prihodi' : %>
+<!--            <h1 class="display-5 text-center">  Lista odbijenih narudžbi </h1>-->
+            <%- include('head_admin/_statistika_prihodi.ejs') %>
                     <% break;
 
             case 'Lista kategorija' : %>
