@@ -3,7 +3,6 @@ const router = express.Router();
 const proizvod = require("../controllers/proizvod");
 const kategorija = require("../controllers/kategorija");
 const korisnik = require("../controllers/korisnik");
-const {dajTrenutnogKorisnika} = require("../controllers/korisnik");
 const auth = require("../helpers/authMiddleware");
 
 router.get('/dodajArtikl', kategorija.dajKategorije, function(req, res) {

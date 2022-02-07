@@ -1,4 +1,6 @@
 /*
+
+
 const expressJwt = require('express-jwt');
 
 function authJwt() {
@@ -9,7 +11,9 @@ function authJwt() {
         isRevoked: isRevoked // Zabrana arhiviranom korisniku da koriste metode PUT;DELETE,POST, a ostalim dozvoljava
     }).unless({ // daj mi ove rute bez tokena, ( npr. pristup posjetiocima)
         path: [
+
             // KONFUZNOO!
+
             // https://stackoverflow.com/questions/36400665/regex-for-express-router-url-to-match-path-starting-with-public
             // https://www.regextester.com // public routes that don't require authentication
             // {url: /\/TalaShop\/korisnik(.*)/ ,     methods: ['GET', 'OPTIONS'] },
