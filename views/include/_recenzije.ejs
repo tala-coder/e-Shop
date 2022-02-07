@@ -88,7 +88,7 @@
                                              <% if(user){ %>
                                     <button type="button" class="btn btn-primary"
                                             onclick="addRow('<%=user%>',
-                                                    '<%=korisnik.slika%>', '<%=korisnik._id%>' , '<%=proizvod._id%>'  )" > Objavi </button>
+                                                    '<%=korisnik.slika%>', '<%=korisnik._id%>' , '<%=proizvod._id%>'  , '<%=status%>'  )" > Objavi </button>
                                               <% } else{ %>
                                         <button type="button" class="btn btn-primary"  > Objavi </button>
                                              <% } %>
@@ -103,7 +103,8 @@
 
 <script>
 
-    function addRow (username,  slika, idkomentosobe, idproizvoda) {
+    function addRow (username,  slika, idkomentosobe, idproizvoda, status) {
+        if (status !== 'arhiviran'){
         let text = document.getElementById('textAreaExample').value;
         document.querySelector('#komentarDiv').insertAdjacentHTML(
             'afterbegin',
@@ -150,6 +151,9 @@
 
         })
     }
+    else
+        alert('Administrator Vas je arhivirao i niste u mogućnosti izvršiti ovu radnju.')
+ }
 
     jQuery(document).ready(function($){
 $(".btnrating").on('click',(function(e) {

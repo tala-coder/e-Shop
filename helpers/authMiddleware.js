@@ -1,6 +1,6 @@
     const jwt = require('jsonwebtoken');
 
-exports.requireAuth = (req, res, next) => {
+exports.jelArhiviran = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
         jwt.verify(token, "tajna", (err, decodedToken) => {
@@ -10,7 +10,7 @@ exports.requireAuth = (req, res, next) => {
         } else {
             console.log(decodedToken, 'decoded');
             if (decodedToken.korisnikStatus === 'arhiviran')
-                res.status(400).json({message: `Pogresano !`, bug: `exports.logujSe`});
+                return res.render('login/arhiviran', {    });
             else
                 next();
         }

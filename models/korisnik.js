@@ -110,6 +110,10 @@ const korisnikSchema = new mongoose.Schema({
         type: String,
         default: 'aktivan'
     },
+    blokiranDo: {
+        type: Number,
+        default: null
+    },
     ulica: {
         type: String,
         default: ''

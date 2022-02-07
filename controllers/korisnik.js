@@ -6,10 +6,11 @@ const mongoose = require("mongoose");
 const asyncHandler = require('express-async-handler')
 const multer  = require('multer');
 const { storage } = require('../helpers/multer');
-const Recenzija = require("../models/recenzije");
 const RecenzijaTrgovac = require("../models/recenzije_korisnik");
 const upload = multer({ storage: storage })
 exports.uploadSingle = upload.single('avatar');
+const moment = require('moment');
+moment.locale('bs');
 
 /*const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -152,9 +153,6 @@ exports.dajKomentare = asyncHandler(async (req,res, next)=>{
 exports.dajTrenutnogKorisnika = asyncHandler(async (req,res, next) => {
     let id = res.locals.userId;
     const korisnik = await Korisnik.findById( id ).select('-passwordHash');
-    // triky https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-    // const { ime, ...others } = korisnik._doc;
-    // console.log(others
 
     if(!korisnik)
         return next();
@@ -211,12 +209,13 @@ exports.logujSe = async (req, res) => {
         res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
 
     else if( korisnik.status === 'blokiran' )
-        res.status(400).json({message: `Korisnik ${korisnik.ime} je blokiran na 15 dana!`, bug: `exports.logujSe`});
+        return res.render('login/blokiranDo', { blokiranDo:(korisnik.blokiranDo), moment: req.moment = moment  });
+
 
     if (korisnik && bcrypt.compareSync(req.body.password, korisnik.passwordHash)){
         const token = jwt.sign(
             {korisnikId: korisnik.id, korisnikSlika: korisnik.slika, korisnikIme: korisnik.ime,
-                jelArhiviran: korisnik.jelArhiviran, korisnikStatus: korisnik.status,
+                korisnikStatus: korisnik.status,
                 korisnikNickname: korisnik.nickName, jelAdmin: korisnik.jelAdmin }, //https://jwt.io DEBUGGER,
             secret,
             {expiresIn : '1d'})
@@ -245,21 +244,17 @@ exports.obrisiKorisnika = async (req, res) => {
     return res.status(400).json({success: false , message: 'Korisnik nije obrisan!'});
 }
 
-
-/*
-exports.brojKorisnika = async (req, res) => {
-    const brojKorisnika = await Korisnik.countDocuments()
-    if (!brojKorisnika)
-        res.status(500).json({success: false})
-    res.send({brojKorisnika: brojKorisnika});
-}*/
-
-
 exports.promeniStatus = async (req, res)=> {
     console.log(req.body.status, req.params.id);
+    let blokiranDo = null;
+    if (req.body.status === 'blokiran')
+        blokiranDo = new Date(Date.now() + (3600 * 1000 * 24 * 15));
+
+
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
         {
-            status: req.body.status
+            status: req.body.status,
+            blokiranDo: blokiranDo,
         },
         { new: true}
     )

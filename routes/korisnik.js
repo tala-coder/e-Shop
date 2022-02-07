@@ -6,6 +6,7 @@ const auth = require("../helpers/authMiddleware");
 const kategorija = require("../controllers/kategorija");
 
 
+
 /*      HEAD ADMIN      */
 router.get(`/headadmin`,  korisnik.dajKorisnike, korisnik.statistika, kategorija.dajKategorije, /*kategorija.statistika,*/
     function (req, res){
@@ -15,7 +16,7 @@ router.get(`/headadmin`,  korisnik.dajKorisnike, korisnik.statistika, kategorija
             moment: req.moment });
     });
 
-router.put('/headadmin/:id', korisnik.promeniStatus);
+router.put('/headadmin/:id',  korisnik.promeniStatus);
 
 
 
@@ -31,7 +32,7 @@ router.get('/urediProfil/:id',   korisnik.dajKorisnika, kategorija.dajKategorije
 });
 
 
-router.get(`/:id`, auth.requireAuth,  korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, korisnik.dajKomentare, // moguci bug, konfuzija
+router.get(`/:id`,   korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, korisnik.dajKomentare, // moguci bug, konfuzija
     function (req, res){
         res.render('korisnik', { korisnik: req.korisnik,   recenzija: req.recenzija,  proizvod: req.proizvod,  moment: req.moment });
 });
@@ -40,9 +41,9 @@ router.get(`/:id`, auth.requireAuth,  korisnik.dajKorisnika, proizvod.dajProizvo
 router.get(`/`,  korisnik.dajKorisnike, );
 router.post(`/register`,  korisnik.registrujSe);
 router.post(`/login`, korisnik.logujSe);
-router.delete('/:id', korisnik.obrisiKorisnika);
-router.post('/urediProfil/:id',  korisnik.uploadSingle, korisnik.urediKorisnika);    // Pokusat sa NPM od profesora
-router.post('/:id/dodajKomentar', korisnik.dodajKomentar);    // Pokusat sa NPM od profesora
+router.delete('/:id',    korisnik.obrisiKorisnika);
+router.post('/urediProfil/:id', auth.jelArhiviran,  korisnik.uploadSingle, korisnik.urediKorisnika);    // Pokusat sa NPM od profesora
+router.post('/:id/dodajKomentar', auth.jelArhiviran, korisnik.dodajKomentar);    // Pokusat sa NPM od profesora
 
 // router.put('/:id', korisnik.uploadSingle,  korisnik.urediKorisnika);
 

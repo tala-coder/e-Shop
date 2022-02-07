@@ -35,7 +35,7 @@
                             <img
                                     class="rounded-circle shadow-1-strong me-3"
                                     <% if(user){ %>
-                                    src="<%= korisnik.slika %>"
+                                    src="<%= slika %>"
                                      <% } else{ %>
                                     src="https://image.ibb.co/jw55Ex/def_face.jpg"
                                     <% } %>
@@ -90,7 +90,8 @@
                                             onclick="addRow('<%=user%>',
                                                     '<%=slika%>',
                                                     '<%=userId%>',
-                                                    '<%=korisnik._id%>'
+                                                    '<%=korisnik._id%>',
+                                                    '<%=status%>'
                                                     )" > Objavi </button>
                                               <% } else{ %>
                                         <button type="button" class="btn btn-primary"  > Objavi </button>
@@ -106,12 +107,13 @@
 
 <script>
 
-    function addRow (username, slika, idkomentosobe, idTrgovca) {
-        console.log(username, slika, idkomentosobe, idTrgovca, 'ocdjeeeeee')
-        let text = document.getElementById('textAreaExample').value;
-        document.querySelector('#komentarDiv').insertAdjacentHTML(
-            'afterbegin',
-            `
+    function addRow (username, slika, idkomentosobe, idTrgovca, status) {
+        if (status !== 'arhiviran'){
+            console.log(username, slika, idkomentosobe, idTrgovca, 'ocdjeeeeee')
+            let text = document.getElementById('textAreaExample').value;
+            document.querySelector('#komentarDiv').insertAdjacentHTML(
+                'afterbegin',
+                `
             <div class="card-body pb-0"  >
              <div class="row">
             <div class="col-md-2 text-center pe-0">
@@ -137,22 +139,26 @@
         </div>
     </div>
             `
-        )
-        document.getElementById('textAreaExample').value = '';
-        $.ajax({
-            url: `/TalaShop/korisnik/${idTrgovca}/dodajKomentar`,
-            type: 'POST',
-            data: {
-                korisnik: idkomentosobe,
-                trgovac: idTrgovca,
-                rating: 4,
-                komentar: text
-            },
-            beforeSend: function () {}
-        }).done(function (data) {
+            )
+            document.getElementById('textAreaExample').value = '';
+            $.ajax({
+                url: `/TalaShop/korisnik/${idTrgovca}/dodajKomentar`,
+                type: 'POST',
+                data: {
+                    korisnik: idkomentosobe,
+                    trgovac: idTrgovca,
+                    rating: 4,
+                    komentar: text
+                },
+                beforeSend: function () {}
+            }).done(function (data) {
 
-        })
+            })
+        }
+        else
+            alert('Administrator Vas je arhivirao i niste u mogućnosti izvršiti ovu radnju.')
     }
+
 
     jQuery(document).ready(function($){
 $(".btnrating").on('click',(function(e) {

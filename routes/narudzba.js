@@ -1,6 +1,7 @@
 const  narudzba   = require('../controllers/narudzba');
 const  korisnik   = require('../controllers/korisnik');
  const express = require('express');
+const auth = require("../helpers/authMiddleware");
 const router = express.Router();
 
 
@@ -17,7 +18,7 @@ let title = req.query.status;
 })
 
 
-router.post('/korpa', narudzba.PromijeniStatusNarudzbe);
+router.post('/korpa',  auth.jelArhiviran, narudzba.PromijeniStatusNarudzbe);
 
 
 
@@ -33,9 +34,9 @@ function(req, res) {
 */
 // router.get(`/`, narudzba.dajNarudzbe)
 // router.get(`/:id`, narudzba.dajNarudzbu)
-router.post('/', narudzba.dodajNarudzbu)
-router.delete('/:id', narudzba.obrisiNarudzbu)
-router.put('/:id', narudzba.PromijeniStatusNarudzbe);
+router.post('/',  auth.jelArhiviran, narudzba.dodajNarudzbu)
+router.delete('/:id',  auth.jelArhiviran, narudzba.obrisiNarudzbu)
+router.put('/:id',  auth.jelArhiviran, narudzba.PromijeniStatusNarudzbe);
 
 router.get(`/get/userorders/:userid`, async (req, res) =>{
     const userOrderList = await Order.find({user: req.params.userid}).populate({
