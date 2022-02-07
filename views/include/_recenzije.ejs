@@ -35,7 +35,7 @@
                             <img
                                     class="rounded-circle shadow-1-strong me-3"
                                     <% if(user){ %>
-                                    src="<%= korisnik.slika %>"
+                                    src="<%= slika %>"
                                      <% } else{ %>
                                     src="https://image.ibb.co/jw55Ex/def_face.jpg"
                                     <% } %>
@@ -88,7 +88,7 @@
                                              <% if(user){ %>
                                     <button type="button" class="btn btn-primary"
                                             onclick="addRow('<%=user%>',
-                                                    '<%=korisnik.slika%>', '<%=korisnik._id%>' , '<%=proizvod._id%>'  , '<%=status%>'  )" > Objavi </button>
+                                                    '<%=slika%>', '<%=userId%>' , '<%=proizvod._id%>'  , '<%=status%>'  )" > Objavi </button>
                                               <% } else{ %>
                                         <button type="button" class="btn btn-primary"  > Objavi </button>
                                              <% } %>
