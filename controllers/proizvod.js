@@ -90,7 +90,7 @@ exports.dajProizvod = async (req, res, next) =>{
 
 exports.dajProizvodiKomentar = async (req, res, next) =>{
     const proizvod = await Proizvod.findById(req.params.id)
-         .populate({ path: 'korisnik', select: '_id slika nickName ime', model: Korisnik })
+         .populate({ path: 'korisnik', select: '_id slika nickName ime', model: Korisnik });
     const recenzija = await Recenzija.find({proizvod: req.params.id})
          .populate({ path: 'korisnik', select: '_id slika nickName ime prezime', model: Korisnik })
 
@@ -219,3 +219,4 @@ exports.dodajKomentar =  asyncHandler(async (req, res) =>{
         return res.status(500).json({success: false, message: `Nije moguće postaviti recenziju!`, bug: `exports.postaviKomentar`});
     res.send(recenzija);
 })
+
