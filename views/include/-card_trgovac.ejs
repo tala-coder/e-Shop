@@ -1,0 +1,67 @@
+<style>
+   .blink_me {animation: blinker 1s linear infinite;}.pe-5{padding-right:3rem!important}.pb-0{padding-bottom:0!important}.pb-1{padding-bottom:.25rem!important}.pb-2{padding-bottom:.5rem!important}.pb-3{padding-bottom:1rem!important}.pb-4{padding-bottom:1.5rem!important}.pb-5{padding-bottom:3rem!important}
+
+    @keyframes blinker { 50% {
+        opacity: 0;} }
+
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 24.85%;
+        }
+    }
+</style>
+
+<% proizvod.forEach(function(proizvod) { %>
+<div class="col-lg-3 col-md-3  pb-4" >
+    <div class="card">
+        <img
+                src="<%=proizvod.slika%> "
+                class="card-img-top"
+                alt="Slika proizvoda" height="175px"
+                style="object-fit: contain"/>
+
+
+        <div class="card-body pt-0 pb-1"  >
+            <h3 class="card-title m-0 mt-3"  > <%=proizvod.naziv%></h3>
+            <p class="card-text m-0" >
+                <%= proizvod.kategorija.naziv %>
+            </p>
+            <p style="margin-bottom: 3px"><%=proizvod.cijena%><b> KM</b></p>
+
+
+            <!-- Button trigger modal -->
+             <a   class="btn btn-primary mb-1"  id="button-addon3"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"  style="padding-left: 0.625em; padding-right: 0.625em"
+               onclick="urediArtikl( '<%=proizvod._id%>' )">
+                UREDI ARTIKL </a>
+
+        <div class=" card-footer text-muted row justify-content-between pt-0 ps-2 pb-0 pe-2 m-0">
+
+            <div  class="col-4 text-start mt-3 p-0" >
+                <i class="far fa-eye"></i>
+                <span class="light color__dark--3">702</span>
+            </div>
+            <div  class="col-8 text-end  mt-3 p-0" >
+                <p    > <%= moment(proizvod.updatedAt).endOf('second').fromNow() %></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<% }); %>
+
+
+
+<!--toast sound-->
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/toasty.js"></script>
+<script>
+    function urediArtikl(id) {
+        var request = {
+            "url" : `/TalaShop/proizvod/urediArtikl/${id}`,
+            "method" : "GET",
+        }
+        $.ajax(request).done(function(response){
+            location.replace(`/TalaShop/proizvod/urediArtikl/${id}`);
+        })
+    }
+
+</script>

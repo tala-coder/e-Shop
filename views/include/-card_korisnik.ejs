@@ -11,6 +11,9 @@
     }
 </style>
 
+<% if(paramsId === userId ){ %>
+    <%- include('-card_trgovac.ejs') %>
+<% } else{ %>
 
     <% proizvod.forEach(function(proizvod) { %>
     <div class="col-lg-3 col-md-3  pb-4" >
@@ -218,6 +221,7 @@
     <!-- Modal -->
     <% } %>
 
+<% } %>
 
 
 

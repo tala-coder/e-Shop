@@ -34,7 +34,7 @@ router.get('/urediProfil/:id',   korisnik.dajKorisnika, kategorija.dajKategorije
 
 router.get(`/:id`,   korisnik.dajKorisnika, proizvod.dajProizvodeKorisnika, korisnik.dajKomentare, // moguci bug, konfuzija
     function (req, res){
-        res.render('korisnik', { korisnik: req.korisnik,   recenzija: req.recenzija,  proizvod: req.proizvod,  moment: req.moment });
+        res.render('korisnik', { korisnik: req.korisnik, paramsId: req.params.id,  recenzija: req.recenzija,  proizvod: req.proizvod,  moment: req.moment });
 });
 
 

@@ -59,9 +59,16 @@ exports.dajGrad = asyncHandler(async (req, res, next) => {
 
 exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
     const proizvodi = await Proizvod.find({korisnik: req.params.id})
-    .populate( 'kategorija' , 'naziv')
+        .populate({ path: 'korisnik', select: '_id', model: Korisnik })
+        .populate( 'kategorija' , 'naziv');
+
+
+
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
+
+    console.log(proizvodi[0].korisnik._id)
+    console.log(res.locals.userId)
 
     req.proizvod = proizvodi;
     req.moment = moment;  // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
