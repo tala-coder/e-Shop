@@ -31,12 +31,14 @@
             <div class="col-lg-3 ">
                 <div class="card mb-2">
                     <div class="card-body text-center">
-                        <img src=<%=korisnik.slika%> alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3"> <%= korisnik.nickName %> </h5>
+                        <img src=<%=korisnik.slika%> alt="slika" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3"> <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.nazivFirme %> </h5>
 
-                         <p class="text-muted mb-1">   <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.nazivFirme %></p>
-                        <p class="text-muted mb-1">    <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.adresaFirme + ',' %>  <%=  korisnik.zemlja %></p>
-                        <p class="text-muted mb-4"> <%=  korisnik.telefon %> </p>
+
+                         <p class="text-muted mb-1">   <%= korisnik.trgovina  == null ? '' : korisnik.trgovina.adresaFirme  %> </p>
+
+                        <p class="text-muted mb-1">    <%= korisnik.trgovina  == null ? '' :  korisnik.zemlja %>   </p>
+                        <p class="text-muted mb-4"> <%=  korisnik.trgovina.telefonFirme %> </p>
 
                         <div class="d-flex justify-content-center mb-2">
                             <button type="button" class="btn btn-primary ms-1"
