@@ -9,7 +9,6 @@ const Recenzija = require("../models/recenzije");
 const upload = multer({ storage: storage })
 exports.uploadArray = upload.array('avatar', 10);
 
-
 exports.dajProizvode = asyncHandler(async (req, res, next) => {
     let filter_kategorije = {};
     let filter_grad = {};
@@ -18,35 +17,26 @@ exports.dajProizvode = asyncHandler(async (req, res, next) => {
     if (req.query.grad)
         filter_grad = {grad: req.query.grad};
 
-    // console.log(req.body, 'ovdje sam')
+    // console.log(req.body, 'ovdje sammmm')
     // SEARCH:    https://stackoverflow.com/questions/29648626/moongose-mongodb-like-operator-in-search
     var naziv = '';
-    // console.log(req.query)
     if (req.query.naziv)
         naziv = req.query.naziv
-    // console.log(naziv)
 
     var toSearch = naziv.split(" ").map(function(n) {
         return {
             naziv: new RegExp(n.trim(), 'i')
         };
     });
-    /*const search = await Proizvod.find({ $and: [toSearch[0]] });
-    console.log('search', search )
-    console.log('kategorije', filter_kategorije )
-    const proizvodi = await Proizvod.find(filter_kategorije, )
-    const proizvodi = await Proizvod.find({$and:[filter_grad, filter_kategorije]  } )*/
 
     const proizvodi = await Proizvod.find({$and:  [filter_grad, filter_kategorije, toSearch[0] ]    } )
         .populate( 'kategorija' , 'naziv')
     // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 
-
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     req.proizvod = proizvodi;
-    req.moment = moment;
-    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    req.moment = moment; // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
 })
 
@@ -56,19 +46,13 @@ exports.dajGrad = asyncHandler(async (req, res, next) => {
     next()
 })
 
-
-exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => { // dajProizvode po selektovanim kategorijama
+exports.dajProizvodeKorisnika = asyncHandler(async (req, res, next) => {
     const proizvodi = await Proizvod.find({korisnik: req.params.id})
         .populate({ path: 'korisnik', select: '_id', model: Korisnik })
         .populate( 'kategorija' , 'naziv');
 
-
-
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
-
-    console.log(proizvodi[0].korisnik._id)
-    console.log(res.locals.userId)
 
     req.proizvod = proizvodi;
     req.moment = moment;  // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
@@ -132,11 +116,10 @@ exports.urediProizvod =  asyncHandler(  async (req, res)=> {
     )
     if(!proizvod)
         return res.status(500).json({succes: false, message: `Nije moguće urediti proizvod!`, bug: `exports.urediProizvod`})
-    res.send(proizvod);
+    res.redirect(`/TalaShop/korisnik/${res.locals.userId}`);
 })
 
-
-exports.dodajProizvod =  asyncHandler(async (req, res) =>{
+exports.dodajProizvod = asyncHandler(async (req, res) =>{
     let slike = [];
     const putanja = `${req.protocol}://${req.get('host')}/public/images/`;
 
@@ -172,17 +155,15 @@ exports.dodajProizvod =  asyncHandler(async (req, res) =>{
     proizvod = await proizvod.save();
     if(!proizvod)
         return res.status(500).json({success: false, message: `Nije moguće postaviti proizvod!`, bug: `exports.postaviProizvod`});
-    res.send(proizvod);
+    res.redirect(`/TalaShop/korisnik/${res.locals.userId}`);
 })
-
-
 
 exports.obrisiProizvod =  async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id))
         return res.status(400).json({message: `ID proizvoda ne postoji`});
     let proizvod = await Proizvod.findByIdAndRemove(req.params.id);
     if(proizvod)
-        return res.status(200).json({success: true, message: 'Proizvod je obrisan!'});
+        return res.redirect(`/TalaShop/korisnik/${res.locals.userId}`);
     return res.status(400).json({success: false , message: "Proizvod nije obrisan!"});
 }
 
@@ -194,16 +175,14 @@ exports.brojProizvoda = async (req, res) =>{
 }
 
 exports.dajIzdvojeneProizvode = async (req, res, next) =>{
-    const count = req.params.broj ? req.params.broj : 0
-    const proizvodi = await Proizvod.find({istaknut: true}).limit(+count)
-        .populate( 'kategorija' , 'naziv');
-    // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
+    // const count = req.params.broj ? req.params.broj : 0
+    const proizvodi = await Proizvod.find({istaknut: true}) //.limit(count)
+        .populate( 'kategorija' , 'naziv');    // .populate({ path: 'korisnik', select: 'grad', model: Korisnik })
 
     if(!proizvodi)
         res.status(500).json({success: false, bug: `exports.dajProizvode`});
     req.proizvod = proizvodi;
-    req.moment = moment;
-    // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
+    req.moment = moment;  // req.proizvod.vrijemeKreiranja = moment(proizvodi.createdAt).endOf('second').fromNow();
     next();
 }
 

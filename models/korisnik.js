@@ -126,6 +126,10 @@ const korisnikSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    adminSistema: {
+        type: Boolean,
+        default: false,
+    },
     trgovina: {
         type: trgovinaSchema,
         default: null

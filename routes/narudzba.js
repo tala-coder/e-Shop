@@ -50,4 +50,6 @@ router.get(`/get/userorders/:userid`, async (req, res) =>{
     res.send(userOrderList);
 })
 
+router.get(`/prihodi/mjesec`, narudzba.dajMjesecnuZaradu)
+
 module.exports = router;

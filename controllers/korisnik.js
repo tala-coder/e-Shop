@@ -23,9 +23,6 @@ client.messages
     })
     .then(message => console.log(message.sid));*/
 
-
-
-
 exports.logujSeForma = asyncHandler(async function(req, res) {
     res.render('login', { title: 'Login' , greska: ''});
 })
@@ -65,7 +62,6 @@ exports.statistika = asyncHandler(async (req, res, next) =>{
     req.spol = spol;
     next();
 })
-
 
 exports.urediKorisnika =  asyncHandler( async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id))
@@ -223,14 +219,16 @@ exports.logujSe = async (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000 // 24h
             });
 
-        if (korisnik.jelAdmin && korisnik.trgovina == null )
+        if (korisnik.jelAdmin && korisnik.trgovina.nazivFirme === '' )
             return res.redirect(`/TalaShop/korisnik/urediProfil/${korisnik._id}`);
-        return res.redirect(`/TalaShop/korisnik/${korisnik._id}`);
+        else if ( korisnik.jelAdmin )
+            return res.redirect(`/TalaShop/korisnik/${korisnik._id}`);
+        else if ( korisnik.adminSistema )
+            return res.redirect(`/TalaShop/korisnik/headadmin?status=Lista%20korisnika`);
+        return res.redirect(`/TalaShop`);
     }
     else
         return res.render('login', { title: 'Login', greska: 'Unijeli ste pogrešne podatke!' });
-
-
 }
 
 exports.obrisiKorisnika = async (req, res) => {
@@ -243,11 +241,9 @@ exports.obrisiKorisnika = async (req, res) => {
 }
 
 exports.promeniStatus = async (req, res)=> {
-    console.log(req.body.status, req.params.id);
     let blokiranDo = null;
     if (req.body.status === 'blokiran')
         blokiranDo = new Date(Date.now() + (3600 * 1000 * 24 * 15));
-
 
     const korisnik = await Korisnik.findByIdAndUpdate(req.params.id,
         {
