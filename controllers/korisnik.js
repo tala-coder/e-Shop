@@ -27,7 +27,7 @@ client.messages
 
 
 exports.logujSeForma = asyncHandler(async function(req, res) {
-    res.render('login', { title: 'Login' });
+    res.render('login', { title: 'Login' , greska: ''});
 })
 
 exports.dajKorisnike = async (req, res, next) =>{
@@ -109,7 +109,7 @@ exports.urediKorisnika =  asyncHandler( async (req, res)=> {
     )
     if(!korisnik)
         return res.status(500).json({succes: false, message: `Nije moguće urediti korisnik-a!`, bug: `exports.urediKorisnika`})
-    res.send(korisnik);
+    res.redirect(`/TalaShop/korisnik/${korisnik._id}`);
 })
 
 exports.dajKorisnika = asyncHandler(async (req,res, next)=>{
@@ -164,7 +164,7 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     const salt = await bcrypt.genSaltSync(10);
     let pass = await bcrypt.hashSync(req.body.password, salt);
 
-    let picture = req.body.spol === 'M' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
+    let picture = req.body.spol === 'Muško' ? 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' : 'https://st3.depositphotos.com/1007566/13175/v/600/depositphotos_131750410-stock-illustration-woman-female-avatar-character.jpg'
 
     let korisnik = new Korisnik({
          nickName: req.body.nickName,
@@ -195,18 +195,17 @@ exports.registrujSe = asyncHandler(async (req,res)=>{
     korisnik = await korisnik.save();
     if(!korisnik)
         res.status(400).json({success: false, bug: `exports.registrujSe`});
-    res.send(korisnik);
+    res.redirect(`/TalaShop/korisnik/login`);
 })
 
 exports.logujSe = async (req, res) => {
     const korisnik = await Korisnik.findOne({mail: req.body.mail})
-    // const secret = process.env.token_secret;
     const secret = "tajna";
     if (!korisnik)
-        return res.status(400).json({message: `Korisnik nije registrovan!.`, bug: `exports.logujSe`});
+        return res.render('login', { title: 'Login', greska: 'Korisnik nije registrovan!' });
 
     else if( korisnik.mail !== req.body.mail)
-        res.status(400).json({message: `Pogresan mail!`, bug: `exports.logujSe`});
+        return res.render('login', { title: 'Login', greska: 'Unijeli ste pogrešne podatke!' });
 
     else if( korisnik.status === 'blokiran' )
         return res.render('login/blokiranDo', { blokiranDo:(korisnik.blokiranDo), moment: req.moment = moment  });
@@ -224,13 +223,12 @@ exports.logujSe = async (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000 // 24h
             });
 
-        if (korisnik.jelAdmin && !korisnik.trgovina )
-            return res.redirect('/TalaShop/korisnik/getMethodaProfileID');
-        return res.redirect('/TalaShop');
-        // return res.status(200).send({korisnik: korisnik.ime, token});
+        if (korisnik.jelAdmin && korisnik.trgovina == null )
+            return res.redirect(`/TalaShop/korisnik/urediProfil/${korisnik._id}`);
+        return res.redirect(`/TalaShop/korisnik/${korisnik._id}`);
     }
     else
-        res.status(400).json({message: `Pogresan password!`, bug: `exports.logujSe`});
+        return res.render('login', { title: 'Login', greska: 'Unijeli ste pogrešne podatke!' });
 
 
 }
